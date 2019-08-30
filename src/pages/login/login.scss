@@ -1,0 +1,48 @@
+ion-slide {
+    height: 100vh;
+    flex-direction: column;
+}
+
+
+.step-one {
+    background: url('../assets/slides/background-petfriendly.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    color: var(--ion-color-dark-contrast);
+}
+
+.step-two {
+    background: url('../assets/slides/background-donate.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    color: var(--ion-color-dark-contrast);
+}
+
+.step-three {
+    background: url('../assets/slides/background-login.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    color: var(--ion-color-dark-contrast);
+}
+
+.logo_login {
+    width: 108px;
+    height: 108px;
+}
+
+.bottom_page {
+    position: fixed;
+    bottom: 30px;
+    width: 100%;
+    padding: 15px;
+}
+
+/* .black_back {
+    background: var(--ion-color-dark);
+    color: var(--ion-color-dark-contrast);
+} */
+
+.adicionar {
+    margin-top: -5px;
+    font-size: 55px;
+}

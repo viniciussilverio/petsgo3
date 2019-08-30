@@ -1,0 +1,139 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Perfil
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="firebase.auth() && firebase.auth().currentUser && firebase.auth().currentUser.displayName">
+  <div class="item_list_pet box-shadow-blur center_text">
+    <br>
+    <div class="imgframe_pet"
+      [style.background-image]="'url(' + firebase.auth().currentUser.photoURL + ')'">
+    </div>
+    <div class="descricao_frame">
+      <table class="detalhes_table full_space">
+        <tr>
+          <td><strong *ngIf="firebase.auth().currentUser">{{firebase.auth().currentUser.displayName}}</strong></td>
+        </tr>
+        <tr>
+          <td>{{firebase.auth().currentUser.email}}</td>
+        </tr>
+      </table>
+      <br>
+    </div>
+  </div>
+
+  <div class="item_list_pet">
+    <div class="descricao_frame">
+      <strong>Dados Pessoais</strong>
+    </div>
+  </div>
+
+  <div class="item_list_pet box-shadow-blur extra_padding" *ngIf="firebase.auth().currentUser.displayName">
+    <div>
+      <table class="detalhes_table">
+        <tr>
+          <td class="icon_size_td">
+            <ion-icon name="ios-contact" class="my_icon"></ion-icon>
+          </td>
+          <td>
+            <table>
+              <tr>
+                <td>Nome</td>
+              </tr>
+              <tr>
+                <td><strong>{{firebase.auth().currentUser.displayName}}</strong></td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+
+  <div class="item_list_pet box-shadow-blur extra_padding" *ngIf="firebase.auth().currentUser.email">
+    <div>
+      <table class="detalhes_table">
+        <tr>
+          <td class="icon_size_td">
+            <ion-icon name="ios-mail" class="my_icon"></ion-icon>
+          </td>
+          <td>
+            <table>
+              <tr>
+                <td>E-mail</td>
+              </tr>
+              <tr>
+                <td><strong>{{firebase.auth().currentUser.email}}</strong></td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+
+  <div class="item_list_pet box-shadow-blur extra_padding" *ngIf="firebase.auth().currentUser.phoneNumber">
+    <div>
+      <table class="detalhes_table">
+        <tr>
+          <td class="icon_size_td">
+            <ion-icon name="md-call" class="my_icon"></ion-icon>
+          </td>
+          <td>
+            <table>
+              <tr>
+                <td>Telefone</td>
+              </tr>
+              <tr>
+                <td><strong>{{firebase.auth().currentUser.phoneNumber}}</strong></td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="item_list_pet">
+    <div class="descricao_frame">
+      <strong>Configurações</strong>
+    </div>
+  </div>
+
+  <div class="item_list_pet box-shadow-blur" *ngIf="firebase.auth().currentUser" (click)="SignOut()">
+    <div>
+      <table class="detalhes_table">
+        <tr>
+          <td class="icon_size_td">
+            <ion-icon name="md-paw" class="my_icon"></ion-icon>
+          </td>
+          <td>
+            <strong>Meus Pets</strong>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+
+  <div class="item_list_pet box-shadow-blur" *ngIf="firebase.auth().currentUser" (click)="SignOut()">
+    <div>
+      <table class="detalhes_table">
+        <tr>
+          <td class="icon_size_td">
+            <ion-icon name="md-exit" class="my_icon"></ion-icon>
+          </td>
+          <td>
+            <strong>Sair</strong>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+</ion-content>
