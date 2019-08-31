@@ -19,7 +19,6 @@ export class Tab4Page {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad Tab4Page');
   }
 
 }

@@ -1,21 +1,22 @@
-.welcome-card ion-img {
+page-tab5 {
+  .welcome-card ion-img {
     max-height: 35vh;
     overflow: hidden;
   }
-  
+
   .img_frame {
     background-repeat: no-repeat;
     background-size: 100% 100%;
     width: 100%;
     height: calc(100% - 50px);
   }
-  
+
   .item_list_pet {
     color: #9b9b9b;
     margin: 10px;
     border-radius: 10px;
   }
-  
+
   .imgframe_profile {
     border-radius: 50px;
     background-repeat: no-repeat;
@@ -25,43 +26,44 @@
     background-size: 100% 100%;
     margin: 0 auto;
   }
-  
+
   .box-shadow-blur {
     box-shadow: 0px 0px 5px grey;
   }
-  
+
   .descricao_frame {
     margin: 15px !important;
   }
-  
+
   .detalhes_table {
     color: #9b9b9b;
   }
-  
+
   .nome_animal {
     color: #000000;
   }
-  
+
   .center_text {
     text-align: center;
   }
-  
+
   .my_icon {
     color: #9575cd;
     font-size: 30px;
   }
-  
+
   .icon_size_td {
     width: 45px;
     vertical-align: middle;
     text-align: center;
   }
-  
+
   .full_space {
     width: 100%;
   }
-  
+
   .extra_padding {
     padding-top: 10px;
     padding-bottom: 10px;
   }
+}

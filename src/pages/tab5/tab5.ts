@@ -21,7 +21,6 @@ export class Tab5Page {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad Tab5Page');
   }
 
   firebase = firebase;

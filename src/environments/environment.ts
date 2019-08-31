@@ -12,8 +12,8 @@ export const environment = {
     storageBucket: "petsgo-1d56a.appspot.com",
     messagingSenderId: "393027674647"
   },
-  backend: "https://petsgo.herokuapp.com"
-  /* backend: "https://petsgobackendapp.mybluemix.net" */
+  /* backend: "https://petsgo.herokuapp.com" */
+  backend: "https://petsgobackendapp.mybluemix.net"
 };
 
 /*
