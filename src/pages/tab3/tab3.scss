@@ -83,4 +83,13 @@ page-tab3 {
   .list-ios {
     margin-bottom: 15px;
   }
+
+  .u-button-color {
+    background-color: #9575cd !important;
+  }
+
+  .u-button-color.activated {
+    background-color: #6d50a0 !important;
+    opacity: 1;
+}
 }

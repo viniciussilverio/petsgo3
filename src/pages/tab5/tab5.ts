@@ -25,6 +25,10 @@ export class Tab5Page {
 
   firebase = firebase;
 
+  verPets() {
+    console.log("Ver Pets");
+  }
+
   SignOut() {
     firebase.auth().signOut();
     console.log(firebase.auth().currentUser);

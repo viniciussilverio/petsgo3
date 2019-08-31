@@ -16,12 +16,12 @@
             <tr>
               <td>
                 <div class="imgframe" (click)="dog()" [ngClass]="{'img_activated' : animal === 0}"
-                  [style.background-image]="'url(/assets/dog-option.svg)'">
+                  [style.background-image]="'url(../assets/dog-option.svg)'">
                 </div>
               </td>
               <td>
                 <div class="imgframe" (click)="cat()" [ngClass]="{'img_activated' : animal === 1}"
-                  [style.background-image]="'url(/assets/cat-option.svg)'">
+                  [style.background-image]="'url(../assets/cat-option.svg)'">
                 </div>
               </td>
             </tr>
@@ -30,7 +30,7 @@
               <td (click)="cat()" [ngClass]="{'td_activated' : animal === 1}">Gato</td>
             </tr>
           </table>
-          <button ion-button (click)="next()">Continuar</button>
+          <button ion-button (click)="next()" class="u-button-color">Continuar</button>
         </div>
       </div>
     </ion-slide>
@@ -43,12 +43,12 @@
             <tr>
               <td>
                 <div class="imgframe" (click)="menino()" [ngClass]="{'img_activated' : sexo === 0}"
-                  [style.background-image]="'url(/assets/dog-option.png)'">
+                  [style.background-image]="'url(../assets/dog-option.png)'">
                 </div>
               </td>
               <td>
                 <div class="imgframe" (click)="menina()" [ngClass]="{'img_activated' : sexo === 1}"
-                  [style.background-image]="'url(/assets/cat-option.png)'">
+                  [style.background-image]="'url(../assets/cat-option.png)'">
                 </div>
               </td>
             </tr>
@@ -57,7 +57,7 @@
               <td (click)="menina()" [ngClass]="{'td_activated' : sexo === 1}">Menina</td>
             </tr>
           </table>
-          <button ion-button (click)="next()">Continuar</button>
+          <button ion-button (click)="next()" class="u-button-color">Continuar</button>
         </div>
       </div>
     </ion-slide>
@@ -94,7 +94,7 @@
               </table>
             </div>
           </div>
-          <button ion-button (click)="next()">Continuar</button>
+          <button ion-button (click)="next()" class="u-button-color">Continuar</button>
         </div>
       </div>
     </ion-slide>
@@ -119,7 +119,7 @@
               <ion-radio slot="end" value="Grande"></ion-radio>
             </ion-item>
           </ion-list>
-          <button ion-button (click)="next()">Continuar</button>
+          <button ion-button (click)="next()" class="u-button-color">Continuar</button>
         </div>
       </div>
     </ion-slide>
@@ -144,7 +144,7 @@
               <ion-radio slot="end" value="Idoso"></ion-radio>
             </ion-item>
           </ion-list>
-          <button ion-button (click)="next()">Continuar</button>
+          <button ion-button (click)="next()" class="u-button-color">Continuar</button>
         </div>
       </div>
     </ion-slide>
@@ -187,7 +187,7 @@
               </td>
             </tr>
           </table>
-          <button ion-button (click)="next()">Continuar</button>
+          <button ion-button (click)="next()" class="u-button-color">Continuar</button>
         </div>
       </div>
     </ion-slide>
@@ -241,7 +241,7 @@
               </table>
             </div>
           </div>
-          <button ion-button (click)="done()">Adicionar Pet</button>
+          <button ion-button (click)="done()" class="u-button-color">Adicionar Pet</button>
         </div>
       </div>
     </ion-slide>
