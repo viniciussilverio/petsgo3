@@ -87,7 +87,7 @@
     <plugin name="cordova-plugin-browsertab" spec="^0.2.0" />
     <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
     <plugin name="cordova-plugin-customurlscheme" spec="^4.3.0">
-        <variable name="URL_SCHEME" value="io.ionic.firebaseui" />
+        <variable name="URL_SCHEME" value="com.vsilverio.petsgo" />
     </plugin>
     <universal-links>
         <host name="petsgo.page.link" scheme="https" />

@@ -10,7 +10,7 @@
   <div class="item_list_pet box-shadow-blur center_text">
     <br>
     <div class="imgframe_profile"
-      [style.background-image]="'url(' + firebase.auth().currentUser.photoURL + ')'">
+      [style.background-image]="'url(' + firebase.auth().currentUser.photoURL.replace('_normal', '') + '?type=large&redirect=true&width=400&height=400' + ')'">
     </div>
     <div class="descricao_frame">
       <table class="detalhes_table full_space">

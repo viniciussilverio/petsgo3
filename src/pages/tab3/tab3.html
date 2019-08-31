@@ -15,13 +15,11 @@
           <table class="center">
             <tr>
               <td>
-                <div class="imgframe" (click)="dog()" [ngClass]="{'img_activated' : animal === 0}"
-                  [style.background-image]="'url(../assets/dog-option.svg)'">
+                <div class="imgframe dog" (click)="dog()" [ngClass]="{'img_activated' : animal === 0}">
                 </div>
               </td>
               <td>
-                <div class="imgframe" (click)="cat()" [ngClass]="{'img_activated' : animal === 1}"
-                  [style.background-image]="'url(../assets/cat-option.svg)'">
+                <div class="imgframe cat" (click)="cat()" [ngClass]="{'img_activated' : animal === 1}">
                 </div>
               </td>
             </tr>
@@ -42,13 +40,11 @@
           <table class="center">
             <tr>
               <td>
-                <div class="imgframe" (click)="menino()" [ngClass]="{'img_activated' : sexo === 0}"
-                  [style.background-image]="'url(../assets/dog-option.png)'">
+                <div class="imgframe macho" (click)="menino()" [ngClass]="{'img_activated' : sexo === 0}">
                 </div>
               </td>
               <td>
-                <div class="imgframe" (click)="menina()" [ngClass]="{'img_activated' : sexo === 1}"
-                  [style.background-image]="'url(../assets/cat-option.png)'">
+                <div class="imgframe femea" (click)="menina()" [ngClass]="{'img_activated' : sexo === 1}">
                 </div>
               </td>
             </tr>

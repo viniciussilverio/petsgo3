@@ -72,8 +72,8 @@ export class Tab3Page {
       }
       reader.readAsDataURL(event.target.files[0]);
     }
-    let fileList: FileList = event.target.files;
-    let file: File = fileList[0];
+    /* let fileList: FileList = event.target.files; */
+    /* let file: File = fileList[0]; */
     /* console.log(file); */
   }
 

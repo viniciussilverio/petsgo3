@@ -91,5 +91,21 @@ page-tab3 {
   .u-button-color.activated {
     background-color: #6d50a0 !important;
     opacity: 1;
-}
+  }
+
+  .imgframe.dog{
+    background-image: url(../assets/dog-option.svg);
+  }
+
+  .imgframe.cat{
+    background-image: url(../assets/cat-option.svg);
+  }
+
+  .imgframe.macho{
+    background-image: url(../assets/dog-option.png);
+  }
+
+  .imgframe.femea{
+    background-image: url(../assets/cat-option.png);
+  }
 }

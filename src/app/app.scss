@@ -23,10 +23,14 @@
     color: #ffffff !important;
 }
 
-.tabs-ios .tab-button[aria-selected=true] .tab-button-icon {
+.tab-button[aria-selected=true] .tab-button-icon {
     color: #9575cd !important;
 }
 
-.tabs-ios .tab-button:hover:not(.disable-hover), .tabs-ios .tab-button[aria-selected=true] {
+.tab-button:hover:not(.disable-hover), .tab-button[aria-selected=true] {
     color: #9575cd !important;
+}
+
+.firebaseui-tos {
+    color: #ffffff !important;
 }
