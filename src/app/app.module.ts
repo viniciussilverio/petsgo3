@@ -13,6 +13,8 @@ import { Tab2Page } from '../pages/tab2/tab2';
 import { Tab3Page } from '../pages/tab3/tab3';
 import { Tab4Page } from '../pages/tab4/tab4';
 import { Tab5Page } from '../pages/tab5/tab5';
+import { PetsgoBackendProvider } from '../providers/petsgo-backend/petsgo-backend';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { Tab5Page } from '../pages/tab5/tab5';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -44,7 +47,8 @@ import { Tab5Page } from '../pages/tab5/tab5';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthProvider
+    AuthProvider,
+    PetsgoBackendProvider
   ]
 })
 export class AppModule {}

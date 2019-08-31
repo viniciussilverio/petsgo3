@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the Tab1Page page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { PetsgoBackendProvider } from '../../providers/petsgo-backend/petsgo-backend';
+import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'page-tab1',
@@ -14,11 +11,25 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class Tab1Page {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  results: Observable<any>;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private PetsgoBackendProvider: PetsgoBackendProvider) {
+    this.getPetsList();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad Tab1Page');
+    
+  }
+
+
+  getPetsList() {
+    this.results = this.PetsgoBackendProvider.getPetsList();
+  }
+
+  getImgUrl(item) {
+    return(`${environment.backend}/getImage/${item._id}/${Object.keys(item._attachments)[0]}`)
   }
 
 }
+
+

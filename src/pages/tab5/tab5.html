@@ -9,7 +9,7 @@
 <ion-content *ngIf="firebase.auth() && firebase.auth().currentUser && firebase.auth().currentUser.displayName">
   <div class="item_list_pet box-shadow-blur center_text">
     <br>
-    <div class="imgframe_pet"
+    <div class="imgframe_profile"
       [style.background-image]="'url(' + firebase.auth().currentUser.photoURL + ')'">
     </div>
     <div class="descricao_frame">

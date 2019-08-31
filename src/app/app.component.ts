@@ -34,7 +34,6 @@ export class MyApp {
   ngAfterViewInit() {
 
     firebase.auth().onAuthStateChanged((user) => {
-      console.log(user);
       if (user) {
         // User is authenticated.
         this.setRootPage(HomePage);
@@ -46,7 +45,6 @@ export class MyApp {
   }
 
   setRootPage(page) {
-    console.log(page)
     if (this.firstRun) {
 
       // if its the first run we also have to hide the splash screen
