@@ -1,5 +1,9 @@
 <p align="center"><img src="/Screenshots/PetsGo-Icon.png" width="210"></p>
 
+![Ionic 3+](https://img.shields.io/badge/Ionic-3.0%2B-blue.svg)
+![Cordova 9+](https://img.shields.io/badge/Cordova-9.0%2B-green.svg)
+![npm 6.0+](https://img.shields.io/badge/npm-6.0%2B-red.svg)
+
 # PetsGO
 O presente aplicativo foi desenvolvido no âmbito social, com o intuito de auxiliar no processo de doação e adoção de animais domésticos (cachorro e gato)Destinado à pessoas que querem ajudar quando encontram um animalzinho abandonado nas ruas, no entanto, não sabem como agir, o PetsGo veio para facilitar e centralizar um ambiente cujo o único objetivo é esse: encontrar um lar para mais animaizinhos e consequentemente, diminuir a quantidade de animais abandonados nas ruas, que já ultrapassam os 30 milhões. 
 
@@ -8,15 +12,16 @@ O presente aplicativo foi desenvolvido no âmbito social, com o intuito de auxil
 ## Primeiros passos
 Essas instruções fornecerão uma cópia do projeto em execução na sua máquina local para fins de desenvolvimento e teste.
 
-### Pré - requisitos
+### Pré-Requisitos
 O que você precisa para instalar esse aplicativo:
 
 ```
-1 - Xcode 9+
-2 - Visual Studio Code
+- Java JDK 8
+- Android Studio
+- Xcode 7+
 ```
 
-### Instalando no android
+### Instalando no Android
 1. Abra o terminal, vá até a pasta raiz do projeto e execute o seguinte comando: 
 
 ```
@@ -38,7 +43,7 @@ $ cordova platform add android
 ```
 Path: plugins/cordova-universal-links-plugin/hooks/lib/android/manifestWriter.js.
 ```
-5. Em seguida, na linha 21 substitua o código atual, pelo mostrado abaixo:
+5. Em seguida, na linha **21** substitua o código atual, pelo mostrado abaixo:
 
 ```js
  var pathToManifest = path.join(cordovaContext.opts.projectRoot, 'platforms', 'android', 'app', 'src', 'main', 'AndroidManifest.xml');
@@ -112,7 +117,7 @@ platforms\ios\PetsGo\config.xml
 ```
 
 
-8. Abra o X-code e execute o projeto.
+8. Abra o Xcode e execute o projeto.
 
 **Observação**: Todas as vezes que algo é alterado no projeto e que seja necessario rodar no IOS, é preciso executar um comando para que as alterações sejam atualizadas no projeto.
 ```
