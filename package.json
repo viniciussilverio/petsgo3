@@ -66,14 +66,12 @@
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-customurlscheme": {
-        "URL_SCHEME": "com.vsilverio.petsgo",
-        "ANDROID_SCHEME": " ",
-        "ANDROID_HOST": " ",
-        "ANDROID_PATHPREFIX": "/"
+        "URL_SCHEME": "com.vsilverio.petsgo"
       }
     },
     "platforms": [
-      "browser"
+      "browser",
+      "ios"
     ]
   }
 }

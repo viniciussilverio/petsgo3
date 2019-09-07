@@ -56,8 +56,8 @@ export class AuthProvider {
         // firebase.auth.PhoneAuthProvider.PROVIDER_ID // not available for Ionic apps
       ],
       // Terms of service url.
-      tosUrl: '<your-tos-url>',
-      privacyPolicyUrl: '<your-pp-url>'
+      tosUrl: 'https://drive.google.com/file/d/1RnnLKRraQ-KnzJT_P7VDhSe_ujhsmhB4/view',
+      privacyPolicyUrl: 'https://www.youtube.com'
     };
   }
 

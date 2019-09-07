@@ -86,9 +86,6 @@
     <plugin name="cordova-universal-links-plugin" spec="^1.2.1" />
     <plugin name="cordova-plugin-browsertab" spec="^0.2.0" />
     <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
-    <plugin name="cordova-plugin-customurlscheme" spec="^4.3.0">
-        <variable name="URL_SCHEME" value="com.vsilverio.petsgo" />
-    </plugin>
     <universal-links>
         <host name="petsgo.page.link" scheme="https" />
         <host name="petsgo-1d56a.firebaseapp.com" scheme="https">
