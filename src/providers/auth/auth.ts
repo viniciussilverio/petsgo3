@@ -56,8 +56,8 @@ export class AuthProvider {
         // firebase.auth.PhoneAuthProvider.PROVIDER_ID // not available for Ionic apps
       ],
       // Terms of service url.
-      tosUrl: 'https://drive.google.com/file/d/1U7C9WRYY-e66RfCuXzQCuAQULuwJ-PIn/view?usp=sharing',
-      privacyPolicyUrl: 'https://drive.google.com/file/d/1FB0z7cyu_WL5vwvlm-z1T6TqxdM3jFgZ/view?usp=sharing'
+      tosUrl: 'https://jessicasantosscruz.wixsite.com/petsgo/termsofservice',
+      privacyPolicyUrl: 'https://jessicasantosscruz.wixsite.com/petsgo/privacypolicy'
     };
   }
 
