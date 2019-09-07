@@ -126,4 +126,4 @@ $ sudo ionic cordova ios
 
 * **Vinicius Silverio** - https://github.com/viniciussilverio
 * **Jéssica Santos**    - https://github.com/jesantosscruz
-* **Vinicius Silverio** - https://github.com/yanluccasoliveira
+* **Yan Luccas**        - https://github.com/yanluccasoliveira
