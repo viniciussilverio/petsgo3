@@ -1,33 +1,83 @@
-# petsgo
+<p align="center"><img src="/Screenshots/PetsGo-Icon.png" width="210"></p>
 
-https://github.com/nordnet/cordova-universal-links-plugin/issues/131
-https://github.com/firebase/firebaseui-web/issues/365
-Fazer o de cima dentro da pasta platform/ios/ ...
+# PetsGO
+O presente aplicativo foi desenvolvido no âmbito social, com o intuito de auxiliar no processo de doação e adoção de animais domésticos (cachorro e gato)Destinado à pessoas que querem ajudar quando encontram um animalzinho abandonado nas ruas, no entanto, não sabem como agir, o PetsGo veio para facilitar e centralizar um ambiente cujo o único objetivo é esse: encontrar um lar para mais animaizinhos e consequentemente, diminuir a quantidade de animais abandonados nas ruas, que já ultrapassam os 30 milhões. 
 
-https://mediatemple.net/blog/tips/quick-tip-debug-ios-safari-true-local-emulator-actual-iphoneipad/
+<img src="/Screenshots/Donate.png" width="210"> <img src="/Screenshots/Favoritos.png" width="210"> <img src="/Screenshots/Pet Species.png" width="210"><img src="Screenshots/Detalhes.png" width="210"> 
 
- ------ ANDROID --------
+## Primeiros passos
+Essas instruções fornecerão uma cópia do projeto em execução na sua máquina local para fins de desenvolvimento e teste.
 
-1º Passo - Rodar o comando "npm install"
+### Pré - requisitos
+O que você precisa para instalar esse aplicativo:
 
-2º Passo - Rodar o comando "npm run build"
+```
+1 - Xcode 9+
+2 - Visual Studio Code
+```
 
-3º Passo - Instalar os plugins e interface a usar. (Usar Browser, Android e IOS)
-rodar "cordova platform add android"
+### Instalando no android
+1. Abra o terminal, vá até a pasta raiz do projeto e execute o seguinte comando: 
 
-4º Passo - Irá dar um erro de "cannot read property 'manifest' of undefined" e precisará modificar a biblioteca cordova-universal-links-plugins. 
+```
+$ npm install
+$ npm run build
+```
+2. Você precisará instalar o plugin para rodar no Android.
 
-Path: plugins/cordova-universal-links-plugin/hooks/lib/android/manifestWriter.js. 
+```
+$ cordova platform add android
+```
 
-Na linha 21 substituir o código atual por "var pathToManifest = path.join(cordovaContext.opts.projectRoot, 'platforms', 'android', 'app', 'src', 'main', 'AndroidManifest.xml');"
+3. Depois disso, o seguinte erro irá aparecer:
+>Error: **"cannot read property 'manifest' of undefined"**
 
-5º Passo - Rodar novamente "cordova platform add android". (Sempre que rodar o "npm install" irá precisar rodar novamente).
 
- --------------- IOS ----------------
+4. Você precisará modificar a biblioteca: 
+>cordova-universal-links-plugins
+```
+Path: plugins/cordova-universal-links-plugin/hooks/lib/android/manifestWriter.js.
+```
+5. Em seguida, na linha 21 substitua o código atual, pelo mostrado abaixo:
 
-6º Passo - Rodar o "cordova platform add ios" e irá dar um erro "Cannot find module '../../src/plugman/platforms/ios'", acessar a pasta plugins/cordova-universal-links-plugin/hooks/lib/ios/xcodePreferences.js e substituir o código da linha 135 até a 150 pelo código abaixo:
+```js
+ var pathToManifest = path.join(cordovaContext.opts.projectRoot, 'platforms', 'android', 'app', 'src', 'main', 'AndroidManifest.xml');
+```
 
-function loadProjectFile() {
+ 6. Execute novamente o comando abaixo:
+ ```
+ cordova platform add android
+ ```
+
+ **Observação**: Todas as vezes que o comando npm install for rodado, o comando acima precisará ser executado novamente.
+
+
+### Instalando no IOS
+
+1. Abra o terminal, vá até a pasta raiz do projeto e execute o seguinte comando: 
+
+```
+$ npm install
+$ npm run build
+$ sudo cordova platform add ios
+```
+2. Execute os próximos comandos:
+
+```
+    $ sudo cordova plugin remove cordova-plugin-customurlscheme
+    $ sudo cordova plugin add cordova-plugin-customurlscheme     --variable URL_SCHEME=com.vsilverio.petsgo --save
+    $ sudo cordova platform add ios
+```
+
+3. Depois disso, o seguinte erro irá aparecer:
+>"Cannot find module '../../src/plugman/platforms/ios""
+
+4. Acesse a pasta: *plugins/cordova-universal-links-plugin/hooks/lib/ios/xcodePreferences.js*
+
+5. Substitua o código da linha **135** até a **150** pelo código abaixo:
+
+```js
+ function loadProjectFile() {
   var platform_ios;
   var projectFile;
   try {
@@ -49,6 +99,31 @@ function loadProjectFile() {
   }
   return projectFile;
 }
+```
 
-7º Passo - Ir no caminho : platforms\ios\PetsGo\config.xml e substituir o código por:
+6. Acesse o Path a seguir:
+```
+platforms\ios\PetsGo\config.xml 
+```
+7. Substitua o código existente no Path pelo código abaixo:
+
+```js
 "<preference name="CordovaWebViewEngine" value="CDVUIWebViewEngine" />"
+```
+
+
+8. Abra o X-code e execute o projeto.
+
+**Observação**: Todas as vezes que algo é alterado no projeto e que seja necessario rodar no IOS, é preciso executar um comando para que as alterações sejam atualizadas no projeto.
+```
+$ sudo ionic cordova ios
+```
+
+## Pronto! Agora você tem todos os passos para rodar o projeto! 😉
+
+
+# Authors
+
+* **Vinicius Silverio** - https://github.com/viniciussilverio
+* **Jéssica Santos**    - https://github.com/jesantosscruz
+* **Vinicius Silverio** - https://github.com/yanluccasoliveira
