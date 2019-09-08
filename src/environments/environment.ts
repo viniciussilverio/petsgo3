@@ -14,6 +14,7 @@ export const environment = {
   },
   /* backend: "https://petsgo.herokuapp.com" */
   backend: "https://petsgobackendapp.mybluemix.net"
+  /* backend: "http://localhost:9910" */
 };
 
 /*

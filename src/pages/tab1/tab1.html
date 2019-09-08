@@ -1,22 +1,65 @@
-<ion-header class="ion-toolbar-custom">
+<ion-header class="ion-toolbar-custom" style="z-index:200;">
   <ion-toolbar>
-    <ion-title>
-      Busca de Pets
+    <ion-title (click)="getPetsList()" *ngIf="!selected">
+      Busca de Pets (Atualizar)
+    </ion-title>
+    <ion-title (click)="cleanPet()" *ngIf="selected">
+      Pet selecionado (Voltar)
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
+<ion-content style="z-index:100; position: fixed; background-color: white; height: 100%; width: 100%;"
+  [ngClass]="{'hideThing' : !selected}">
+  <ion-list *ngIf="selected">
+    <div class="item_list_pet box-shadow-blur">
+      <div class="imgframe_pet" [style.background-image]="'url(' + getImgUrl(selected) + ')'">
+      </div>
+      <div class="descricao_frame">
+        <table class="detalhes_table">
+          <tr>
+            <td class="nome_animal"><strong>{{ selected.nome }}</strong></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Genero: {{ selected.genero }}</td>
+            <td>Porte: {{ selected.porte }}</td>
+          </tr>
+          <tr>
+            <td>Idade: {{ selected.idade }}</td>
+            <td>Situação: {{ selected.situacao }}</td>
+          </tr>
+          <tr>
+            <td>Idade: {{ selected.idade }}</td>
+            <td>Situação: {{ selected.situacao }}</td>
+          </tr>
+          <tr>
+            <td>Idade: {{ selected.idade }}</td>
+            <td>Situação: {{ selected.situacao }}</td>
+          </tr>
+          <tr>
+            <td>Idade: {{ selected.idade }}</td>
+            <td>Situação: {{ selected.situacao }}</td>
+          </tr>
+          <tr>
+            <td>Idade: {{ selected.idade }}</td>
+            <td>Situação: {{ selected.situacao }}</td>
+          </tr>
+          <tr>
+            <td>Idade: {{ selected.idade }}</td>
+            <td>Situação: {{ selected.situacao }}</td>
+          </tr>
+        </table>
+        <br>
+      </div>
+    </div>
+  </ion-list>
+</ion-content>
+
 <ion-content>
-  <!-- <div class="img_frame">
-  </div>
-  <div class="img_list_buttons">
-      <ion-icon name="md-heart"></ion-icon>
-      <ion-icon name="md-heart"></ion-icon>
-      <ion-icon name="md-heart"></ion-icon>
-  </div> -->
   <ion-list>
     <div *ngFor="let item of (results | async)">
-      <div class="item_list_pet box-shadow-blur">
+      <div class="item_list_pet box-shadow-blur" (click)="selectPet(item)">
         <div class="imgframe_pet" [style.background-image]="'url(' + getImgUrl(item) + ')'">
         </div>
         <div class="descricao_frame">

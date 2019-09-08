@@ -72,7 +72,7 @@
                   <td>
                     <p class="text_title_add"><strong>Descreva como encontrou o Pet:</strong></p>
                     <ion-item>
-                      <ion-input placeholder="Descrição"></ion-input>
+                      <ion-input placeholder="Descrição" [(ngModel)]="descricao"></ion-input>
                     </ion-item>
                   </td>
                 </tr>
@@ -83,7 +83,7 @@
                   <td>
                     <p class="text_title_add"><strong>Qual o nome do Pet:</strong></p>
                     <ion-item>
-                      <ion-input placeholder="Pode inventar"></ion-input>
+                      <ion-input placeholder="Pode inventar" [(ngModel)]="nome"></ion-input>
                     </ion-item>
                   </td>
                 </tr>
@@ -99,20 +99,20 @@
       <div>
         <div class="linha">
           <h1>Qual o porte?</h1>
-          <ion-list radio-group>
+          <ion-list radio-group [(ngModel)]="porte">
             <ion-item>
               <ion-label>Pequeno</ion-label>
-              <ion-radio slot="end" value="Pequeno" checked></ion-radio>
+              <ion-radio slot="end" value="0" checked></ion-radio>
             </ion-item>
 
             <ion-item>
               <ion-label>Médio</ion-label>
-              <ion-radio slot="end" value="Medio"></ion-radio>
+              <ion-radio slot="end" value="1"></ion-radio>
             </ion-item>
 
             <ion-item>
               <ion-label>Grande</ion-label>
-              <ion-radio slot="end" value="Grande"></ion-radio>
+              <ion-radio slot="end" value="2"></ion-radio>
             </ion-item>
           </ion-list>
           <button ion-button (click)="next()" class="u-button-color">Continuar</button>
@@ -124,20 +124,20 @@
       <div>
         <div class="linha">
           <h1>Qual a idade aproximada?</h1>
-          <ion-list radio-group>
+          <ion-list radio-group [(ngModel)]="idade">
             <ion-item>
               <ion-label>Filhote</ion-label>
-              <ion-radio slot="end" value="Filhote" checked></ion-radio>
+              <ion-radio slot="end" value="0" checked></ion-radio>
             </ion-item>
 
             <ion-item>
               <ion-label>Adulto</ion-label>
-              <ion-radio slot="end" value="Adulto"></ion-radio>
+              <ion-radio slot="end" value="1"></ion-radio>
             </ion-item>
 
             <ion-item>
               <ion-label>Idoso</ion-label>
-              <ion-radio slot="end" value="Idoso"></ion-radio>
+              <ion-radio slot="end" value="2"></ion-radio>
             </ion-item>
           </ion-list>
           <button ion-button (click)="next()" class="u-button-color">Continuar</button>
@@ -201,7 +201,7 @@
                   </td>
                   <td>
                     <ion-item>
-                      <ion-input placeholder="Onde você o encontrou?"></ion-input>
+                      <ion-input placeholder="Onde você o encontrou?" [(ngModel)]="local"></ion-input>
                     </ion-item>
                   </td>
                 </tr>
@@ -212,9 +212,9 @@
                   <td>
                     <ion-item>
                       <ion-label>Situação:</ion-label>
-                      <ion-select placeholder="Selecione">
-                        <ion-option value="Pequeno">Adoção</ion-option>
-                        <ion-option value="Medio">Perdido</ion-option>
+                      <ion-select placeholder="Selecione" [(ngModel)]="situacao">
+                        <ion-option value="0">Adoção</ion-option>
+                        <ion-option value="1">Perdido</ion-option>
                       </ion-select>
                     </ion-item>
                   </td>
@@ -226,10 +226,10 @@
                   <td>
                     <ion-item>
                       <ion-label>O Pet já foi:</ion-label>
-                      <ion-select placeholder="Selecione" multiple class="multiple-size">
-                        <ion-option value="Castrado">Castrado</ion-option>
-                        <ion-option value="Vacinado">Vacinado</ion-option>
-                        <ion-option value="Vermifugado">Vermifugado</ion-option>
+                      <ion-select placeholder="Selecione" multiple class="multiple-size"  [(ngModel)]="castrado">
+                        <ion-option value="0">Castrado</ion-option>
+                        <ion-option value="1">Vacinado</ion-option>
+                        <ion-option value="2">Vermifugado</ion-option>
                       </ion-select>
                     </ion-item>
                   </td>
