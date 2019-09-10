@@ -16,11 +16,11 @@ export class Tab1Page {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private PetsgoBackendProvider: PetsgoBackendProvider) {
     this.getPetsList();
-    this.selected =  "";
+    this.selected = "";
   }
 
   ionViewDidLoad() {
-    
+
   }
 
 
@@ -37,10 +37,8 @@ export class Tab1Page {
   }
 
   getImgUrl(item) {
-    if (item.fotos) {
-      return(item.fotos[0])
-    }
-    return(`${environment.backend}/getImage/${item._id}/${Object.keys(item._attachments)[0]}`)
+    return (item.fotos[0]);
+    /* return(`${environment.backend}/getImage/${item._id}/${Object.keys(item._attachments)[0]}`) */
   }
 
 }
