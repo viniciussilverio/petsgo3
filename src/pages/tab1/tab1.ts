@@ -12,13 +12,15 @@ import { environment } from '../../environments/environment';
 export class Tab1Page {
 
   results: Observable<any>;
+  selected: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private PetsgoBackendProvider: PetsgoBackendProvider) {
     this.getPetsList();
+    this.selected = "";
   }
 
   ionViewDidLoad() {
-    
+
   }
 
 
@@ -26,8 +28,17 @@ export class Tab1Page {
     this.results = this.PetsgoBackendProvider.getPetsList();
   }
 
+  cleanPet() {
+    this.selected = "";
+  }
+
+  selectPet(pet) {
+    this.selected = pet;
+  }
+
   getImgUrl(item) {
-    return(`${environment.backend}/getImage/${item._id}/${Object.keys(item._attachments)[0]}`)
+    return (item.fotos[0]);
+    /* return(`${environment.backend}/getImage/${item._id}/${Object.keys(item._attachments)[0]}`) */
   }
 
 }

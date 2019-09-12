@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import firebase from 'firebase/app';
+import { environment } from '../environments/environment';
 import 'firebase/auth';
 
 @Component({
@@ -20,14 +21,7 @@ export class MyApp {
               private splashScreen: SplashScreen) {
 
     // Initialize Firebase
-    const config = {
-      apiKey: "AIzaSyAYiZdtD0EqL8QfmCPPQ6ibyrcGOlwTBps",
-      authDomain: "petsgo-1d56a.firebaseapp.com",
-      databaseURL: "https://petsgo-1d56a.firebaseio.com",
-      projectId: "petsgo-1d56a",
-      storageBucket: "petsgo-1d56a.appspot.com",
-      messagingSenderId: "393027674647"
-    };
+    const config = environment.firebase;
     firebase.initializeApp(config);
   }
 
