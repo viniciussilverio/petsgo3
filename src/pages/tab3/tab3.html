@@ -90,7 +90,7 @@
               </table>
             </div>
           </div>
-          <button ion-button (click)="next()" class="u-button-color">Continuar</button>
+          <button ion-button (click)="validatePetData()" class="u-button-color">Continuar</button>
         </div>
       </div>
     </ion-slide>
@@ -187,7 +187,7 @@
             </tr>
           </table>
 
-          <button ion-button (click)="next()" class="u-button-color">Continuar</button>
+          <button ion-button (click)="validatePetPhotos()" class="u-button-color">Continuar</button>
         </div>
       </div>
     </ion-slide>
@@ -232,7 +232,7 @@
                   <td>
                     <ion-item>
                       <ion-label>O Pet já foi:</ion-label>
-                      <ion-select placeholder="Selecione" multiple class="multiple-size"  [(ngModel)]="castrado">
+                      <ion-select placeholder="Selecione" multiple class="multiple-size" [(ngModel)]="foi">
                         <ion-option value="0">Castrado</ion-option>
                         <ion-option value="1">Vacinado</ion-option>
                         <ion-option value="2">Vermifugado</ion-option>
@@ -244,7 +244,7 @@
               </table>
             </div>
           </div>
-          <button ion-button (click)="done()" class="u-button-color">Adicionar Pet</button>
+          <button ion-button (click)="validateGeneralInformationData()" class="u-button-color">Adicionar Pet</button>
         </div>
       </div>
     </ion-slide>

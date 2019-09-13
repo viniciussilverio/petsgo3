@@ -1,7 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Slides } from 'ionic-angular';
 import { PetsgoBackendProvider } from '../../providers/petsgo-backend/petsgo-backend';
+import { isEmpty } from 'rxjs/operator/isEmpty';
 
 /**
  * Generated class for the Tab3Page page.
@@ -31,25 +32,28 @@ export class Tab3Page {
   img3: any;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private PetsgoBackendProvider: PetsgoBackendProvider) {
-    this.animal = 0;
-    this.sexo = 0;
-    this.nome = "";
-    this.situacao = 0;
-    this.porte = 0;
-    this.idade = 0;
-    this.foi = "";
-    this.local = "";
-    this.descricao = "";
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams, 
+              private PetsgoBackendProvider: PetsgoBackendProvider,
+              public alertControler: AlertController) {
+      this.animal = 0;
+      this.sexo = 0;
+      this.porte = 0;
+      this.idade = 0;
+      this.situacao = null;
+      this.nome = "";
+      this.foi = "";
+      this.local = "";
+      this.descricao = "";
   }
 
-  clearAll() {
+  resetData() {
     this.animal = 0;
     this.sexo = 0;
-    this.nome = "";
-    this.situacao = 0;
     this.porte = 0;
     this.idade = 0;
+    this.situacao = null;
+    this.nome = "";
     this.foi = "";
     this.local = "";
     this.descricao = "";
@@ -62,16 +66,13 @@ export class Tab3Page {
   @ViewChild('mySlider') slides: Slides;
 
   ionViewDidLoad() {
+    this.slides.lockSwipeToNext(true);
   }
-
-
 
   next() {
+    this.slides.lockSwipeToNext(false);
     this.slides.slideNext();
-  }
-
-  prev() {
-    this.slides.slidePrev();
+    this.slides.lockSwipeToNext(true);
   }
 
   dog() {
@@ -90,14 +91,56 @@ export class Tab3Page {
     this.sexo = 1;
   }
 
-  async done() {
+  validatePetData() {
+
+    if (this.descricao != "" && this.nome != "") {
+      this.next()
+    } else {
+      let alert = this.alertControler.create({
+        title: 'Ops!',
+        subTitle: 'Preencha todos os campos! :D',
+        buttons: ['OK']
+      });
+      alert.present();
+    }
+  }
+
+  validatePetPhotos() {
+    
+    if (this.img0 != null || this.img1 != null || this.img2 != null || this.img3 != null) {
+      this.next()
+    } else {
+      let alert = this.alertControler.create({
+        title: 'Ops!',
+        subTitle: 'Adicione pelo menos uma foto! :D',
+        buttons: ['OK']
+      });
+      alert.present();
+    }
+  }
+
+  validateGeneralInformationData() {
+    
+    if (this.local != "" && this.situacao != null && this.foi != "") {
+      this.addPet()
+    } else {
+      let alert = this.alertControler.create({
+        title: 'Ops!',
+        subTitle: 'Preencha todos os campos! :D',
+        buttons: ['OK']
+      });
+      alert.present();
+    }
+  }
+
+  async addPet() {
     await this.PetsgoBackendProvider.addPet(this.nome, this.descricao,
       this.animal, this.situacao, this.sexo, this.porte, this.idade,
       this.foi.indexOf("0") > -1 ? "1" : "0", this.foi.indexOf("1") > -1 ? "1" : "0",
       this.foi.indexOf("2") > -1 ? "1" : "0", this.local, "vinicius.silverio",
       this.img0, this.img1, this.img2, this.img3);
     this.slides.slideTo(0);
-    this.clearAll();
+    this.resetData();
   }
 
   fileChange(event, imgNumber) {
@@ -117,7 +160,7 @@ export class Tab3Page {
   cleanIMG(imgNumber) {
     let doc: any = document.getElementById("fileupload" + imgNumber);
     doc.value = "";
-    this["img" + imgNumber] = "";
+    this["img" + imgNumber] = null;
   }
 
 }
