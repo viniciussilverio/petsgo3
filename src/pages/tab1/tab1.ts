@@ -3,7 +3,6 @@ import { NavController, NavParams } from 'ionic-angular';
 
 import { PetsgoBackendProvider } from '../../providers/petsgo-backend/petsgo-backend';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'page-tab1',
