@@ -188,7 +188,7 @@
               </td>
             </tr>
           </table>
-
+          <h6 *ngIf="photoError" class="error"> {{photoErrorMessage}}</h6>
           <button ion-button (click)="validatePetPhotos()" class="u-button-color">Continuar</button>
         </div>
       </div>

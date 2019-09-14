@@ -37,7 +37,8 @@ export class Tab3Page {
   img1: any;
   img2: any;
   img3: any;
-
+  photoError: boolean;
+  photoErrorMessage: string;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
@@ -70,24 +71,28 @@ export class Tab3Page {
     this.cleanIMG(3);
   }
 
-  isValidText(input) {
-   const onlyText = /^[A-Za-z]+$/;
-
-   if (input == "") {
-    return true;
-   }
-
-   if(input.match(onlyText)) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   resetValidations() {
     this.descricaoError = null;
     this.descricaoErrorMessage = null;
+    this.nomeError = null;
+    this.nomeErrorMessage = null;
+    this.photoError = null;
+    this.photoErrorMessage = null;
   }
+
+  isValidText(input) {
+    const onlyText = /^[A-Za-z]+$/;
+ 
+    if (input == "") {
+     return true;
+    }
+ 
+    if(input.match(onlyText)) {
+       return true;
+     } else {
+       return false;
+     }
+   }
 
   @ViewChild('mySlider') slides: Slides;
 
@@ -148,14 +153,12 @@ export class Tab3Page {
   validatePetPhotos() {
     
     if (this.img0 != null || this.img1 != null || this.img2 != null || this.img3 != null) {
+      this.photoError = false;
+      this.photoErrorMessage = null;
       this.next()
     } else {
-      let alert = this.alertControler.create({
-        title: 'Ops!',
-        subTitle: 'Adicione pelo menos uma foto! :D',
-        buttons: ['OK']
-      });
-      alert.present();
+      this.photoError = true;
+      this.photoErrorMessage = "Ops! Precisamos de pelo menos uma foto.";
     }
   }
 
