@@ -1,7 +1,7 @@
 <ion-header class="ion-toolbar-custom" style="z-index:200;">
   <ion-toolbar>
-    <ion-title (click)="getPetsList()" *ngIf="!selected">
-      Busca de Pets (Atualizar)
+    <ion-title *ngIf="!selected">
+      Busca de Pets
     </ion-title>
     <ion-title (click)="cleanPet()" *ngIf="selected">
       Pet selecionado (Voltar)
@@ -75,6 +75,9 @@
 </ion-content>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="refreshPetList($event)">
+      <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-list>
     <div *ngFor="let item of (results | async)">
       <div class="item_list_pet box-shadow-blur" (click)="selectPet(item)">

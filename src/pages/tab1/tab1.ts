@@ -23,9 +23,15 @@ export class Tab1Page {
 
   }
 
-
   getPetsList() {
     this.results = this.PetsgoBackendProvider.getPetsList();
+  }
+
+  refreshPetList(refresher) {
+
+    this.results.subscribe( _ => {
+      refresher.complete();
+    });
   }
 
   cleanPet() {
