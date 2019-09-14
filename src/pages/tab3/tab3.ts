@@ -206,7 +206,6 @@ export class Tab3Page {
   }
 
   async addPet() {
-    console.log(firebase.auth().currentUser.uid)
     await this.PetsgoBackendProvider.addPet(this.nome, this.descricao,
       this.animal, this.situacao, this.sexo, this.porte, this.idade,
       this.foi.indexOf("0") > -1 ? "1" : "0", this.foi.indexOf("1") > -1 ? "1" : "0",
