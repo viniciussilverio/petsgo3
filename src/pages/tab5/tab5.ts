@@ -26,7 +26,7 @@ export class Tab5Page {
   firebase = firebase;
 
   verPets() {
-    console.log("Ver Pets");
+    console.log("Ver meus Pets");
   }
 
   SignOut() {
