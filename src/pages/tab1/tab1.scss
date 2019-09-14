@@ -60,4 +60,18 @@ page-tab1 {
   .hideThing {
     display: none;
   }
+
+  .imgframe {
+    background-size: 100% 100%;
+    width: 25px;
+    height: 25px;
+  }
+
+  .imgframe.favorited {
+    background-image: url(../assets/icon-heart-filled.svg);
+  }
+
+  .imgframe.unfavorited {
+    background-image: url(../assets/icon-heart-unfilled.svg);
+  }
 }

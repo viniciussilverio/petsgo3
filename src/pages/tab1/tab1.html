@@ -82,8 +82,7 @@
   <ion-list>
     <div *ngFor="let item of (results | async)">
       <div class="item_list_pet box-shadow-blur" (click)="selectPet(item)">
-        <div class="imgframe_pet" [style.background-image]="'url(' + getImgUrl(item, 0) + ')'">
-        </div>
+        <div class="imgframe_pet" [style.background-image]="'url(' + getImgUrl(item, 0) + ')'"> </div>
         <div class="descricao_frame">
           <table class="detalhes_table">
             <tr>
@@ -93,6 +92,7 @@
             <tr>
               <td>Genero: {{ item.genero }}</td>
               <td>Porte: {{ item.porte }}</td>
+              <div class="imgframe favorited"> </div>
             </tr>
             <tr>
               <td>Idade: {{ item.idade }}</td>
