@@ -18,16 +18,24 @@ import { PetsgoBackendProvider } from '../../providers/petsgo-backend/petsgo-bac
 export class Tab3Page {
   animal: number;
   sexo: number;
+  porte: number;
+  idade: number;
 
   nome: string;
   nomeError: boolean;
   nomeErrorMessage: string;
 
   situacao: number;
-  porte: number;
-  idade: number;
+  situacaoError: boolean;
+  situacaoErrorMessage: string;
+
   foi: string;
+  foiError: boolean;
+  foiErrorMessage: string;
+
   local: string;
+  localError: boolean;
+  localErrorMessage: string;
 
   descricao: string;
   descricaoError: boolean;
@@ -78,6 +86,12 @@ export class Tab3Page {
     this.nomeErrorMessage = null;
     this.photoError = null;
     this.photoErrorMessage = null;
+    this.situacaoError = null;
+    this.situacaoErrorMessage = null;
+    this.foiError = null;
+    this.foiErrorMessage = null;
+    this.localError = null;
+    this.localErrorMessage = null;
   }
 
   isValidText(input) {
@@ -163,16 +177,35 @@ export class Tab3Page {
   }
 
   validateGeneralInformationData() {
+
+    const requiredText: string = "Ops! Precisamos dessa informação.";
     
+    if (this.local == "") {
+      this.localError = true;
+      this.localErrorMessage = requiredText;
+    } else {
+      this.localError = false;
+      this.localErrorMessage = null;
+    }
+    
+    if (this.situacao == null) {
+      this.situacaoError = true;
+      this.situacaoErrorMessage = requiredText;
+    } else {
+      this.situacaoError = false;
+      this.situacaoErrorMessage = null;
+    }
+
+    if (this.foi == "") {
+      this.foiError = true;
+      this.foiErrorMessage = requiredText;
+    } else {
+      this.foiError = false;
+      this.foiErrorMessage = null;
+    }
+
     if (this.local != "" && this.situacao != null && this.foi != "") {
       this.addPet()
-    } else {
-      let alert = this.alertControler.create({
-        title: 'Ops!',
-        subTitle: 'Preencha todos os campos! :D',
-        buttons: ['OK']
-      });
-      alert.present();
     }
   }
 
