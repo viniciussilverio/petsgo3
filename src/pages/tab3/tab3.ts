@@ -2,6 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Slides } from 'ionic-angular';
 import { PetsgoBackendProvider } from '../../providers/petsgo-backend/petsgo-backend';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
 /**
  * Generated class for the Tab3Page page.
@@ -23,6 +25,7 @@ export class Tab3Page {
   sexo: number;
   porte: number;
   idade: number;
+  foi: string;
 
   nome: string;
   nomeError: boolean;
@@ -31,10 +34,6 @@ export class Tab3Page {
   situacao: number;
   situacaoError: boolean;
   situacaoErrorMessage: string;
-
-  foi: string;
-  foiError: boolean;
-  foiErrorMessage: string;
 
   local: string;
   localError: boolean;
@@ -94,15 +93,13 @@ export class Tab3Page {
     this.photoErrorMessage = null;
     this.situacaoError = null;
     this.situacaoErrorMessage = null;
-    this.foiError = null;
-    this.foiErrorMessage = null;
     this.localError = null;
     this.localErrorMessage = null;
   }
 
   containsOnlyText(input) {
 
-    const onlyText = /^[A-Za-z]+$/;
+    const onlyText = /^[A-Za-z ]+$/;
 
     if (input == "") {
       return true;
@@ -203,15 +200,7 @@ export class Tab3Page {
       this.situacaoErrorMessage = null;
     }
 
-    if (this.foi == "") {
-      this.foiError = true;
-      this.foiErrorMessage = requiredText;
-    } else {
-      this.foiError = false;
-      this.foiErrorMessage = null;
-    }
-
-    if (!this.localError && !this.situacaoError && !this.foiError) {
+    if (!this.localError && !this.situacaoError) {
       this.addPet()
     }
   }
@@ -220,7 +209,7 @@ export class Tab3Page {
     await this.PetsgoBackendProvider.addPet(this.nome, this.descricao,
       this.animal, this.situacao, this.sexo, this.porte, this.idade,
       this.foi.indexOf("0") > -1 ? "1" : "0", this.foi.indexOf("1") > -1 ? "1" : "0",
-      this.foi.indexOf("2") > -1 ? "1" : "0", this.local, "vinicius.silverio",
+      this.foi.indexOf("2") > -1 ? "1" : "0", this.local, firebase.auth().currentUser.displayName,
       this.img0, this.img1, this.img2, this.img3);
     this.slides.slideTo(0);
     this.resetData();
