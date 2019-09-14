@@ -74,6 +74,7 @@
                     <ion-item>
                       <ion-input placeholder="Descrição" [(ngModel)]="descricao"></ion-input>
                     </ion-item>
+                    <h6 *ngIf="descricaoError" class="error"> {{descricaoErrorMessage}}</h6>
                   </td>
                 </tr>
                 <tr>
@@ -85,6 +86,7 @@
                     <ion-item>
                       <ion-input placeholder="Pode inventar" [(ngModel)]="nome"></ion-input>
                     </ion-item>
+                    <h6 *ngIf="nomeError" class="error"> {{nomeErrorMessage}}</h6>
                   </td>
                 </tr>
               </table>

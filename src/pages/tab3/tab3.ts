@@ -2,7 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Slides } from 'ionic-angular';
 import { PetsgoBackendProvider } from '../../providers/petsgo-backend/petsgo-backend';
-import { isEmpty } from 'rxjs/operator/isEmpty';
 
 /**
  * Generated class for the Tab3Page page.
@@ -19,13 +18,21 @@ import { isEmpty } from 'rxjs/operator/isEmpty';
 export class Tab3Page {
   animal: number;
   sexo: number;
+
   nome: string;
+  nomeError: boolean;
+  nomeErrorMessage: string;
+
   situacao: number;
   porte: number;
   idade: number;
   foi: string;
   local: string;
+
   descricao: string;
+  descricaoError: boolean;
+  descricaoErrorMessage: string;
+
   img0: any;
   img1: any;
   img2: any;
@@ -63,6 +70,25 @@ export class Tab3Page {
     this.cleanIMG(3);
   }
 
+  isValidText(input) {
+   const onlyText = /^[A-Za-z]+$/;
+
+   if (input == "") {
+    return true;
+   }
+
+   if(input.match(onlyText)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  resetValidations() {
+    this.descricaoError = null;
+    this.descricaoErrorMessage = null;
+  }
+
   @ViewChild('mySlider') slides: Slides;
 
   ionViewDidLoad() {
@@ -93,15 +119,29 @@ export class Tab3Page {
 
   validatePetData() {
 
-    if (this.descricao != "" && this.nome != "") {
-      this.next()
+    const requiredText: string = "Ops! Precisamos dessa informação."
+
+    if (this.descricao != "") {
+      this.descricaoError = false;
+      this.descricaoErrorMessage = null;
     } else {
-      let alert = this.alertControler.create({
-        title: 'Ops!',
-        subTitle: 'Preencha todos os campos! :D',
-        buttons: ['OK']
-      });
-      alert.present();
+      this.descricaoError = true;
+      this.descricaoErrorMessage = requiredText;
+    }
+
+    if (!this.isValidText(this.nome)) {
+      this.nomeError = true;
+      this.nomeErrorMessage = "Ops! O nome deve conter apenas letras";
+    } else if (this.nome != "") {
+      this.nomeError = false;
+      this.nomeErrorMessage = null;
+    }  else {
+      this.nomeError = true;
+      this.nomeErrorMessage = requiredText;
+    }
+
+    if (!this.descricaoError && !this.nomeError) {
+      this.next();
     }
   }
 
