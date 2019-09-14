@@ -5,6 +5,14 @@ page-tab3 {
     color: #9575cd;
   }
 
+  .error {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 15px;
+    color: #d9534f;
+    font-size: 12px;
+  }
+
   .box-shadow-blur {
     box-shadow: 0px 0px 5px grey;
   }
@@ -82,5 +90,31 @@ page-tab3 {
 
   .list-ios {
     margin-bottom: 15px;
+  }
+
+  .u-button-color {
+    width: 200px;
+    border-radius: 45px;
+    background-color: #9575cd !important;
+  }
+
+  .imgframe.dog{
+    background-image: url(../assets/dog-option.svg);
+  }
+
+  .imgframe.cat{
+    background-image: url(../assets/cat-option.svg);
+  }
+
+  .imgframe.macho{
+    background-image: url(../assets/dog-option.png);
+  }
+
+  .imgframe.femea{
+    background-image: url(../assets/cat-option.png);
+  }
+
+  .scroll-content {
+    padding-bottom: 0px !important;
   }
 }

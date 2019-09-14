@@ -20,7 +20,7 @@ export class AuthProvider {
     return {
       callbacks: {
         signInSuccessWithAuthResult: (authResult: firebase.auth.UserCredential) => {
-          const user = authResult.user;
+          /* const user = authResult.user; */
           const isNewUser = authResult.additionalUserInfo.isNewUser;
 
           // initialize new user
@@ -51,13 +51,13 @@ export class AuthProvider {
             'email'
           ]
         },
-        firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-        firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        firebase.auth.TwitterAuthProvider.PROVIDER_ID
+        /* firebase.auth.EmailAuthProvider.PROVIDER_ID, */
         // firebase.auth.PhoneAuthProvider.PROVIDER_ID // not available for Ionic apps
       ],
       // Terms of service url.
-      tosUrl: '<your-tos-url>',
-      privacyPolicyUrl: '<your-pp-url>'
+      tosUrl: 'https://jessicasantosscruz.wixsite.com/petsgo/termsofservice',
+      privacyPolicyUrl: 'https://jessicasantosscruz.wixsite.com/petsgo/privacypolicy'
     };
   }
 

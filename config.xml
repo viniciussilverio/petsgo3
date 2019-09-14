@@ -1,5 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.vsilverio.petsgo" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.vsilverio.petsgo" version="0.0.1" 
+    xmlns="http://www.w3.org/ns/widgets" 
+    xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>PetsGo</name>
     <description>Aplicativo de adoção de animais.</description>
     <author email="vinos.vinicius@gmail.com" href="http://ionicframework.com/">Time PetsGo</author>

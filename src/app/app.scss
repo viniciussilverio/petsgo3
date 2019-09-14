@@ -21,4 +21,17 @@
 
 .toolbar-title {
     color: #ffffff !important;
+    align-content: center;
+}
+
+.tab-button[aria-selected=true] .tab-button-icon {
+    color: #9575cd !important;
+}
+
+.tab-button:hover:not(.disable-hover), .tab-button[aria-selected=true] {
+    color: #9575cd !important;
+}
+
+.firebaseui-tos {
+    color: #ffffff !important;
 }
