@@ -16,6 +16,9 @@ import { PetsgoBackendProvider } from '../../providers/petsgo-backend/petsgo-bac
   templateUrl: 'tab3.html',
 })
 export class Tab3Page {
+
+  // Properties
+
   animal: number;
   sexo: number;
   porte: number;
@@ -48,10 +51,11 @@ export class Tab3Page {
   photoError: boolean;
   photoErrorMessage: string;
 
+  // Init
+
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
-              private PetsgoBackendProvider: PetsgoBackendProvider,
-              public alertControler: AlertController) {
+              private PetsgoBackendProvider: PetsgoBackendProvider) {
       this.animal = 0;
       this.sexo = 0;
       this.porte = 0;
@@ -62,6 +66,8 @@ export class Tab3Page {
       this.local = "";
       this.descricao = "";
   }
+
+  // Methods
 
   resetData() {
     this.animal = 0;
@@ -94,19 +100,20 @@ export class Tab3Page {
     this.localErrorMessage = null;
   }
 
-  isValidText(input) {
+  containsOnlyText(input) {
+
     const onlyText = /^[A-Za-z]+$/;
- 
+
     if (input == "") {
-     return true;
+      return true;
     }
- 
+
     if(input.match(onlyText)) {
-       return true;
-     } else {
-       return false;
-     }
-   }
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   @ViewChild('mySlider') slides: Slides;
 
@@ -140,21 +147,21 @@ export class Tab3Page {
 
     const requiredText: string = "Ops! Precisamos dessa informação."
 
-    if (this.descricao != "") {
-      this.descricaoError = false;
-      this.descricaoErrorMessage = null;
-    } else {
+    if (this.descricao == "") {
       this.descricaoError = true;
       this.descricaoErrorMessage = requiredText;
+    } else {
+      this.descricaoError = false;
+      this.descricaoErrorMessage = null;
     }
 
-    if (!this.isValidText(this.nome)) {
+    if (!this.containsOnlyText(this.nome)) {
       this.nomeError = true;
       this.nomeErrorMessage = "Ops! O nome deve conter apenas letras";
     } else if (this.nome != "") {
       this.nomeError = false;
       this.nomeErrorMessage = null;
-    }  else {
+    } else {
       this.nomeError = true;
       this.nomeErrorMessage = requiredText;
     }
@@ -179,7 +186,7 @@ export class Tab3Page {
   validateGeneralInformationData() {
 
     const requiredText: string = "Ops! Precisamos dessa informação.";
-    
+
     if (this.local == "") {
       this.localError = true;
       this.localErrorMessage = requiredText;
@@ -204,7 +211,7 @@ export class Tab3Page {
       this.foiErrorMessage = null;
     }
 
-    if (this.local != "" && this.situacao != null && this.foi != "") {
+    if (!this.localError && !this.situacaoError && !this.foiError) {
       this.addPet()
     }
   }
@@ -217,6 +224,7 @@ export class Tab3Page {
       this.img0, this.img1, this.img2, this.img3);
     this.slides.slideTo(0);
     this.resetData();
+    this.resetValidations();
   }
 
   fileChange(event, imgNumber) {
