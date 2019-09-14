@@ -28,6 +28,7 @@ export class Tab1Page {
   }
 
   refreshPetList(refresher) {
+    this.results = this.PetsgoBackendProvider.getPetsList();
     this.results.subscribe( _ => {
       refresher.complete();
     });
