@@ -18,6 +18,10 @@ export class PetsgoBackendProvider {
     return this.http.get(`${this.url}/findPets`);
   }
 
+  getPetFavorites() {
+    return this.http.get(`${this.url}/findPets`);
+  }
+
   addPet(nome, descricao, especie, situacao, genero, porte, idade,
     castrado, vacinado, vermifugado, local, cuidador,
     file1, file2, file3, file4) {

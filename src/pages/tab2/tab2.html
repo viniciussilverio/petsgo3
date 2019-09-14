@@ -1,18 +1,104 @@
-<!--
-  Generated template for the Tab2Page page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>Favoritos</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content>
-
-</ion-content>
+<ion-header class="ion-toolbar-custom" style="z-index:200;">
+    <ion-toolbar>
+      <ion-title *ngIf="!selected">
+        Favoritos
+      </ion-title>
+      <ion-title (click)="cleanPet()" *ngIf="selected">
+        Pet selecionado (Voltar)
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content style="z-index:100; position: fixed; background-color: white; height: 100%; width: 100%;"
+    [ngClass]="{'hideThing' : !selected}">
+    <ion-list *ngIf="selected">
+      <div class="item_list_pet box-shadow-blur">
+        <ion-slides pager="true">
+            <ion-slide *ngFor="let foto of selected.fotos" [style.background-image]="'url(' + foto + ')'" class="imgframe_pet">
+            </ion-slide>
+        </ion-slides>
+        <div class="descricao_frame">
+          <table class="detalhes_table">
+            <tr>
+              <td class="nome_animal"><strong>{{ selected.nome }}</strong></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Descrição:</td>
+              <td>{{ selected.descricao }}</td>
+            </tr>
+            <tr>
+              <td>Genero:</td>
+              <td>{{ selected.genero }}</td>
+            </tr>
+            <tr>
+              <td>Porte:</td>
+              <td>{{ selected.porte }}</td>
+            </tr>
+            <tr>
+              <td>Idade:</td>
+              <td>{{ selected.idade }}</td>
+            </tr>
+            <tr>
+              <td>Situação:</td>
+              <td>{{ selected.situacao }}</td>
+            </tr>
+            <tr>
+              <td>Espécie:</td>
+              <td>{{ selected.especie }}</td>
+            </tr>
+            <tr>
+              <td>Castrado:</td>
+              <td>{{ selected.castrado }}</td>
+            </tr>
+            <tr>
+              <td>Vacinado:</td>
+              <td>{{ selected.vacinado }}</td>
+            </tr>
+            <tr>
+              <td>Vermifugado:</td>
+              <td>{{ selected.vermifugado }}</td>
+            </tr>
+            <tr>
+              <td>Local:</td>
+              <td>{{ selected.local }}</td>
+            </tr>
+            <tr>
+              <td>Cuidador:</td>
+              <td>{{ selected.cuidador }}</td>
+            </tr>
+          </table>
+          <br>
+        </div>
+      </div>
+    </ion-list>
+  </ion-content>
+  
+  <ion-content>
+    <ion-list>
+      <ion-spinner class="custom-ion-spinner" *ngIf="isLoading" ></ion-spinner>
+      <div *ngFor="let item of (results | async)">
+        <div class="item_list_pet box-shadow-blur" (click)="selectPet(item)">
+          <div class="imgframe_pet" [style.background-image]="'url(' + getImgUrl(item, 0) + ')'">
+          </div>
+          <div class="descricao_frame">
+            <table class="detalhes_table">
+              <tr>
+                <td class="nome_animal"><strong>{{ item.nome }}</strong></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Genero: {{ item.genero }}</td>
+                <td>Porte: {{ item.porte }}</td>
+              </tr>
+              <tr>
+                <td>Idade: {{ item.idade }}</td>
+                <td>Situação: {{ item.situacao }}</td>
+              </tr>
+            </table>
+            <br>
+          </div>
+        </div>
+      </div>
+    </ion-list>
+  </ion-content>

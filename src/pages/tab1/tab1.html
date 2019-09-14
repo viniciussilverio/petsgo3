@@ -78,6 +78,7 @@
   <ion-refresher slot="fixed" (ionRefresh)="refreshPetList($event)">
       <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
+  <ion-spinner class="custom-ion-spinner" *ngIf="isLoading" ></ion-spinner>
   <ion-list>
     <div *ngFor="let item of (results | async)">
       <div class="item_list_pet box-shadow-blur" (click)="selectPet(item)">
