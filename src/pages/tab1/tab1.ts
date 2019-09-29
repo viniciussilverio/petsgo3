@@ -12,19 +12,26 @@ export class Tab1Page {
 
   results: Observable<any>;
   selected: any;
+  isLoading: boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private PetsgoBackendProvider: PetsgoBackendProvider) {
+    this.isLoading = true;
     this.getPetsList();
     this.selected = "";
   }
 
-  ionViewDidLoad() {
-
-  }
-
-
   getPetsList() {
     this.results = this.PetsgoBackendProvider.getPetsList();
+    this.results.subscribe( _ => {
+      this.isLoading = false;
+    });
+  }
+
+  refreshPetList(refresher) {
+    this.results = this.PetsgoBackendProvider.getPetsList();
+    this.results.subscribe( _ => {
+      refresher.complete();
+    });
   }
 
   cleanPet() {

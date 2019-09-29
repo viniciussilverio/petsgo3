@@ -1,4 +1,18 @@
 page-tab1 {
+
+  .custom-ion-spinner {
+    position: fixed;
+    z-index: 999;
+    height: 2em;
+    width: 2em;
+    overflow: visible;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
   .welcome-card ion-img {
     max-height: 35vh;
     overflow: hidden;
@@ -45,5 +59,19 @@ page-tab1 {
 
   .hideThing {
     display: none;
+  }
+
+  .imgframe {
+    background-size: 100% 100%;
+    width: 25px;
+    height: 25px;
+  }
+
+  .imgframe.favorited {
+    background-image: url(../assets/icon-heart-filled.svg);
+  }
+
+  .imgframe.unfavorited {
+    background-image: url(../assets/icon-heart-unfilled.svg);
   }
 }

@@ -1,7 +1,7 @@
 <ion-header class="ion-toolbar-custom" style="z-index:200;">
   <ion-toolbar>
-    <ion-title (click)="getPetsList()" *ngIf="!selected">
-      Busca de Pets (Atualizar)
+    <ion-title *ngIf="!selected">
+      Busca de Pets
     </ion-title>
     <ion-title (click)="cleanPet()" *ngIf="selected">
       Pet selecionado (Voltar)
@@ -75,11 +75,14 @@
 </ion-content>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="refreshPetList($event)">
+      <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-spinner class="custom-ion-spinner" *ngIf="isLoading" ></ion-spinner>
   <ion-list>
     <div *ngFor="let item of (results | async)">
       <div class="item_list_pet box-shadow-blur" (click)="selectPet(item)">
-        <div class="imgframe_pet" [style.background-image]="'url(' + getImgUrl(item, 0) + ')'">
-        </div>
+        <div class="imgframe_pet" [style.background-image]="'url(' + getImgUrl(item, 0) + ')'"> </div>
         <div class="descricao_frame">
           <table class="detalhes_table">
             <tr>
@@ -89,6 +92,7 @@
             <tr>
               <td>Genero: {{ item.genero }}</td>
               <td>Porte: {{ item.porte }}</td>
+              <div class="imgframe favorited"> </div>
             </tr>
             <tr>
               <td>Idade: {{ item.idade }}</td>
