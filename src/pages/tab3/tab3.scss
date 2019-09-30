@@ -1,4 +1,17 @@
 page-tab3 {
+  .custom-ion-spinner {
+    position: fixed;
+    z-index: 999;
+    height: 2em;
+    width: 2em;
+    overflow: visible;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+  
   ion-slide {
     height: calc(100vh - 113px);
     flex-direction: column;
@@ -98,19 +111,19 @@ page-tab3 {
     background-color: #9575cd !important;
   }
 
-  .imgframe.dog{
+  .imgframe.dog {
     background-image: url(../assets/dog-option.svg);
   }
 
-  .imgframe.cat{
+  .imgframe.cat {
     background-image: url(../assets/cat-option.svg);
   }
 
-  .imgframe.macho{
+  .imgframe.macho {
     background-image: url(../assets/dog-option.png);
   }
 
-  .imgframe.femea{
+  .imgframe.femea {
     background-image: url(../assets/cat-option.png);
   }
 

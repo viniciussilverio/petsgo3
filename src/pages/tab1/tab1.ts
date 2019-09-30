@@ -3,6 +3,8 @@ import { NavController, NavParams } from 'ionic-angular';
 
 import { PetsgoBackendProvider } from '../../providers/petsgo-backend/petsgo-backend';
 import { Observable } from 'rxjs';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
 @Component({
   selector: 'page-tab1',
@@ -13,22 +15,26 @@ export class Tab1Page {
   results: Observable<any>;
   selected: any;
   isLoading: boolean;
+  firebase = firebase;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private PetsgoBackendProvider: PetsgoBackendProvider) {
-    this.isLoading = true;
-    this.getPetsList();
     this.selected = "";
   }
 
+  ionViewWillEnter() {
+    this.getPetsList();
+  }
+
   getPetsList() {
-    this.results = this.PetsgoBackendProvider.getPetsList();
+    this.isLoading = true;
+    this.results = this.PetsgoBackendProvider.getPetsList(firebase.auth().currentUser.uid);
     this.results.subscribe( _ => {
       this.isLoading = false;
     });
   }
 
   refreshPetList(refresher) {
-    this.results = this.PetsgoBackendProvider.getPetsList();
+    this.results = this.PetsgoBackendProvider.getPetsList(firebase.auth().currentUser.uid);
     this.results.subscribe( _ => {
       refresher.complete();
     });
