@@ -22,6 +22,10 @@ export class PetsgoBackendProvider {
     return this.http.get(`${this.url}/getFavoritos/${user}`);
   }
 
+  setPetFavorites(user, pet) {
+    return this.http.get(`${this.url}/setFavoritos/${user}/${pet}`);
+  }
+
   addPet(nome, descricao, especie, situacao, genero, porte, idade,
     castrado, vacinado, vermifugado, local, cuidador,
     file1, file2, file3, file4) {

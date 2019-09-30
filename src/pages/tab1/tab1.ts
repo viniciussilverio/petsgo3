@@ -28,15 +28,22 @@ export class Tab1Page {
   getPetsList() {
     this.isLoading = true;
     this.results = this.PetsgoBackendProvider.getPetsList(firebase.auth().currentUser.uid);
-    this.results.subscribe( _ => {
+    this.results.subscribe(_ => {
       this.isLoading = false;
     });
   }
 
   refreshPetList(refresher) {
     this.results = this.PetsgoBackendProvider.getPetsList(firebase.auth().currentUser.uid);
-    this.results.subscribe( _ => {
+    this.results.subscribe(_ => {
       refresher.complete();
+    });
+  }
+
+  setFavorite(pet) {
+    this.PetsgoBackendProvider.setPetFavorites(firebase.auth().currentUser.uid, pet).subscribe(_ => {
+      this.getPetsList();
+      this.selected = "";
     });
   }
 
@@ -44,8 +51,10 @@ export class Tab1Page {
     this.selected = "";
   }
 
-  selectPet(pet) {
-    this.selected = pet;
+  selectPet(pet, event) {
+    if(event.target.className != "imgframe unfavorited") {
+      this.selected = pet;
+    }
   }
 
   getImgUrl(item) {

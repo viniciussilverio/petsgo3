@@ -33,6 +33,13 @@ export class Tab2Page {
     });
   }
 
+  setFavorite(pet) {
+    this.PetsgoBackendProvider.setPetFavorites(firebase.auth().currentUser.uid, pet).subscribe(_ => {
+      this.getPetFavorites();
+      this.selected = "";
+    });
+  }
+
   refreshPetList(refresher) {
     this.results = this.PetsgoBackendProvider.getPetFavorites(firebase.auth().currentUser.uid);
     this.results.subscribe( _ => {
@@ -44,8 +51,10 @@ export class Tab2Page {
     this.selected = "";
   }
 
-  selectPet(pet) {
-    this.selected = pet;
+  selectPet(pet, event) {
+    if(event.target.className != "imgframe favorited") {
+      this.selected = pet;
+    }
   }
 
   getImgUrl(item) {
