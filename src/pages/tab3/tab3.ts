@@ -209,7 +209,7 @@ export class Tab3Page {
     await this.PetsgoBackendProvider.addPet(this.nome, this.descricao,
       this.animal, this.situacao, this.sexo, this.porte, this.idade,
       this.foi.indexOf("0") > -1 ? "1" : "0", this.foi.indexOf("1") > -1 ? "1" : "0",
-      this.foi.indexOf("2") > -1 ? "1" : "0", this.local, firebase.auth().currentUser.displayName,
+      this.foi.indexOf("2") > -1 ? "1" : "0", this.local, firebase.auth().currentUser.uid,
       this.img0, this.img1, this.img2, this.img3);
     this.slides.slideTo(0);
     this.resetData();
