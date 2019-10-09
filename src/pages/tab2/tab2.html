@@ -67,6 +67,9 @@
               <td>Cuidador:</td>
               <td>{{ selected.cuidador }}</td>
             </tr>
+            <tr>
+              <td colspan="2"><div class="imgframe favorited" (click)="setFavorite(selected._id)"> </div></td>
+            </tr>
           </table>
           <br>
         </div>
@@ -75,10 +78,13 @@
   </ion-content>
   
   <ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="refreshPetList($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-spinner class="custom-ion-spinner" *ngIf="isLoading" ></ion-spinner>
     <ion-list>
-      <ion-spinner class="custom-ion-spinner" *ngIf="isLoading" ></ion-spinner>
       <div *ngFor="let item of (results | async)">
-        <div class="item_list_pet box-shadow-blur" (click)="selectPet(item)">
+        <div class="item_list_pet box-shadow-blur" (click)="selectPet(item, $event)">
           <div class="imgframe_pet" [style.background-image]="'url(' + getImgUrl(item, 0) + ')'">
           </div>
           <div class="descricao_frame">
@@ -90,7 +96,7 @@
               <tr>
                 <td>Genero: {{ item.genero }}</td>
                 <td>Porte: {{ item.porte }}</td>
-                <div class="imgframe favorited"> </div>
+                <div class="imgframe favorited" (click)="setFavorite(item._id)"> </div>
               </tr>
               <tr>
                 <td>Idade: {{ item.idade }}</td>

@@ -14,12 +14,16 @@ export class PetsgoBackendProvider {
   url = environment.backend;
   constructor(public http: HttpClient) { }
 
-  getPetsList() {
-    return this.http.get(`${this.url}/findPets`);
+  getPetsList(user) {
+    return this.http.get(`${this.url}/findPets/${user}`);
   }
 
-  getPetFavorites() {
-    return this.http.get(`${this.url}/findPets`);
+  getPetFavorites(user) {
+    return this.http.get(`${this.url}/getFavoritos/${user}`);
+  }
+
+  setPetFavorites(user, pet) {
+    return this.http.get(`${this.url}/setFavoritos/${user}/${pet}`);
   }
 
   addPet(nome, descricao, especie, situacao, genero, porte, idade,
