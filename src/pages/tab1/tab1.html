@@ -3,85 +3,163 @@
     <ion-title *ngIf="!selected">
       Busca de Pets
     </ion-title>
-    <ion-title (click)="cleanPet()" *ngIf="selected">
-      Pet selecionado (Voltar)
-    </ion-title>
+
+    <ion-title *ngIf="selected"> Detalhes </ion-title>
+
+    <ion-buttons left>
+      <button ion-button icon-only (click)="cleanPet()" class="my-style-for-modal" *ngIf="selected">
+        <ion-icon name="arrow-back" class="arrow_color">
+        </ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-buttons right margin-right="5">
+        <button ion-button icon-only (click)="setFavorite(selected._id)" class="imgframe unfavorited" *ngIf="selected">
+        </button>
+      </ion-buttons>
+
+    <ion-buttons most right>
+      <button ion-button icon-only (click)="cleanPet()" class="my-style-for-modal" *ngIf="selected">
+        <ion-icon name="share" class="arrow_color">
+        </ion-icon>
+      </button>
+    </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
-<ion-content style="z-index:100; position: fixed; background-color: white; height: 100%; width: 100%;"
+<ion-content style="z-index:100; position: fixed; background-color: #F6F6F6; height: 100%; width: 100%;"
   [ngClass]="{'hideThing' : !selected}">
+
   <ion-list *ngIf="selected">
     <div class="item_list_pet box-shadow-blur">
       <ion-slides pager="true">
-          <ion-slide *ngFor="let foto of selected.fotos" [style.background-image]="'url(' + foto + ')'" class="imgframe_pet">
-          </ion-slide>
+        <ion-slide *ngFor="let foto of selected.fotos" [style.background-image]="'url(' + foto + ')'" class="img_pet">
+        </ion-slide>
       </ion-slides>
-      <div class="descricao_frame">
-        <table class="detalhes_table">
-          <tr>
-            <td class="nome_animal"><strong>{{ selected.nome }}</strong></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Descrição:</td>
-            <td>{{ selected.descricao }}</td>
-          </tr>
-          <tr>
-            <td>Genero:</td>
-            <td>{{ selected.genero }}</td>
-          </tr>
-          <tr>
-            <td>Porte:</td>
-            <td>{{ selected.porte }}</td>
-          </tr>
-          <tr>
-            <td>Idade:</td>
-            <td>{{ selected.idade }}</td>
-          </tr>
-          <tr>
-            <td>Situação:</td>
-            <td>{{ selected.situacao }}</td>
-          </tr>
-          <tr>
-            <td>Espécie:</td>
-            <td>{{ selected.especie }}</td>
-          </tr>
-          <tr>
-            <td>Castrado:</td>
-            <td>{{ selected.castrado }}</td>
-          </tr>
-          <tr>
-            <td>Vacinado:</td>
-            <td>{{ selected.vacinado }}</td>
-          </tr>
-          <tr>
-            <td>Vermifugado:</td>
-            <td>{{ selected.vermifugado }}</td>
-          </tr>
-          <tr>
-            <td>Local:</td>
-            <td>{{ selected.local }}</td>
-          </tr>
-          <tr>
-            <td>Cuidador:</td>
-            <td>{{ selected.cuidador }}</td>
-          </tr>
-          <tr>
-            <td colspan="2"><div class="imgframe unfavorited" (click)="setFavorite(selected._id)"> </div></td>
-          </tr>
-        </table>
-        <br>
-      </div>
     </div>
+
+    <div class="align_dados_gerais">
+      <strong> DADOS GERAIS </strong>
+    </div>
+
+    <div class="descricao_frame items_details box-bordered-shadow-blur">
+      <table class="tabela_detalhes">
+        <tr>
+          <td class="nome_animal"><strong> {{ selected.nome }} </strong></td>
+          <td></td>
+          <td></td>
+        </tr>
+
+        <br>
+        <tr>
+          <td><strong> Espécie: </strong> {{ selected.especie }} </td>
+          <td></td>
+          <td><strong> Gênero: </strong> {{ selected.genero }} </td>
+        </tr>
+        
+        <tr>
+          <td><strong> Idade: </strong> {{ selected.idade }} </td>
+          <td></td>
+          <td><strong> Porte: </strong> {{ selected.porte }} </td>
+        </tr>
+
+        <tr>
+          <td><strong> Situação: </strong> {{ selected.situacao }} </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="align_dados_gerais">
+      <strong> DESCRIÇÃO </strong>
+    </div>
+
+    <div class="descricao_frame items_details box-bordered-shadow-blur">
+      <table class="tabela_detalhes">
+        <tr>
+          <td class="icon_size_td">
+            <ion-icon name="md-paw" class="my_icon"></ion-icon>
+          </td>
+          <td> {{ selected.descricao }} </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="align_dados_gerais">
+      <strong> LOCALIZAÇÃO </strong>
+    </div>
+
+    <div class="descricao_frame items_details box-bordered-shadow-blur">
+      <table class="tabela_detalhes">
+        <tr>
+          <td class ="icon_size_td">
+            <ion-icon name="pin" class="my_icon"></ion-icon>
+          </td>
+          <td> {{ selected.local }} </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="align_dados_gerais margem_div">
+      <strong> SAÚDE </strong>
+    </div>
+
+    <div class="descricao_frame items_details box-bordered-shadow-blur">
+      <table class="tabela_detalhes">
+        <tr>
+          <td class="icon_size_td"> <img src="assets/castration.svg" alt="" class="my_icon" /> </td>
+          <td><strong> Castrado: </strong> {{ selected.castrado }} </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="descricao_frame items_details box-bordered-shadow-blur">
+      <table class="tabela_detalhes">
+        <tr>
+          <td class="icon_size_td"> <img src="assets/vaccine.svg" alt="" class="my_icon" /> </td>
+          <td class="ajustar_cel"><strong> Vacinado: </strong> {{ selected.vacinado }} </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="descricao_frame items_details box-bordered-shadow-blur">
+      <table class="tabela_detalhes">
+        <tr>
+          <td class="icon_size_td"> <img src="assets/pills.svg" alt="" class="my_icon" /> </td>
+          <td><strong> Vermifugado: </strong> {{ selected.vermifugado }} </td>
+        </tr>
+      </table>
+    </div>
+
+    <br>
+    <div class="align_dados_gerais">
+      <strong> CADASTRADO POR </strong>
+    </div>
+
+    <div class="descricao_frame items_details box-bordered-shadow-blur">
+      <table class="tabela_detalhes">
+        <tr>
+          <td class="icon_size_td">
+            <ion-icon name="contact" class="my_icon"></ion-icon>
+          </td>
+          <td><strong> Cuidador: </strong> {{ selected.cuidador }} </td>
+        </tr>
+      </table>
+    </div>
+
+    <br>
+    <div class="centralizar">
+      <button (click)="goChat()"  ion-button class="u-button-color"> Conversar </button>
+    </div>
+
   </ion-list>
 </ion-content>
 
 <ion-content>
   <ion-refresher slot="fixed" (ionRefresh)="refreshPetList($event)">
-      <ion-refresher-content></ion-refresher-content>
+    <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-spinner class="custom-ion-spinner" *ngIf="isLoading" ></ion-spinner>
+  <ion-spinner class="custom-ion-spinner" *ngIf="isLoading"></ion-spinner>
   <ion-list>
     <div *ngFor="let item of (results | async)">
       <div class="item_list_pet box-shadow-blur" (click)="selectPet(item, $event)">
@@ -93,7 +171,7 @@
               <td></td>
             </tr>
             <tr>
-              <td>Genero: {{ item.genero }}</td>
+              <td>Gênero: {{ item.genero }}</td>
               <td>Porte: {{ item.porte }}</td>
               <div class="imgframe unfavorited" (click)="setFavorite(item._id)"> </div>
             </tr>
