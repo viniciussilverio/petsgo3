@@ -1,27 +1,21 @@
 <ion-header class="ion-toolbar-custom" style="z-index:200;">
   <ion-toolbar>
-    <ion-title *ngIf="!selected">
-      Busca de Pets
-    </ion-title>
-
+    <ion-title *ngIf="!selected"> Busca de Pets </ion-title>
     <ion-title *ngIf="selected"> Detalhes </ion-title>
 
-    <ion-buttons left>
-      <button ion-button icon-only (click)="cleanPet()" class="my-style-for-modal" *ngIf="selected">
-        <ion-icon name="arrow-back" class="arrow_color">
-        </ion-icon>
+    <ion-buttons left *ngIf="selected">
+      <button ion-button icon-only (click)="cleanPet()" class="my-style-for-modal">
+        <ion-icon name="arrow-back" class="arrow_color"></ion-icon>
       </button>
     </ion-buttons>
 
-    <ion-buttons right margin-right="5">
-        <button ion-button icon-only (click)="setFavorite(selected._id)" class="imgframe unfavorited" *ngIf="selected">
-        </button>
-      </ion-buttons>
+    <ion-buttons right margin-right="5" *ngIf="selected">
+      <button ion-button icon-only (click)="setFavorite(selected._id)" class="imgframe unfavorited"></button>
+    </ion-buttons>
 
-    <ion-buttons most right>
-      <button ion-button icon-only (click)="cleanPet()" class="my-style-for-modal" *ngIf="selected">
-        <ion-icon name="share" class="arrow_color">
-        </ion-icon>
+    <ion-buttons most right *ngIf="selected">
+      <button ion-button icon-only (click)="cleanPet()" class="my-style-for-modal">
+        <ion-icon name="share" class="arrow_color"></ion-icon>
       </button>
     </ion-buttons>
 
@@ -57,7 +51,7 @@
           <td></td>
           <td><strong> Gênero: </strong> {{ selected.genero }} </td>
         </tr>
-        
+
         <tr>
           <td><strong> Idade: </strong> {{ selected.idade }} </td>
           <td></td>
@@ -92,7 +86,7 @@
     <div class="descricao_frame items_details box-bordered-shadow-blur">
       <table class="tabela_detalhes">
         <tr>
-          <td class ="icon_size_td">
+          <td class="icon_size_td">
             <ion-icon name="pin" class="my_icon"></ion-icon>
           </td>
           <td> {{ selected.local }} </td>
@@ -149,7 +143,7 @@
 
     <br>
     <div class="centralizar">
-      <button (click)="goChat()"  ion-button class="u-button-color"> Conversar </button>
+      <button (click)="goChat()" ion-button class="u-button-color"> Conversar </button>
     </div>
 
   </ion-list>
