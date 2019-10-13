@@ -5,6 +5,7 @@ import { PetsgoBackendProvider } from '../../providers/petsgo-backend/petsgo-bac
 import { Observable } from 'rxjs';
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import { Tab4Page } from '../tab4/tab4';
 
 @Component({
   selector: 'page-tab1',
@@ -60,6 +61,10 @@ export class Tab1Page {
   getImgUrl(item) {
     return (item.fotos[0]);
     /* return(`${environment.backend}/getImage/${item._id}/${Object.keys(item._attachments)[0]}`) */
+  }
+
+  goChat(){
+    this.navCtrl.push(Tab4Page, {}, {animate: true} );    
   }
 
 }
