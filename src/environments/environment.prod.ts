@@ -9,5 +9,6 @@ export const environment = {
     messagingSenderId: "393027674647"
   },
   /* backend: "http://localhost:9910" */
+  /* backend: "https://petsgo.herokuapp.com" */
   backend: "https://petsgobackendapp.mybluemix.net"
 };
