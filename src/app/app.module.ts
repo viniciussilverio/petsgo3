@@ -15,6 +15,7 @@ import { Tab4Page } from '../pages/tab4/tab4';
 import { Tab5Page } from '../pages/tab5/tab5';
 import { PetsgoBackendProvider } from '../providers/petsgo-backend/petsgo-backend';
 import { HttpClientModule } from '@angular/common/http';
+import { Camera } from '@ionic-native/camera';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { HttpClientModule } from '@angular/common/http';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
-    PetsgoBackendProvider
+    PetsgoBackendProvider,
+    Camera
   ]
 })
 export class AppModule {}
