@@ -74,5 +74,78 @@ page-tab2 {
     .imgframe.unfavorited {
       background-image: url(../assets/icon-heart-unfilled.svg);
     }
+
+    .arrow_color {
+      margin-right: 10px;
+      color: #ffffff;
+      font-size: 30px;
+    }
+    
+    .box-bordered-shadow-blur {
+      box-shadow: 0px 0px 0px 5px white;
+    }
+    
+    .background_div_color{
+      color: #ffffff;
+    }
+    
+    .items_details {
+      margin: 20px;
+      border-radius: 5px;
+    }
+    
+    .tabela_detalhes {
+      color: #9b9b9b;
+      background-color: white;
+      width: 100%;
+    }
+    
+    .align_dados_gerais {
+      size: 5px;
+      margin: 15px !important;
+    }
+    
+    .my_icon {
+      width: 20px;
+      margin-left: 10px;
+      color: #9575cd;
+      font-size: 20px;
+    }
+    
+    .icon_size_td {
+      width: 45px;
+      vertical-align: top;
+      text-align: left;
+    }
+    
+    .align_favoritos{
+     width: 45px;
+     vertical-align: middle; 
+     text-align: right;
+    }
+    
+    .img_pet {
+        border-radius: 10px 10px 10px 10px;
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 100%;
+        height: 230px;
+        background-size: 100% 100%;
+      }
+
+      .u-button-color {
+        height: 45px;
+        width: 180px;
+        border-radius: 45px;
+        background-color: #9575cd !important;
+      }
+      
+       .centralizar{
+        text-align: center;
+      }
+      
+      .margem_tr{
+        margin-top: 15px;
+      }
   }
   
