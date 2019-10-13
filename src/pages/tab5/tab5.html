@@ -1,10 +1,173 @@
-<ion-header>
+<ion-header class="ion-toolbar-custom" style="z-index:300;">
   <ion-toolbar>
-    <ion-title>
-      Perfil
-    </ion-title>
+    <ion-title *ngIf="!meusPets"> Perfil </ion-title>
+    <ion-title *ngIf="meusPets && !selected"> Meus Pets </ion-title>
+    <ion-title (click)="cleanPet()" *ngIf="meusPets && selected"> Detalhes </ion-title>
+
+    <ion-buttons left *ngIf="meusPets && selected">
+      <button ion-button icon-only (click)="cleanPet()" class="my-style-for-modal">
+        <ion-icon name="arrow-back" class="arrow_color"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-buttons left *ngIf="meusPets && !selected">
+      <button ion-button icon-only (click)="cleanPerfil()" class="my-style-for-modal">
+        <ion-icon name="arrow-back" class="arrow_color"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-buttons most right *ngIf="meusPets && selected">
+      <button ion-button icon-only (click)="cleanPet()" class="my-style-for-modal">
+        <ion-icon name="share" class="arrow_color"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
+<ion-content style="z-index:200; position: fixed; background-color: #F6F6F6; height: 100%; width: 100%;"
+  [ngClass]="{'hideThing' :  !(meusPets && selected)}">
+
+  <ion-list *ngIf="selected">
+    <div class="item_list_pet_new box-shadow-blur_new">
+      <ion-slides pager="true">
+        <ion-slide *ngFor="let foto of selected.fotos" [style.background-image]="'url(' + foto + ')'" class="img_pet">
+        </ion-slide>
+      </ion-slides>
+    </div>
+
+    <div class="align_dados_gerais">
+      <strong> DADOS GERAIS </strong>
+    </div>
+
+    <div class="descricao_frame items_details box-bordered-shadow-blur">
+      <table class="tabela_detalhes">
+        <tr>
+          <td class="nome_animal"><strong> {{ selected.nome }} </strong></td>
+          <td></td>
+          <td></td>
+        </tr>
+
+        <br>
+        <tr>
+          <td><strong> Espécie: </strong> {{ selected.especie }} </td>
+          <td></td>
+          <td><strong> Gênero: </strong> {{ selected.genero }} </td>
+        </tr>
+
+        <tr>
+          <td><strong> Idade: </strong> {{ selected.idade }} </td>
+          <td></td>
+          <td><strong> Porte: </strong> {{ selected.porte }} </td>
+        </tr>
+
+        <tr>
+          <td><strong> Situação: </strong> {{ selected.situacao }} </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="align_dados_gerais">
+      <strong> DESCRIÇÃO </strong>
+    </div>
+
+    <div class="descricao_frame items_details box-bordered-shadow-blur">
+      <table class="tabela_detalhes">
+        <tr>
+          <td class="icon_size_td_new">
+            <ion-icon name="md-paw" class="my_icon_new"></ion-icon>
+          </td>
+          <td> {{ selected.descricao }} </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="align_dados_gerais">
+      <strong> LOCALIZAÇÃO </strong>
+    </div>
+
+    <div class="descricao_frame items_details box-bordered-shadow-blur">
+      <table class="tabela_detalhes">
+        <tr>
+          <td class="icon_size_td_new">
+            <ion-icon name="pin" class="my_icon_new"></ion-icon>
+          </td>
+          <td> {{ selected.local }} </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="align_dados_gerais margem_div">
+      <strong> SAÚDE </strong>
+    </div>
+
+    <div class="descricao_frame items_details box-bordered-shadow-blur">
+      <table class="tabela_detalhes">
+        <tr>
+          <td class="icon_size_td_new"> <img src="assets/castration.svg" alt="" class="my_icon_new" /> </td>
+          <td><strong> Castrado: </strong> {{ selected.castrado }} </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="descricao_frame items_details box-bordered-shadow-blur">
+      <table class="tabela_detalhes">
+        <tr>
+          <td class="icon_size_td_new"> <img src="assets/vaccine.svg" alt="" class="my_icon_new" /> </td>
+          <td class="ajustar_cel"><strong> Vacinado: </strong> {{ selected.vacinado }} </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="descricao_frame items_details box-bordered-shadow-blur">
+      <table class="tabela_detalhes">
+        <tr>
+          <td class="icon_size_td_new"> <img src="assets/pills.svg" alt="" class="my_icon_new" /> </td>
+          <td><strong> Vermifugado: </strong> {{ selected.vermifugado }} </td>
+        </tr>
+      </table>
+    </div>
+
+    <br>
+    <div class="centralizar">
+      <button (click)="editarPet()" ion-button class="u-button-color"> Alterar </button>
+    </div>
+
+  </ion-list>
+</ion-content>
+
+<ion-content style="z-index:100; position: fixed; background-color: #F6F6F6; height: 100%; width: 100%;"
+[ngClass]="{'hideThing' : !(meusPets && !selected)}">
+  <ion-refresher slot="fixed" (ionRefresh)="refreshPetList($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-spinner class="custom-ion-spinner" *ngIf="isLoading"></ion-spinner>
+  <ion-list>
+    <div *ngFor="let item of (results | async)">
+      <div class="item_list_pet_new box-shadow-blur_new" (click)="selectPet(item, $event)">
+        <div class="imgframe_pet" [style.background-image]="'url(' + getImgUrl(item, 0) + ')'">
+        </div>
+        <div class="descricao_frame">
+          <table class="detalhes_table_new">
+            <tr>
+              <td class="nome_animal"><strong>{{ item.nome }}</strong></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Genero: {{ item.genero }}</td>
+              <td>Porte: {{ item.porte }}</td>
+              <div class="imgframe favorited" (click)="setFavorite(item._id)"> </div>
+            </tr>
+            <tr>
+              <td>Idade: {{ item.idade }}</td>
+              <td>Situação: {{ item.situacao }}</td>
+            </tr>
+          </table>
+          <br>
+        </div>
+      </div>
+    </div>
+  </ion-list>
+</ion-content>
 
 <ion-content *ngIf="firebase.auth() && firebase.auth().currentUser && firebase.auth().currentUser.displayName">
   <div class="item_list_pet box-shadow-blur center_text">

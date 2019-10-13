@@ -18,6 +18,10 @@ export class PetsgoBackendProvider {
     return this.http.get(`${this.url}/findPets/${user}`);
   }
 
+  getMyPetsList(user) {
+    return this.http.get(`${this.url}/findMyPets/${user}`);
+  }
+
   getPetFavorites(user) {
     return this.http.get(`${this.url}/getFavoritos/${user}`);
   }

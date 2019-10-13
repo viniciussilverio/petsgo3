@@ -5,7 +5,6 @@ import { PetsgoBackendProvider } from '../../providers/petsgo-backend/petsgo-bac
 import { Observable } from 'rxjs';
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import { Tab4Page } from '../tab4/tab4';
 
 @Component({
   selector: 'page-tab1',
@@ -64,7 +63,7 @@ export class Tab1Page {
   }
 
   goChat(){
-    this.navCtrl.push(Tab4Page, {}, {animate: true} );    
+    this.navCtrl.parent.select(3);  
   }
 
 }
