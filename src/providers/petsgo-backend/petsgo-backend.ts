@@ -32,7 +32,7 @@ export class PetsgoBackendProvider {
 
   addPet(nome, descricao, especie, situacao, genero, porte, idade,
     castrado, vacinado, vermifugado, local, cuidador,
-    file1, file2, file3, file4) {
+    nomeCuidador, fotoCuidador, file1, file2, file3, file4) {
 
     let httpOptions = {
       headers: {
@@ -58,6 +58,8 @@ export class PetsgoBackendProvider {
     formData.append('vermifugado', vermifugado);
     formData.append('local', local);
     formData.append('cuidador', cuidador);
+    formData.append('nomeCuidador', nomeCuidador);
+    formData.append('fotoCuidador', fotoCuidador);
 
     file1 ? formData.append('foto1', file1) : false;
     file2 ? formData.append('foto2', file2) : false;

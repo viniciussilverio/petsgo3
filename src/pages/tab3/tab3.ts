@@ -215,6 +215,7 @@ export class Tab3Page {
       this.animal, this.situacao, this.sexo, this.porte, this.idade,
       this.foi.indexOf("0") > -1 ? "1" : "0", this.foi.indexOf("1") > -1 ? "1" : "0",
       this.foi.indexOf("2") > -1 ? "1" : "0", this.local, firebase.auth().currentUser.uid,
+      firebase.auth().currentUser.displayName, firebase.auth().currentUser.photoURL,
       this.img0, this.img1, this.img2, this.img3);
     this.slides.slideTo(0);
     this.resetData();
