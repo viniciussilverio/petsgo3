@@ -62,4 +62,9 @@ export class Tab2Page {
     /* return(`${environment.backend}/getImage/${item._id}/${Object.keys(item._attachments)[0]}`) */
   }
 
+  goChat(){
+    this.navCtrl.parent.select(3); 
+  }
+
+
 }

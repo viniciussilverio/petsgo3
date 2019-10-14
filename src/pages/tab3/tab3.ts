@@ -1,9 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { Slides } from 'ionic-angular';
 import { PetsgoBackendProvider } from '../../providers/petsgo-backend/petsgo-backend';
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 /**
  * Generated class for the Tab3Page page.
@@ -49,21 +50,25 @@ export class Tab3Page {
   img3: any;
   photoError: boolean;
   photoErrorMessage: string;
+  platform: any;
 
   // Init
 
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams, 
-              private PetsgoBackendProvider: PetsgoBackendProvider) {
-      this.animal = 0;
-      this.sexo = 0;
-      this.porte = 0;
-      this.idade = 0;
-      this.situacao = null;
-      this.nome = "";
-      this.foi = "";
-      this.local = "";
-      this.descricao = "";
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    private PetsgoBackendProvider: PetsgoBackendProvider,
+    private camera: Camera,
+    private Platform: Platform) {
+    this.animal = 0;
+    this.sexo = 0;
+    this.porte = 0;
+    this.idade = 0;
+    this.situacao = null;
+    this.nome = "";
+    this.foi = "";
+    this.local = "";
+    this.descricao = "";
+    this.platform = Platform;
   }
 
   // Methods
@@ -105,7 +110,7 @@ export class Tab3Page {
       return true;
     }
 
-    if(input.match(onlyText)) {
+    if (input.match(onlyText)) {
       return true;
     } else {
       return false;
@@ -169,7 +174,7 @@ export class Tab3Page {
   }
 
   validatePetPhotos() {
-    
+
     if (this.img0 != null || this.img1 != null || this.img2 != null || this.img3 != null) {
       this.photoError = false;
       this.photoErrorMessage = null;
@@ -191,7 +196,7 @@ export class Tab3Page {
       this.localError = false;
       this.localErrorMessage = null;
     }
-    
+
     if (this.situacao == null) {
       this.situacaoError = true;
       this.situacaoErrorMessage = requiredText;
@@ -210,6 +215,7 @@ export class Tab3Page {
       this.animal, this.situacao, this.sexo, this.porte, this.idade,
       this.foi.indexOf("0") > -1 ? "1" : "0", this.foi.indexOf("1") > -1 ? "1" : "0",
       this.foi.indexOf("2") > -1 ? "1" : "0", this.local, firebase.auth().currentUser.uid,
+      firebase.auth().currentUser.displayName, firebase.auth().currentUser.photoURL,
       this.img0, this.img1, this.img2, this.img3);
     this.slides.slideTo(0);
     this.resetData();
@@ -225,15 +231,28 @@ export class Tab3Page {
       }
       reader.readAsDataURL(event.target.files[0]);
     }
-    /* let fileList: FileList = event.target.files; */
-    /* let file: File = fileList[0]; */
-    /* console.log(file); */
   }
 
   cleanIMG(imgNumber) {
     let doc: any = document.getElementById("fileupload" + imgNumber);
     doc.value = "";
     this["img" + imgNumber] = null;
+  }
+
+  takePicture(imgNumber) {
+    const options: CameraOptions = {
+      quality: 100,
+      targetWidth: 500,
+      targetHeight: 500,
+      saveToPhotoAlbum: false,
+      correctOrientation: true,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+    this.camera.getPicture(options).then((imageData) => {
+      this["img" + imgNumber] = 'data:image/jpeg;base64,' + imageData;
+    }).catch(error => console.warn(error))
   }
 
 }
