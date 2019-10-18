@@ -20,5 +20,4 @@ export class Tab4Page {
 
   ionViewDidLoad() {
   }
-
 }
