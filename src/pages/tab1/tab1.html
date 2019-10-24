@@ -1,7 +1,14 @@
 <ion-header class="ion-toolbar-custom" style="z-index:200;">
   <ion-toolbar>
-    <ion-title *ngIf="!selected"> Busca de Pets </ion-title>
+    <ion-title *ngIf="card"> Busca de Pets </ion-title>
     <ion-title *ngIf="selected"> Detalhes </ion-title>
+    <ion-title *ngIf="filtrar"> Filtro </ion-title>
+
+     <ion-buttons right *ngIf="card" class="margin_right" margin-right="10">
+      <button ion-button (click)="abrirFiltro()" class="my-style-for-modal"> 
+        <img src="assets/filtro.svg" alt="" class="arrow_color">
+      </button>
+     </ion-buttons> 
 
     <ion-buttons left *ngIf="selected">
       <button ion-button icon-only (click)="cleanPet()" class="my-style-for-modal">
@@ -9,8 +16,14 @@
       </button>
     </ion-buttons>
 
+    <ion-buttons left *ngIf="filtrar">
+        <button ion-button icon-only (click)="cleanFiltro()" class="my-style-for-modal">
+        <ion-icon name="close" class="arrow_color"></ion-icon>
+      </button>
+        </ion-buttons>
+
     <ion-buttons right margin-right="5" *ngIf="selected">
-      <button ion-button icon-only (click)="setFavorite(selected._id)" class="imgframe unfavorited"></button>
+      <button ion-button icon-only (click)="setFavorite(selec._id)" class="imgframe unfavorited"></button>
     </ion-buttons>
 
     <ion-buttons most right *ngIf="selected">
@@ -23,8 +36,10 @@
 </ion-header>
 
 <ion-content style="z-index:100; position: fixed; background-color: #F6F6F6; height: 100%; width: 100%;"
-  [ngClass]="{'hideThing' : !selected}">
+  [ngClass]="{'hideThing' : !selected && !filtrar}">
 
+  <!-- TELA COM A DESCRIÇÃO DOS CARDS -->
+  
   <ion-list *ngIf="selected">
     <div class="item_list_pet box-shadow-blur">
       <ion-slides pager="true">
@@ -145,9 +160,84 @@
     <div class="centralizar">
       <button (click)="goChat()" ion-button class="u-button-color"> Conversar </button>
     </div>
-
   </ion-list>
+
+  <!-- TELA DE FILTRO -->
+
+  <ion-list *ngIf="filtrar">
+    <div class ="margem_filtro">
+        <ion-item>
+          <ion-label><strong> ESPÉCIE: </strong></ion-label>
+            <ion-select [(ngModel)]="especie" multiple="false">
+              <ion-option><strong> Cachorro </strong></ion-option>
+              <ion-option><strong> Gato </strong></ion-option>
+            </ion-select>
+          </ion-item>
+      </div>
+    
+      <div class ="margem_filtro">
+        <ion-item>
+          <ion-label><strong> GÊNERO: </strong></ion-label>
+            <ion-select [(ngModel)]="genero" multiple="false">
+              <ion-option><strong> Macho </strong></ion-option>
+              <ion-option><strong> Fêmea </strong></ion-option>
+            </ion-select>
+        </ion-item>   
+      </div>
+      
+      <div class ="margem_filtro">
+        <ion-item>
+          <ion-label><strong> SITUAÇÃO: </strong></ion-label>
+            <ion-select [(ngModel)]="situacao" multiple="false">
+              <ion-option><strong> Adoção </strong></ion-option>
+              <ion-option><strong> Doação </strong></ion-option>
+             </ion-select>
+        </ion-item>
+      </div>
+      
+      <div class ="margem_filtro">
+          <ion-item>
+            <ion-label><strong> PORTE: </strong></ion-label>
+              <ion-select [(ngModel)]="porte" multiple="false" class="test">
+                <ion-option><strong> Pequeno </strong></ion-option>
+                <ion-option><strong> Médio </strong></ion-option>
+                <ion-option><strong> Grande </strong></ion-option>
+              </ion-select>
+          </ion-item>   
+        </div>
+        
+        <div class ="margem_filtro">
+          <ion-item>
+            <ion-label><strong> IDADE: </strong></ion-label>
+              <ion-select [(ngModel)]="idade" multiple="false">
+                <ion-option><strong> Filhote </strong></ion-option>
+                <ion-option><strong> Adulto </strong></ion-option>
+                <ion-option><strong> Idoso </strong></ion-option>
+               </ion-select>
+          </ion-item>
+        </div>  
+                
+        <br><br><br>
+        <div>
+          <Strong>DISTÂNCIA</Strong>
+        </div>
+         <div>
+          <ion-item>
+            <ion-range>
+              <ion-icon range-left small></ion-icon>
+              <ion-icon range-right> 45 Km </ion-icon>
+            </ion-range>
+          </ion-item>
+        </div>
+              
+        <br><br><br>
+        <div class="centralizar">
+          <button (click)="goChat()" ion-button class="u-button-color"> Aplicar Filtros </button>
+        </div>
+</ion-list>
 </ion-content>
+
+             
 
 <ion-content>
   <ion-refresher slot="fixed" (ionRefresh)="refreshPetList($event)">

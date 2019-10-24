@@ -15,10 +15,14 @@ export class Tab1Page {
   results: Observable<any>;
   selected: any;
   isLoading: boolean;
+  filtrar: boolean;
+  card: boolean;
   firebase = firebase;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private PetsgoBackendProvider: PetsgoBackendProvider) {
     this.selected = "";
+    this.filtrar = false;
+    this.card = true;
   }
 
   ionViewWillEnter() {
@@ -44,16 +48,22 @@ export class Tab1Page {
     this.PetsgoBackendProvider.setPetFavorites(firebase.auth().currentUser.uid, pet).subscribe(_ => {
       this.getPetsList();
       this.selected = "";
+      this.card = true;
+      this.filtrar = false;
     });
   }
 
   cleanPet() {
     this.selected = "";
+    this.card = true;
+    this.filtrar = false;
   }
 
   selectPet(pet, event) {
     if(event.target.className != "imgframe unfavorited") {
       this.selected = pet;
+      this.card = false;
+      this.filtrar = false;
     }
   }
 
@@ -63,9 +73,22 @@ export class Tab1Page {
   }
 
   goChat(){
-    this.navCtrl.parent.select(3);  
+    this.navCtrl.parent.select(3); 
+    this.filtrar = false; 
+    this.selected = false;
+    this.card = true;
+  }
+
+  cleanFiltro(){
+     this.selected = false;
+     this.filtrar = false;
+     this.card = true;
+  }
+
+  abrirFiltro(){
+    this.filtrar = true;
+    this.selected = false;    
+    this.card = false;
   }
 
 }
-
-

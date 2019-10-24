@@ -86,6 +86,7 @@ page-tab1 {
     margin: 0 6px;
     min-width: 36px;
  }
+ 
  .arrow_color {
   margin-right: 10px;
   color: #ffffff;
@@ -180,8 +181,8 @@ page-tab1 {
 //  } 
 
 .u-button-color {
-  height: 45px;
-  width: 180px;
+  height: 50px;
+  width: 200px;
   border-radius: 45px;
   background-color: #9575cd !important;
 }
@@ -194,6 +195,15 @@ page-tab1 {
   margin-top: 15px;
 }
 
+.margem_right {
+  margin-right: 10px;
+}
 
+.margem_filtro {
+  box-shadow: 0.5px 0.5px 0.5px 0.5px gray;
+  margin-top: 30px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
 
 }
