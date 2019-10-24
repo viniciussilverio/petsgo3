@@ -23,7 +23,7 @@
         </ion-buttons>
 
     <ion-buttons right margin-right="5" *ngIf="selected">
-      <button ion-button icon-only (click)="setFavorite(selec._id)" class="imgframe unfavorited"></button>
+      <button ion-button icon-only (click)="setFavorite(selected._id)" class="imgframe unfavorited"></button>
     </ion-buttons>
 
     <ion-buttons most right *ngIf="selected">
@@ -140,7 +140,6 @@
       </table>
     </div>
 
-    <br>
     <div class="align_dados_gerais">
       <strong> CADASTRADO POR </strong>
     </div>
