@@ -5,6 +5,7 @@ import { PetsgoBackendProvider } from '../../providers/petsgo-backend/petsgo-bac
 import { Observable } from 'rxjs';
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import { Geolocation } from '@ionic-native/geolocation';
 
 @Component({
   selector: 'page-tab1',
@@ -18,11 +19,18 @@ export class Tab1Page {
   filtrar: boolean;
   card: boolean;
   firebase = firebase;
+  local: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private PetsgoBackendProvider: PetsgoBackendProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private PetsgoBackendProvider: PetsgoBackendProvider, private Geolocation: Geolocation) {
     this.selected = "";
     this.filtrar = false;
     this.card = true;
+    this.Geolocation.getCurrentPosition().then((res) => {
+      let location=`${res.coords.latitude},${res.coords.longitude}`;
+      this.local = location;
+    }).catch((error) => {
+    console.log('Error getting location', error);
+    });;
   }
 
   ionViewWillEnter() {
@@ -89,6 +97,18 @@ export class Tab1Page {
     this.filtrar = true;
     this.selected = false;    
     this.card = false;
+  }
+
+  calculateDistance(petLocal){
+    let lat1 = this.local.split(",")[0];
+    let long1 = this.local.split(",")[1];
+    let lat2 = petLocal.split(",")[0];
+    let long2 = petLocal.split(",")[1];
+    let p = 0.017453292519943295;    // Math.PI / 180
+    let c = Math.cos;
+    let a = 0.5 - c((lat1-lat2) * p) / 2 + c(lat2 * p) *c((lat1) * p) * (1 - c(((long1- long2) * p))) / 2;
+    let dis = (12742 * Math.asin(Math.sqrt(a))); // 2 * R; R = 6371 km
+    return (Math.round(dis) + " Km");
   }
 
 }

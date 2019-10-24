@@ -16,6 +16,7 @@ import { Tab5Page } from '../pages/tab5/tab5';
 import { PetsgoBackendProvider } from '../providers/petsgo-backend/petsgo-backend';
 import { HttpClientModule } from '@angular/common/http';
 import { Camera } from '@ionic-native/camera';
+import { Geolocation } from '@ionic-native/geolocation';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { Camera } from '@ionic-native/camera';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
     PetsgoBackendProvider,
-    Camera
+    Camera,
+    Geolocation
   ]
 })
 export class AppModule {}
