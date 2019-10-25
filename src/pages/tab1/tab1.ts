@@ -48,7 +48,6 @@ export class Tab1Page {
     }).catch((error) => {
       console.log('Error getting location', error);
     });;
-    
   }
 
   ionViewWillEnter() {
@@ -133,7 +132,7 @@ export class Tab1Page {
       return (Math.round(dis));
     } catch(error) {
       console.log("Error")
-      return ("Buscando localização.")
+      return (0)
     }
     
   }
