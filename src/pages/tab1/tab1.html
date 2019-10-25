@@ -4,30 +4,30 @@
     <ion-title *ngIf="selected"> Detalhes </ion-title>
     <ion-title *ngIf="filtrar"> Filtro </ion-title>
 
-     <ion-buttons right *ngIf="card" class="margin_right" margin-right="10">
-      <button ion-button (click)="abrirFiltro()" class="my-style-for-modal"> 
+    <ion-buttons right *ngIf="card" class="margin_right" margin-right="10">
+      <button ion-button (click)="abrirFiltro()" class="my-style-for-modal">
         <img src="assets/filtro.svg" alt="" class="arrow_color">
       </button>
-     </ion-buttons> 
+    </ion-buttons>
 
     <ion-buttons left *ngIf="selected">
-      <button ion-button icon-only (click)="cleanPet()" class="my-style-for-modal">
+      <button ion-button icon-only (click)="fecharPet()" class="my-style-for-modal">
         <ion-icon name="arrow-back" class="arrow_color"></ion-icon>
       </button>
     </ion-buttons>
 
     <ion-buttons left *ngIf="filtrar">
-        <button ion-button icon-only (click)="cleanFiltro()" class="my-style-for-modal">
-        <ion-icon name="close" class="arrow_color"></ion-icon>
+      <button ion-button icon-only (click)="fecharFiltro()" class="my-style-for-modal">
+        <ion-icon name="arrow-back" class="arrow_color"></ion-icon>
       </button>
-        </ion-buttons>
+    </ion-buttons>
 
     <ion-buttons right margin-right="5" *ngIf="selected">
       <button ion-button icon-only (click)="setFavorite(selected._id)" class="imgframe unfavorited"></button>
     </ion-buttons>
 
     <ion-buttons most right *ngIf="selected">
-      <button ion-button icon-only (click)="cleanPet()" class="my-style-for-modal">
+      <button ion-button icon-only (click)="fecharPet()" class="my-style-for-modal">
         <ion-icon name="share" class="arrow_color"></ion-icon>
       </button>
     </ion-buttons>
@@ -39,7 +39,7 @@
   [ngClass]="{'hideThing' : !selected && !filtrar}">
 
   <!-- TELA COM A DESCRIÇÃO DOS CARDS -->
-  
+
   <ion-list *ngIf="selected">
     <div class="item_list_pet box-shadow-blur">
       <ion-slides pager="true">
@@ -104,7 +104,7 @@
           <td class="icon_size_td">
             <ion-icon name="pin" class="my_icon"></ion-icon>
           </td>
-          <td> {{ calculateDistance(selected.local) }} </td>
+          <td> {{ calculateDistance(selected.local) + " Km" }} </td>
         </tr>
       </table>
     </div>
@@ -164,79 +164,155 @@
   <!-- TELA DE FILTRO -->
 
   <ion-list *ngIf="filtrar">
-    <div class ="margem_filtro">
-        <ion-item>
-          <ion-label><strong> ESPÉCIE: </strong></ion-label>
-            <ion-select [(ngModel)]="especie" multiple="false">
-              <ion-option><strong> Canina </strong></ion-option>
-              <ion-option><strong> Felina </strong></ion-option>
-            </ion-select>
-          </ion-item>
-      </div>
-    
-      <div class ="margem_filtro">
-        <ion-item>
-          <ion-label><strong> GÊNERO: </strong></ion-label>
-            <ion-select [(ngModel)]="genero" multiple="false">
-              <ion-option><strong> Masculino </strong></ion-option>
-              <ion-option><strong> Feminino </strong></ion-option>
-            </ion-select>
-        </ion-item>   
-      </div>
-      
-      <div class ="margem_filtro">
-        <ion-item>
-          <ion-label><strong> SITUAÇÃO: </strong></ion-label>
-            <ion-select [(ngModel)]="situacao" multiple="false">
-              <ion-option><strong> Adoção </strong></ion-option>
-              <ion-option><strong> Perdido </strong></ion-option>
-             </ion-select>
-        </ion-item>
-      </div>
-      
-      <div class ="margem_filtro">
-          <ion-item>
-            <ion-label><strong> PORTE: </strong></ion-label>
-              <ion-select [(ngModel)]="porte" multiple="false" class="test">
-                <ion-option><strong> Pequeno </strong></ion-option>
-                <ion-option><strong> Médio </strong></ion-option>
-                <ion-option><strong> Grande </strong></ion-option>
-              </ion-select>
-          </ion-item>   
-        </div>
-        
-        <div class ="margem_filtro">
-          <ion-item>
-            <ion-label><strong> IDADE: </strong></ion-label>
-              <ion-select [(ngModel)]="idade" multiple="false">
-                <ion-option><strong> Filhote </strong></ion-option>
-                <ion-option><strong> Adulto </strong></ion-option>
-                <ion-option><strong> Idoso </strong></ion-option>
-               </ion-select>
-          </ion-item>
-        </div>  
-                
-        <br><br><br>
-        <div>
-          <Strong>DISTÂNCIA</Strong>
-        </div>
-         <div>
-          <ion-item>
-            <ion-range>
-              <ion-icon range-left small></ion-icon>
-              <ion-icon range-right> 45 Km </ion-icon>
-            </ion-range>
-          </ion-item>
-        </div>
-              
-        <br><br><br>
-        <div class="centralizar">
-          <button (click)="goChat()" ion-button class="u-button-color"> Aplicar Filtros </button>
-        </div>
-</ion-list>
+    <div class="align_dados_gerais">
+      <table style="width: 100%;">
+        <tr>
+          <td>
+            <strong> Espécie: </strong>
+          </td>
+          <td style="width: 30px;" (click)="limparFiltro('especie')">
+              <strong> Limpar </strong>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="buttonSegment">
+      <ion-segment [(ngModel)]="filtro.especie">
+        <ion-segment-button value="Canina">
+          Canina
+        </ion-segment-button>
+        <ion-segment-button value="Felina">
+          Felina
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+
+    <div class="align_dados_gerais">
+      <table style="width: 100%;">
+        <tr>
+          <td>
+            <strong> Gênero: </strong>
+          </td>
+          <td style="width: 30px;" (click)="limparFiltro('genero')">
+              <strong> Limpar </strong>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="buttonSegment">
+      <ion-segment [(ngModel)]="filtro.genero">
+        <ion-segment-button value="Masculino">
+          Masculino
+        </ion-segment-button>
+        <ion-segment-button value="Feminino">
+          Feminino
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+
+    <div class="align_dados_gerais">
+      <table style="width: 100%;">
+        <tr>
+          <td>
+            <strong> Situação: </strong>
+          </td>
+          <td style="width: 30px;" (click)="limparFiltro('situacao')">
+              <strong> Limpar </strong>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="buttonSegment">
+      <ion-segment [(ngModel)]="filtro.situacao">
+        <ion-segment-button value="Adoção">
+          Adoção
+        </ion-segment-button>
+        <ion-segment-button value="Perdido">
+          Perdido
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+
+    <div class="align_dados_gerais">
+      <table style="width: 100%;">
+        <tr>
+          <td>
+            <strong> Porte: </strong>
+          </td>
+          <td style="width: 30px;" (click)="limparFiltro('porte')">
+              <strong> Limpar </strong>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="buttonSegment">
+      <ion-segment [(ngModel)]="filtro.porte">
+        <ion-segment-button value="Pequeno">
+          Pequeno
+        </ion-segment-button>
+        <ion-segment-button value="Médio">
+          Médio
+        </ion-segment-button>
+        <ion-segment-button value="Grande">
+          Grande
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+
+    <div class="align_dados_gerais">
+      <table style="width: 100%;">
+        <tr>
+          <td>
+            <strong> Idade: </strong>
+          </td>
+          <td style="width: 30px;" (click)="limparFiltro('idade')">
+              <strong> Limpar </strong>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="buttonSegment">
+      <ion-segment [(ngModel)]="filtro.idade">
+        <ion-segment-button value="Filhote">
+          Filhote
+        </ion-segment-button>
+        <ion-segment-button value="Adulto">
+          Adulto
+        </ion-segment-button>
+        <ion-segment-button value="Idoso">
+          Idoso
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+
+    <div class="align_dados_gerais">
+      <table style="width: 100%;">
+        <tr>
+          <td>
+            <strong> Distância: </strong>
+          </td>
+          <td style="width: 30px;" (click)="limparFiltro('distancia')">
+              <strong> Limpar </strong>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="buttonSegment">
+      <ion-item>
+        <ion-range min="10" max="99" step="10" snaps="true" color="secondary" [(ngModel)]="filtro.distancia">
+          <ion-icon range-right> {{ filtro.distancia }} </ion-icon>
+        </ion-range>
+      </ion-item>
+    </div>
+
+    <br>
+    <div class="centralizar">
+      <button (click)="aplicarFiltro()" ion-button class="u-button-color"> Aplicar Filtros </button>
+    </div>
+  </ion-list>
 </ion-content>
 
-             
+
 
 <ion-content>
   <ion-refresher slot="fixed" (ionRefresh)="refreshPetList($event)">
@@ -244,7 +320,7 @@
   </ion-refresher>
   <ion-spinner class="custom-ion-spinner" *ngIf="isLoading"></ion-spinner>
   <ion-list>
-    <div *ngFor="let item of (results | async)">
+    <div *ngFor="let item of filtered">
       <div class="item_list_pet box-shadow-blur" (click)="selectPet(item, $event)">
         <div class="imgframe_pet" [style.background-image]="'url(' + getImgUrl(item, 0) + ')'"> </div>
         <div class="descricao_frame">
