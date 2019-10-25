@@ -227,4 +227,20 @@ page-tab1 {
     padding-bottom: 10px;
     border-radius: 10px 10px 10px 10px;
   }
+
+  .segment-md .segment-button {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    width: 0;
+    height: 3.2rem;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #488aff;
+    font-size: 1.3rem;
+    line-height: 3rem;
+    color: #488aff;
+    background-color: transparent;
+}
 }
