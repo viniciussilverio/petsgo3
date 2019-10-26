@@ -110,7 +110,7 @@ page-tab5 {
   }
 
   .hideThing {
-    display: none;
+    visibility: hidden;
   }
 
   .imgframe {
@@ -179,18 +179,123 @@ page-tab5 {
     background-size: 100% 100%;
   }
 
-  .u-button-color {
-    height: 45px;
-    width: 180px;
-    border-radius: 45px;
-    background-color: #9575cd !important;
-  }
-
   .centralizar {
     text-align: center;
   }
 
   .margem_tr {
     margin-top: 15px;
+  }
+
+  /* Olhar depois */
+  
+  ion-slide {
+    height: calc(100vh - 113px);
+    flex-direction: column;
+    color: #9575cd;
+  }
+
+  .error {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 15px;
+    color: #d9534f;
+    font-size: 12px;
+  }
+
+  .item_list {
+    color: #9b9b9b;
+    margin: 10px;
+    border-radius: 10px;
+  }
+
+  .descricao_frame_new {
+    padding-bottom: 10px;
+    text-align: left;
+    margin: 15px !important;
+  }
+
+  .text_title_add {
+    margin-bottom: 0px;
+    margin-top: 5px;
+    margin-left: 16px;
+  }
+
+  .imgframe_new {
+    margin: 20px;
+    margin-bottom: 5px;
+    background-size: 100% 100%;
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+  }
+
+  .img_activated {
+    border: 2px solid;
+    border-color: #9575cd;
+  }
+
+  .td_activated {
+    font-weight: 600;
+  }
+
+  table.center {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+  }
+
+  .image_frame_add {
+    margin: 5px;
+    box-shadow: 0px 0px 5px grey;
+    color: #9575cd;
+    line-height: 100px;
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+  }
+
+  .img_inside {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+  }
+
+  .full_width {
+    width: 100%;
+  }
+
+  .multiple-size {
+    max-width: calc(100vw - 210px);
+  }
+
+  .list-ios {
+    margin-bottom: 15px;
+  }
+
+  .u-button-color {
+    width: 200px;
+    border-radius: 45px;
+    background-color: #9575cd !important;
+  }
+
+  .imgframe_new.dog {
+    background-image: url(../assets/dog-option.svg);
+  }
+
+  .imgframe_new.cat {
+    background-image: url(../assets/cat-option.svg);
+  }
+
+  .imgframe_new.macho {
+    background-image: url(../assets/dog-option.png);
+  }
+
+  .imgframe_new.femea {
+    background-image: url(../assets/cat-option.png);
+  }
+
+  .scroll-content {
+    padding-bottom: 0px !important;
   }
 }
