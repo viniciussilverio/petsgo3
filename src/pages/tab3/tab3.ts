@@ -5,6 +5,7 @@ import { PetsgoBackendProvider } from '../../providers/petsgo-backend/petsgo-bac
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Geolocation } from '@ionic-native/geolocation';
 
 /**
  * Generated class for the Tab3Page page.
@@ -20,7 +21,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 })
 export class Tab3Page {
 
-  // Properties
+  // Propriedades
 
   animal: number;
   sexo: number;
@@ -50,15 +51,13 @@ export class Tab3Page {
   img3: any;
   photoError: boolean;
   photoErrorMessage: string;
-  platform: any;
-
-  // Init
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private PetsgoBackendProvider: PetsgoBackendProvider,
     private camera: Camera,
-    private Platform: Platform) {
+    private platform: Platform,
+    private Geolocation: Geolocation) {
     this.animal = 0;
     this.sexo = 0;
     this.porte = 0;
@@ -66,12 +65,34 @@ export class Tab3Page {
     this.situacao = null;
     this.nome = "";
     this.foi = "";
-    this.local = "";
     this.descricao = "";
-    this.platform = Platform;
+    this.Geolocation.getCurrentPosition().then((res) => {
+      let location = `${res.coords.latitude},${res.coords.longitude}`;
+      this.local = location;
+
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });;
   }
 
   // Methods
+
+  /* getLocation(){
+    this.geolocation.getCurrentPosition().then((res) => {
+      // resp.coords.latitude
+      // resp.coords.longitude
+      //let location= 'lat'+ res.coords.latitude +'lang'+ res.coords.longitude;
+      let location='lat '+res.coords.latitude+' lang '+res.coords.longitude;
+      let toast = this.toastCtrl.create({
+        message: location,
+        duration: 3000
+      });
+      toast.present();
+
+    }).catch((error) => {
+    console.log('Error getting location', error);
+    });
+  } */
 
   resetData() {
     this.animal = 0;
@@ -81,7 +102,6 @@ export class Tab3Page {
     this.situacao = null;
     this.nome = "";
     this.foi = "";
-    this.local = "";
     this.descricao = "";
     this.cleanIMG(0);
     this.cleanIMG(1);
