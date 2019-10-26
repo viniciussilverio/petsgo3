@@ -134,7 +134,6 @@ export class Tab1Page {
       console.log("Error")
       return (0)
     }
-    
   }
 
   filtraDado(data) {

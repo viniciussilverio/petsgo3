@@ -21,7 +21,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 })
 export class Tab3Page {
 
-  // Properties
+  // Propriedades
 
   animal: number;
   sexo: number;
@@ -52,8 +52,6 @@ export class Tab3Page {
   photoError: boolean;
   photoErrorMessage: string;
 
-  // Init
-
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private PetsgoBackendProvider: PetsgoBackendProvider,
@@ -69,11 +67,11 @@ export class Tab3Page {
     this.foi = "";
     this.descricao = "";
     this.Geolocation.getCurrentPosition().then((res) => {
-      let location=`${res.coords.latitude},${res.coords.longitude}`;
+      let location = `${res.coords.latitude},${res.coords.longitude}`;
       this.local = location;
 
     }).catch((error) => {
-    console.log('Error getting location', error);
+      console.log('Error getting location', error);
     });;
   }
 
@@ -104,7 +102,6 @@ export class Tab3Page {
     this.situacao = null;
     this.nome = "";
     this.foi = "";
-    this.local = "";
     this.descricao = "";
     this.cleanIMG(0);
     this.cleanIMG(1);
