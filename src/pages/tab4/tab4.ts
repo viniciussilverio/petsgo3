@@ -87,7 +87,7 @@ export class Tab4Page {
           this.isLoading = false;
           let self = this;
           this.timer = setTimeout(function () { self.updateChat(`${selected}`, `${timeTorun}`); /* console.log("Atualizando")  */ }, 5000);
-          if (this.chat.msgs.length !== data.msgs.length) {
+          if (this.chat.msgs.length !== data["msgs"].length) {
             this.chat = data;
             console.log("Dado atualizado")
             this.scrollToBottom();
