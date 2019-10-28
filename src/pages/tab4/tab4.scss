@@ -1,15 +1,47 @@
 page-tab4 {
+  .arrow_color {
+    margin-right: 10px;
+    color: #ffffff;
+    font-size: 30px;
+  }
 
-    .margem{
-      
-      margin-top: 130%;
-      //margin-bottom: 1;
-      //vertical-align: bottom;  
-    }
+  .hideThing {
+    visibility: hidden;
+  }
 
-    .arrow_color {
-      margin-right: 10px;
-      color: #ffffff;
-      font-size: 30px;
-    }
+  .user_name {
+    color: #5e5e5e;
+  }
+
+  .message {
+    padding: 10px !important;
+    transition: all 250ms ease-in-out !important;
+    border-radius: 10px !important;
+    margin-bottom: 4px !important;
+  }
+  .mymessage {
+    background: #9575cd !important;
+    color: #000 !important;
+    border-top-right-radius: 0px !important;
+  }
+  .othermessage {
+    background: #cecece !important;
+    color: #000 !important;
+    border-top-left-radius: 0px !important;
+  }
+  .time {
+    color: #5e5e5e;
+    float: right;
+    font-size: small;
+  }
+  .message_row {
+    background-color: #fff;
+  }
+
+  .message-input {
+    padding-left: 8px;
+  }
+  ion-footer {
+    background-color: #f6f6f6;
+  }
 }

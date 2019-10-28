@@ -8,6 +8,7 @@ import { LoginPage } from '../pages/login/login';
 import firebase from 'firebase/app';
 import { environment } from '../environments/environment';
 import 'firebase/auth';
+import { PetsgoBackendProvider } from '../providers/petsgo-backend/petsgo-backend';
 
 @Component({
   templateUrl: 'app.html'
@@ -18,7 +19,7 @@ export class MyApp {
   firstRun: boolean = true;
 
   constructor(private platform: Platform, private statusBar: StatusBar,
-              private splashScreen: SplashScreen) {
+              private splashScreen: SplashScreen, private PetsgoBackendProvider: PetsgoBackendProvider) {
 
     // Initialize Firebase
     const config = environment.firebase;
@@ -29,7 +30,7 @@ export class MyApp {
 
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        // User is authenticated.
+        this.PetsgoBackendProvider.updateUser(user.displayName, user.email, user.photoURL, user.uid);
         this.setRootPage(HomePage);
       } else {
         // User is not authenticated.

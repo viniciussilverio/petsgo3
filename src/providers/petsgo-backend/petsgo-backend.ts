@@ -73,7 +73,7 @@ export class PetsgoBackendProvider {
     )
     .subscribe(
     data => {
-      console.log(data);
+      /* console.log(data); */
     },
     err => {
       console.log("ERROR!: ", err);
@@ -125,7 +125,7 @@ export class PetsgoBackendProvider {
     )
     .subscribe(
     data => {
-      console.log(data);
+      /* console.log(data); */
     },
     err => {
       console.log("ERROR!: ", err);
@@ -157,11 +157,117 @@ export class PetsgoBackendProvider {
     )
     .subscribe(
     data => {
-      console.log(data);
+      /* console.log(data); */
     },
     err => {
       console.log("ERROR!: ", err);
     }
+    );
+  }
+
+  updateUser(nome, email, foto, userId) {
+
+    let httpOptions = {
+      headers: {
+        'enctype': 'multipart/form-data;',
+        'Accept': 'plain/text',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT',
+        'Access-Control-Allow-Headers': 'Authorization, Origin, Content-Type, X-CSRF-Token',
+        'x-key': "esoPs03943"
+      }
+    };
+
+    let formData = new FormData();
+    formData.append('nome', nome);
+    formData.append('email', email);
+    formData.append('foto', foto);
+    formData.append('userId', userId);
+
+    this.http.post(
+      `${this.url}/updateUser`,
+      formData,
+      httpOptions
+    )
+    .subscribe(
+    data => {
+      /* console.log(data); */
+    },
+    err => {
+      console.log("ERROR!: ", err);
+    }
+    );
+  }
+
+  getChatsList(userId) {
+
+    let httpOptions = {
+      headers: {
+        'enctype': 'multipart/form-data;',
+        'Accept': 'plain/text',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT',
+        'Access-Control-Allow-Headers': 'Authorization, Origin, Content-Type, X-CSRF-Token',
+        'x-key': "esoPs03943"
+      }
+    };
+
+    let formData = new FormData();
+    formData.append('userId', userId);
+
+    return this.http.post(
+      `${this.url}/getChatsList`,
+      formData,
+      httpOptions
+    );
+  }
+
+  getMessageList(userId, chatId) {
+
+    let httpOptions = {
+      headers: {
+        'enctype': 'multipart/form-data;',
+        'Accept': 'plain/text',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT',
+        'Access-Control-Allow-Headers': 'Authorization, Origin, Content-Type, X-CSRF-Token',
+        'x-key': "esoPs03943"
+      }
+    };
+
+    let formData = new FormData();
+    formData.append('userId', userId);
+    formData.append('chatId', chatId);
+
+    return this.http.post(
+      `${this.url}/getMessageList`,
+      formData,
+      httpOptions
+    );
+  }
+
+  addMessage(userId, chatId, msg) {
+
+    let httpOptions = {
+      headers: {
+        'enctype': 'multipart/form-data;',
+        'Accept': 'plain/text',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT',
+        'Access-Control-Allow-Headers': 'Authorization, Origin, Content-Type, X-CSRF-Token',
+        'x-key': "esoPs03943"
+      }
+    };
+
+    let formData = new FormData();
+    formData.append('userId', userId);
+    formData.append('chatId', chatId);
+    formData.append('msg', msg);
+
+    return this.http.post(
+      `${this.url}/addMessage`,
+      formData,
+      httpOptions
     );
   }
 }
