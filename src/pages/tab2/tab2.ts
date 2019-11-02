@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Events } from 'ionic-angular';
 
 import { PetsgoBackendProvider } from '../../providers/petsgo-backend/petsgo-backend';
 import { Observable } from 'rxjs';
@@ -19,7 +19,7 @@ export class Tab2Page {
   firebase = firebase;
   local: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private PetsgoBackendProvider: PetsgoBackendProvider, private Geolocation: Geolocation) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events, private PetsgoBackendProvider: PetsgoBackendProvider, private Geolocation: Geolocation) {
     this.selected = "";
     this.Geolocation.getCurrentPosition().then((res) => {
       let location=`${res.coords.latitude},${res.coords.longitude}`;
@@ -70,8 +70,10 @@ export class Tab2Page {
     /* return(`${environment.backend}/getImage/${item._id}/${Object.keys(item._attachments)[0]}`) */
   }
 
-  goChat(){
-    this.navCtrl.parent.select(3); 
+  goChat(petId) {
+    this.navCtrl.parent.select(3);
+    let self = this;
+    setTimeout(function () {self.events.publish('openChat', `${firebase.auth().currentUser.uid}-${petId}`)}, 100);
   }
 
   calculateDistance(petLocal){
