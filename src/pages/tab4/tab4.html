@@ -181,7 +181,7 @@
   </ion-list>
 </ion-content>
 
-<ion-content #tabelaDeMsgs [ngClass]="{'hideThing' : !selected}"  style="height: 100%;"
+<ion-content #tabelaDeMsgs [ngClass]="{'hideThing' : !selected}"  style="height: calc(100% - 50px);"
   [scrollTop]="tabelaDeMsgs.scrollHeight">
   <ion-spinner class="custom-ion-spinner" *ngIf="isLoading"></ion-spinner>
 
