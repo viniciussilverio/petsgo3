@@ -1,10 +1,27 @@
 <ion-header class="ion-toolbar-custom" style="z-index:200;">
   <ion-toolbar>
-    <ion-title> Chat </ion-title>
+    <ion-title *ngIf="!chat"> Chat </ion-title>
+    <ion-title *ngIf="detalhes"> Detalhes </ion-title>
+    <ion-title *ngIf="chat && !detalhes"> {{chat.cuidador.nome === firebase.auth().currentUser.uid ? chat.adotante.nome : chat.cuidador.nome }} </ion-title>
 
-    <ion-buttons left *ngIf="selected">
+    <ion-buttons left *ngIf="selected && !detalhes">
       <button ion-button icon-only (click)="clearSelected()" class="my-style-for-modal">
         <ion-icon name="arrow-back" class="arrow_color"></ion-icon>
+      </button>
+      <button *ngIf="chat" ion-button icon-only>
+        <img [src]="chat.cuidador.nome === firebase.auth().currentUser.uid ? chat.adotante.foto : chat.cuidador.foto" class="profile_badge">
+      </button>
+    </ion-buttons>
+
+    <ion-buttons left *ngIf="detalhes">
+      <button ion-button icon-only (click)="closeDetalhes()" class="my-style-for-modal">
+        <ion-icon name="arrow-back" class="arrow_color"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-buttons right *ngIf="selected && !detalhes">
+      <button ion-button icon-only (click)="openDetalhes()" class="my-style-for-modal">
+        <ion-icon name="paw" class="arrow_color"></ion-icon>
       </button>
     </ion-buttons>
 
@@ -12,8 +29,126 @@
 </ion-header>
 
 
+<ion-content style="z-index:100; background-color: #F6F6F6;" [ngClass]="{'hideThing' : !detalhes}" >
+  <ion-list *ngIf="detalhes">
+    <div class="item_list_pet box-shadow-blur">
+      <ion-slides pager="true">
+        <ion-slide *ngFor="let foto of detalhes.fotos" [style.background-image]="'url(' + foto + ')'" class="img_pet">
+        </ion-slide>
+      </ion-slides>
+    </div>
+
+    <div class="align_dados_gerais">
+      <strong> DADOS GERAIS </strong>
+    </div>
+
+    <div class="descricao_frame items_details box-bordered-shadow-blur">
+      <table class="tabela_detalhes">
+        <tr>
+          <td class="nome_animal"><strong> {{ detalhes.nome }} </strong></td>
+          <td></td>
+          <td></td>
+        </tr>
+
+        <br>
+        <tr>
+          <td><strong> Espécie: </strong> {{ detalhes.especie }} </td>
+          <td></td>
+          <td><strong> Gênero: </strong> {{ detalhes.genero }} </td>
+        </tr>
+
+        <tr>
+          <td><strong> Idade: </strong> {{ detalhes.idade }} </td>
+          <td></td>
+          <td><strong> Porte: </strong> {{ detalhes.porte }} </td>
+        </tr>
+
+        <tr>
+          <td><strong> Situação: </strong> {{ detalhes.situacao }} </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="align_dados_gerais">
+      <strong> DESCRIÇÃO </strong>
+    </div>
+
+    <div class="descricao_frame items_details box-bordered-shadow-blur">
+      <table class="tabela_detalhes">
+        <tr>
+          <td class="icon_size_td">
+            <ion-icon name="md-paw" class="my_icon"></ion-icon>
+          </td>
+          <td> {{ detalhes.descricao }} </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="align_dados_gerais">
+      <strong> LOCALIZAÇÃO </strong>
+    </div>
+
+    <div class="descricao_frame items_details box-bordered-shadow-blur">
+      <table class="tabela_detalhes">
+        <tr>
+          <td class="icon_size_td">
+            <ion-icon name="pin" class="my_icon"></ion-icon>
+          </td>
+          <td> {{ calculateDistance(detalhes.local) + " Km" }} </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="align_dados_gerais margem_div">
+      <strong> SAÚDE </strong>
+    </div>
+
+    <div class="descricao_frame items_details box-bordered-shadow-blur">
+      <table class="tabela_detalhes">
+        <tr>
+          <td class="icon_size_td"> <img src="assets/castration.svg" alt="" class="my_icon" /> </td>
+          <td><strong> Castrado: </strong> {{ detalhes.castrado }} </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="descricao_frame items_details box-bordered-shadow-blur">
+      <table class="tabela_detalhes">
+        <tr>
+          <td class="icon_size_td"> <img src="assets/vaccine.svg" alt="" class="my_icon" /> </td>
+          <td class="ajustar_cel"><strong> Vacinado: </strong> {{ detalhes.vacinado }} </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="descricao_frame items_details box-bordered-shadow-blur">
+      <table class="tabela_detalhes">
+        <tr>
+          <td class="icon_size_td"> <img src="assets/pills.svg" alt="" class="my_icon" /> </td>
+          <td><strong> Vermifugado: </strong> {{ detalhes.vermifugado }} </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="align_dados_gerais">
+      <strong> CADASTRADO POR </strong>
+    </div>
+
+    <div class="descricao_frame items_details box-bordered-shadow-blur">
+      <table class="tabela_detalhes">
+        <tr>
+          <td class="icon_size_td">
+            <ion-icon name="contact" class="my_icon"></ion-icon>
+          </td>
+          <td><strong> Cuidador: </strong> {{ detalhes.nomeCuidador }} </td>
+        </tr>
+      </table>
+    </div>
+  </ion-list>
+</ion-content>
+
 <ion-content [ngClass]="{'hideThing' : selected}">
-  <ion-refresher slot="fixed" (ionRefresh)="refreshPetList($event)">
+  <ion-refresher slot="fixed" (ionRefresh)="resfreshChatsList($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-spinner class="custom-ion-spinner" *ngIf="isLoading"></ion-spinner>
@@ -32,7 +167,7 @@
           </p>
         </ion-label>
         <ion-note item-end>
-          {{chat.lastMsg}}
+          {{convertDate(chat.lastMsg)}}
         </ion-note>
       </ion-item>
       <!-- 
@@ -46,11 +181,8 @@
   </ion-list>
 </ion-content>
 
-<ion-content #tabelaDeMsgs [ngClass]="{'hideThing' : !selected}" style="height: 100%;"
+<ion-content #tabelaDeMsgs [ngClass]="{'hideThing' : !selected}"  style="height: calc(100% - 50px);"
   [scrollTop]="tabelaDeMsgs.scrollHeight">
-  <ion-refresher slot="fixed" (ionRefresh)="refreshPetList($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
   <ion-spinner class="custom-ion-spinner" *ngIf="isLoading"></ion-spinner>
 
   <ion-grid *ngIf="chat" style="width: 100%; height: 100%;">
@@ -58,13 +190,13 @@
       <ion-col col-9 *ngIf="firebase.auth().currentUser.uid === msg.user" class="message"
         [ngClass]="{'mymessage': firebase.auth().currentUser.uid !== msg.user, 'othermessage': firebase.auth().currentUser.uid === msg.user}">
         <span>{{ msg.msg }}</span>
-        <div class="time">{{msg.time | date:'dd.MM hh:MM'}}</div>
+        <div class="time">{{convertDate(msg.time)}}</div>
       </ion-col>
 
       <ion-col offset-3 col-9 *ngIf="firebase.auth().currentUser.uid !== msg.user" class="message"
         [ngClass]="{'mymessage': firebase.auth().currentUser.uid !== msg.user, 'othermessage': firebase.auth().currentUser.uid === msg.user}">
         <span>{{ msg.msg }}</span>
-        <div class="time">{{msg.time | date:'dd.MM hh:MM'}}</div>
+        <div class="time">{{convertDate(msg.time)}}</div>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -72,7 +204,7 @@
 
 
 
-<ion-footer [ngClass]="{'hideThing' : !selected}" style="height: 50px;">
+<ion-footer [ngClass]="{'hideThing2' : !selected || detalhes}" style="height: 50px;">
   <table style="width: 100%;">
     <tr>
       <td>
