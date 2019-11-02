@@ -1,15 +1,241 @@
 page-tab4 {
+  .custom-ion-spinner {
+    position: fixed;
+    z-index: 999;
+    height: 2em;
+    width: 2em;
+    overflow: visible;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
 
-    .margem{
-      
-      margin-top: 130%;
-      //margin-bottom: 1;
-      //vertical-align: bottom;  
-    }
+  .profile_badge {
+    border-radius: 30px;
+    height: 30px;
+    width: 30px;
+  }
 
-    .arrow_color {
-      margin-right: 10px;
-      color: #ffffff;
-      font-size: 30px;
-    }
+  .arrow_color {
+    margin-right: 10px;
+    color: #ffffff;
+    font-size: 30px;
+  }
+
+  .hideThing {
+    visibility: hidden;
+  }
+
+  .hideThing2 {
+    display: none;
+  }
+
+  .user_name {
+    color: #5e5e5e;
+  }
+
+  .message {
+    padding: 10px !important;
+    transition: all 250ms ease-in-out !important;
+    border-radius: 10px !important;
+    margin-bottom: 4px !important;
+  }
+  .mymessage {
+    background: #9575cd !important;
+    color: #000 !important;
+    border-top-right-radius: 0px !important;
+  }
+  .othermessage {
+    background: #cecece !important;
+    color: #000 !important;
+    border-top-left-radius: 0px !important;
+  }
+  .time {
+    color: #5e5e5e;
+    float: right;
+    font-size: small;
+  }
+  .message_row {
+    background-color: #fff;
+  }
+
+  .message-input {
+    padding-left: 8px;
+  }
+  ion-footer {
+    background-color: #f6f6f6;
+  }
+
+
+  /* Detalhes Pet */
+
+  .img_frame {
+    background: url("/assets/slides/background-petfriendly.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 100%;
+    height: calc(100% - 50px);
+  }
+
+  .item_list_pet {
+    margin: 10px;
+    border-radius: 20px;
+  }
+
+  .imgframe_pet {
+    border-radius: 20px 20px 0px 0px;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 230px;
+    background-size: 100% 100%;
+  }
+
+  .box-shadow-blur {
+    box-shadow: 0px 0px 10px grey;
+  }
+
+  .descricao_frame {
+    margin: 15px !important;
+  }
+
+  .detalhes_table {
+    color: #9b9b9b;
+    width: 100%;
+  }
+
+  .nome_animal {
+    color: #000000;
+  }
+
+  .imgframe {
+    background-size: 100% 100%;
+    width: 25px;
+    height: 25px;
+  }
+
+  .ion-buttons button[icon-only].my-style-for-modal {
+    color: white;
+    margin: 0 6px;
+    min-width: 36px;
+  }
+
+  .box-bordered-shadow-blur {
+    box-shadow: 0px 0px 0px 5px white;
+  }
+
+  .background_div_color {
+    color: #ffffff;
+  }
+
+  .items_details {
+    margin: 20px;
+    border-radius: 5px;
+  }
+
+  .tabela_detalhes {
+    color: #9b9b9b;
+    background-color: white;
+    width: 100%;
+  }
+
+  .align_dados_gerais {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+
+  .my_icon {
+    width: 20px;
+    margin-left: 10px;
+    color: #9575cd;
+    font-size: 20px;
+  }
+
+  .icon_size_td {
+    width: 45px;
+    vertical-align: top;
+    text-align: left;
+  }
+
+  .align_favoritos {
+    width: 45px;
+    vertical-align: middle;
+    text-align: right;
+  }
+
+  .img_pet {
+    border-radius: 20px 20px 20px 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 230px;
+    background-size: 100% 100%;
+  }
+
+  .u-button-color {
+    height: 50px;
+    width: 200px;
+    border-radius: 45px;
+    background-color: #9575cd !important;
+  }
+
+  .centralizar {
+    text-align: center;
+  }
+
+  .margem_tr {
+    margin-top: 15px;
+  }
+
+  .margem_right {
+    margin-right: 10px;
+  }
+
+  .margem_filtro {
+    box-shadow: 0.5px 0.5px 0.5px 0.5px gray;
+    margin-top: 30px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  .segment-button.segment-activated {
+    background-color: #9575cd !important;
+    color: #fff !important;
+  }
+
+  .segment-button {
+    font-weight: bold;
+    background-color: #fff !important;
+    border-color: #9575cd !important;
+    color: #9575cd !important;
+  }
+
+  .buttonSegment {
+    background-color: #fff !important;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 10px 10px 10px 10px;
+  }
+
+  .segment-md .segment-button {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    width: 0;
+    height: 3.2rem;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #488aff;
+    font-size: 1.3rem;
+    line-height: 3rem;
+    color: #488aff;
+    background-color: transparent;
+  }
 }

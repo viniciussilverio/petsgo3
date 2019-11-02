@@ -1,30 +1,221 @@
-<!--
-  Generated template for the Tab4Page page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-
-<ion-header>
+<ion-header class="ion-toolbar-custom" style="z-index:200;">
   <ion-toolbar>
-  <ion-navbar>
-    <ion-title> Chat </ion-title>
-  </ion-navbar>
+    <ion-title *ngIf="!chat"> Chat </ion-title>
+    <ion-title *ngIf="detalhes"> Detalhes </ion-title>
+    <ion-title *ngIf="chat && !detalhes"> {{chat.cuidador.nome === firebase.auth().currentUser.uid ? chat.adotante.nome : chat.cuidador.nome }} </ion-title>
 
-  <!-- <ion-buttons left *ngIf="!selected">
-    <button ion-button icon-only (click)="cleanPet()" class="my-style-for-modal">
-    <ion-icon name="close" class="arrow_color"></ion-icon>
-  </button>
-    </ion-buttons>  -->
+    <ion-buttons left *ngIf="selected && !detalhes">
+      <button ion-button icon-only (click)="clearSelected()" class="my-style-for-modal">
+        <ion-icon name="arrow-back" class="arrow_color"></ion-icon>
+      </button>
+      <button *ngIf="chat" ion-button icon-only>
+        <img [src]="chat.cuidador.nome === firebase.auth().currentUser.uid ? chat.adotante.foto : chat.cuidador.foto" class="profile_badge">
+      </button>
+    </ion-buttons>
 
-   </ion-toolbar>
+    <ion-buttons left *ngIf="chat && detalhes">
+      <button ion-button icon-only (click)="closeDetalhes()" class="my-style-for-modal">
+        <ion-icon name="arrow-back" class="arrow_color"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-buttons right *ngIf="selected && !detalhes">
+      <button ion-button icon-only (click)="openDetalhes()" class="my-style-for-modal">
+        <ion-icon name="paw" class="arrow_color"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-toolbar>
 </ion-header>
 
 
-<ion-content>
-  <div class="margem">
-    <ion-item>
-      <ion-textarea placeholder="Digite uma mensagem..."></ion-textarea>
-    </ion-item>
-  </div>
+<ion-content style="z-index:100; background-color: #F6F6F6;" [ngClass]="{'hideThing' : !detalhes}" >
+  <ion-list *ngIf="detalhes">
+    <div class="item_list_pet box-shadow-blur">
+      <ion-slides pager="true">
+        <ion-slide *ngFor="let foto of detalhes.fotos" [style.background-image]="'url(' + foto + ')'" class="img_pet">
+        </ion-slide>
+      </ion-slides>
+    </div>
+
+    <div class="align_dados_gerais">
+      <strong> DADOS GERAIS </strong>
+    </div>
+
+    <div class="descricao_frame items_details box-bordered-shadow-blur">
+      <table class="tabela_detalhes">
+        <tr>
+          <td class="nome_animal"><strong> {{ detalhes.nome }} </strong></td>
+          <td></td>
+          <td></td>
+        </tr>
+
+        <br>
+        <tr>
+          <td><strong> Espécie: </strong> {{ detalhes.especie }} </td>
+          <td></td>
+          <td><strong> Gênero: </strong> {{ detalhes.genero }} </td>
+        </tr>
+
+        <tr>
+          <td><strong> Idade: </strong> {{ detalhes.idade }} </td>
+          <td></td>
+          <td><strong> Porte: </strong> {{ detalhes.porte }} </td>
+        </tr>
+
+        <tr>
+          <td><strong> Situação: </strong> {{ detalhes.situacao }} </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="align_dados_gerais">
+      <strong> DESCRIÇÃO </strong>
+    </div>
+
+    <div class="descricao_frame items_details box-bordered-shadow-blur">
+      <table class="tabela_detalhes">
+        <tr>
+          <td class="icon_size_td">
+            <ion-icon name="md-paw" class="my_icon"></ion-icon>
+          </td>
+          <td> {{ detalhes.descricao }} </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="align_dados_gerais">
+      <strong> LOCALIZAÇÃO </strong>
+    </div>
+
+    <div class="descricao_frame items_details box-bordered-shadow-blur">
+      <table class="tabela_detalhes">
+        <tr>
+          <td class="icon_size_td">
+            <ion-icon name="pin" class="my_icon"></ion-icon>
+          </td>
+          <td> {{ calculateDistance(detalhes.local) + " Km" }} </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="align_dados_gerais margem_div">
+      <strong> SAÚDE </strong>
+    </div>
+
+    <div class="descricao_frame items_details box-bordered-shadow-blur">
+      <table class="tabela_detalhes">
+        <tr>
+          <td class="icon_size_td"> <img src="assets/castration.svg" alt="" class="my_icon" /> </td>
+          <td><strong> Castrado: </strong> {{ detalhes.castrado }} </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="descricao_frame items_details box-bordered-shadow-blur">
+      <table class="tabela_detalhes">
+        <tr>
+          <td class="icon_size_td"> <img src="assets/vaccine.svg" alt="" class="my_icon" /> </td>
+          <td class="ajustar_cel"><strong> Vacinado: </strong> {{ detalhes.vacinado }} </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="descricao_frame items_details box-bordered-shadow-blur">
+      <table class="tabela_detalhes">
+        <tr>
+          <td class="icon_size_td"> <img src="assets/pills.svg" alt="" class="my_icon" /> </td>
+          <td><strong> Vermifugado: </strong> {{ detalhes.vermifugado }} </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="align_dados_gerais">
+      <strong> CADASTRADO POR </strong>
+    </div>
+
+    <div class="descricao_frame items_details box-bordered-shadow-blur">
+      <table class="tabela_detalhes">
+        <tr>
+          <td class="icon_size_td">
+            <ion-icon name="contact" class="my_icon"></ion-icon>
+          </td>
+          <td><strong> Cuidador: </strong> {{ detalhes.nomeCuidador }} </td>
+        </tr>
+      </table>
+    </div>
+  </ion-list>
 </ion-content>
+
+<ion-content [ngClass]="{'hideThing' : selected}">
+  <ion-refresher slot="fixed" (ionRefresh)="resfreshChatsList($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-spinner class="custom-ion-spinner" *ngIf="isLoading"></ion-spinner>
+  <ion-list *ngIf="results">
+    <ion-item-sliding *ngFor="let chat of results">
+      <ion-item button (click)="selectChat(chat.chatId)">
+        <ion-avatar item-start>
+          <img [src]="chat.pet.fotos[0]">
+        </ion-avatar>
+        <ion-label>
+          <h4 class="channel-name">
+            {{chat.pet.nome}}
+          </h4>
+          <p class="last-message">
+            {{firebase.auth().currentUser.uid === chat.adotante.id ? chat.cuidador.nome : chat.adotante.nome}}
+          </p>
+        </ion-label>
+        <ion-note item-end>
+          {{convertDate(chat.lastMsg)}}
+        </ion-note>
+      </ion-item>
+      <!-- 
+      <ion-item-options side="end">
+        <button (click)="leaveChannel(channel)" color="danger" expandable>
+          <ion-icon name="trash"></ion-icon>
+          Remove
+        </button>
+      </ion-item-options> -->
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
+
+<ion-content #tabelaDeMsgs [ngClass]="{'hideThing' : !selected}"  style="height: calc(100% - 50px);"
+  [scrollTop]="tabelaDeMsgs.scrollHeight">
+  <ion-spinner class="custom-ion-spinner" *ngIf="isLoading"></ion-spinner>
+
+  <ion-grid *ngIf="chat" style="width: 100%; height: 100%;">
+    <ion-row *ngFor="let msg of chat.msgs">
+      <ion-col col-9 *ngIf="firebase.auth().currentUser.uid === msg.user" class="message"
+        [ngClass]="{'mymessage': firebase.auth().currentUser.uid !== msg.user, 'othermessage': firebase.auth().currentUser.uid === msg.user}">
+        <span>{{ msg.msg }}</span>
+        <div class="time">{{convertDate(msg.time)}}</div>
+      </ion-col>
+
+      <ion-col offset-3 col-9 *ngIf="firebase.auth().currentUser.uid !== msg.user" class="message"
+        [ngClass]="{'mymessage': firebase.auth().currentUser.uid !== msg.user, 'othermessage': firebase.auth().currentUser.uid === msg.user}">
+        <span>{{ msg.msg }}</span>
+        <div class="time">{{convertDate(msg.time)}}</div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+
+
+<ion-footer [ngClass]="{'hideThing2' : !selected || detalhes}" style="height: 50px;">
+  <table style="width: 100%;">
+    <tr>
+      <td>
+        <ion-textarea [(ngModel)]="mensagem" class="message-input" placeholder="Digite a mensagem" rows="1"
+          autocapitalize="off" (keydown.enter)="addMessage();false"></ion-textarea>
+      </td>
+      <td>
+        <button color="primary" (click)="addMessage()">
+          <ion-icon slot="icon-only" name="md-send"></ion-icon>
+        </button>
+      </td>
+    </tr>
+  </table>
+</ion-footer>

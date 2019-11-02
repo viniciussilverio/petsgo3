@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Events } from 'ionic-angular';
 
 import { PetsgoBackendProvider } from '../../providers/petsgo-backend/petsgo-backend';
 import { Observable } from 'rxjs';
@@ -38,7 +38,7 @@ export class Tab1Page {
     distancia: 80
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private PetsgoBackendProvider: PetsgoBackendProvider, private Geolocation: Geolocation) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events, private PetsgoBackendProvider: PetsgoBackendProvider, private Geolocation: Geolocation) {
     this.selected = false;
     this.filtrar = false;
     this.card = true;
@@ -99,8 +99,10 @@ export class Tab1Page {
     /* return(`${environment.backend}/getImage/${item._id}/${Object.keys(item._attachments)[0]}`) */
   }
 
-  goChat() {
+  goChat(petId) {
     this.navCtrl.parent.select(3);
+    let self = this;
+    setTimeout(function () {self.events.publish('openChat', `${firebase.auth().currentUser.uid}-${petId}`)}, 100);
     this.filtrar = false;
     this.selected = false;
     this.card = true;
@@ -130,14 +132,14 @@ export class Tab1Page {
       let a = 0.5 - c((lat1 - lat2) * p) / 2 + c(lat2 * p) * c((lat1) * p) * (1 - c(((long1 - long2) * p))) / 2;
       let dis = (12742 * Math.asin(Math.sqrt(a))); // 2 * R; R = 6371 km
       return (Math.round(dis));
-    } catch(error) {
+    } catch (error) {
       console.log("Error")
       return (0)
     }
   }
 
   filtraDado(data) {
-    let filtered = data.filter(x => 
+    let filtered = data.filter(x =>
       (this.filtroAplicado.especie ? this.filtroAplicado.especie == x.especie : true) &&
       (this.filtroAplicado.genero ? this.filtroAplicado.genero == x.genero : true) &&
       (this.filtroAplicado.idade ? this.filtroAplicado.idade == x.idade : true) &&
