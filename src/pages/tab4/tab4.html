@@ -20,6 +20,9 @@
     </ion-buttons>
 
     <ion-buttons right *ngIf="selected && !detalhes">
+      <button ion-button icon-only (click)="adoption()" class="my-style-for-modal" *ngIf="chat && chat.pet.adotado !== 2 && !(this.chat.pet.cuidador === firebase.auth().currentUser.uid && !chat.pet.adotado)">
+        <ion-icon name="md-heart" class="arrow_color"></ion-icon>
+      </button>
       <button ion-button icon-only (click)="openDetalhes()" class="my-style-for-modal">
         <ion-icon name="paw" class="arrow_color"></ion-icon>
       </button>

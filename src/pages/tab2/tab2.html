@@ -10,7 +10,9 @@
     </ion-buttons>
 
     <ion-buttons right margin-right="5" *ngIf="selected">
-      <button ion-button icon-only (click)="setFavorite(selected._id)" class="imgframe unfavorited"></button>
+      <button ion-button icon-only (click)="setFavorite(selected._id)" class="my-style-for-modal">
+        <ion-icon class="arrow_color bold_icon" name="ios-star"></ion-icon>
+      </button>
     </ion-buttons>
 
     <ion-buttons most right *ngIf="selected">
@@ -168,7 +170,9 @@
             <tr>
               <td>Genero: {{ item.genero }}</td>
               <td>Porte: {{ item.porte }}</td>
-              <div class="imgframe favorited" (click)="setFavorite(item._id)"> </div>
+              <div class="star" (click)="setFavorite(item._id)">
+                <ion-icon class="star bold_icon" name="ios-star"></ion-icon>
+              </div>
             </tr>
             <tr>
               <td>Idade: {{ item.idade }}</td>
