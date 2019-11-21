@@ -124,6 +124,11 @@ platforms\ios\PetsGo\config.xml
 $ sudo ionic cordova ios
 ```
 
+## Admob-Plus
+https://github.com/admob-plus/admob-plus/issues/89
+https://github.com/CocoaPods/CocoaPods/issues/6223
+https://github.com/chemerisuk/cordova-plugin-firebase-analytics/issues/118
+
 ## Pronto! Agora você tem todos os passos para rodar o projeto! 😉
 
 

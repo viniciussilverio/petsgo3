@@ -17,6 +17,7 @@ import { PetsgoBackendProvider } from '../providers/petsgo-backend/petsgo-backen
 import { HttpClientModule } from '@angular/common/http';
 import { Camera } from '@ionic-native/camera';
 import { Geolocation } from '@ionic-native/geolocation';
+import { AdMob } from "ionic-admob";
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     AuthProvider,
     PetsgoBackendProvider,
     Camera,
-    Geolocation
+    Geolocation,
+    AdMob
   ]
 })
 export class AppModule {}

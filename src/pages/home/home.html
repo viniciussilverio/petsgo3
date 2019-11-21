@@ -4,10 +4,10 @@
     Log out
   </button> -->
   <ion-tabs>
-    <ion-tab [root]="tab1Root" tabTitle="Pets" tabIcon="md-paw"></ion-tab>
-    <ion-tab [root]="tab2Root" tabTitle="Favoritos" tabIcon="md-star"></ion-tab>
-    <ion-tab [root]="tab3Root" tabIcon="md-add-circle"></ion-tab>
-    <ion-tab [root]="tab4Root" tabTitle="Chat" tabIcon="md-chatbubbles"></ion-tab>
-    <ion-tab [root]="tab5Root" tabTitle="Perfil" tabIcon="md-contact"></ion-tab>
+    <ion-tab [root]="tab1Root" tabTitle="Pets" tabIcon="md-paw" (ionSelect)="enableMessages(false)"></ion-tab>
+    <ion-tab [root]="tab2Root" tabTitle="Favoritos" tabIcon="md-star" (ionSelect)="enableMessages(false)"></ion-tab>
+    <ion-tab [root]="tab3Root" tabIcon="md-add-circle" (ionSelect)="enableMessages(false)"></ion-tab>
+    <ion-tab [root]="tab4Root" tabTitle="Chat" tabIcon="md-chatbubbles" (ionSelect)="enableMessages(true)"></ion-tab>
+    <ion-tab [root]="tab5Root" tabTitle="Perfil" tabIcon="md-contact" (ionSelect)="enableMessages(false)"></ion-tab>
   </ion-tabs>
 </ion-content>
