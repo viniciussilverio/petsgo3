@@ -31,6 +31,7 @@ export class Tab4Page {
   timeTorun: any;
   mensagem: string;
   detalhes: any;
+  perfil: any;
   local: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private PetsgoBackendProvider: PetsgoBackendProvider, public events: Events, private Geolocation: Geolocation, private alertCtrl: AlertController) {
@@ -279,5 +280,13 @@ export class Tab4Page {
 
   closeDetalhes() {
     this.detalhes = null;
+  }
+
+  openPerfil(user) {
+    this.perfil = user;
+  }
+
+  closePerfil() {
+    this.perfil = null;
   }
 }

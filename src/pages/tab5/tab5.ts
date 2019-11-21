@@ -58,6 +58,7 @@ export class Tab5Page {
   selected: any;
   isLoading: boolean;
   meusPets: boolean;
+  mapa: boolean;
   firebase = firebase;
   local: any;
   alterar: any;
@@ -73,6 +74,7 @@ export class Tab5Page {
     private platform: Platform) {
     this.selected = "";
     this.meusPets = false;
+    this.mapa = false;
     this.alterar = false;
     this.animal = 0;
     this.sexo = 0;
@@ -98,6 +100,14 @@ export class Tab5Page {
 
   verPets() {
     this.meusPets = true;
+  }
+
+  verMapa() {
+    this.mapa = true;
+  }
+
+  cleanMapa() {
+    this.mapa = false;
   }
 
   cleanPerfil() {
