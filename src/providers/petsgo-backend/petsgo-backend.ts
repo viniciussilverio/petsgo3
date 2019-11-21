@@ -270,4 +270,76 @@ export class PetsgoBackendProvider {
       httpOptions
     );
   }
+
+  requestAdoption(userId, petId) {
+    console.log(userId, petId);
+    let httpOptions = {
+      headers: {
+        'enctype': 'multipart/form-data;',
+        'Accept': 'plain/text',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT',
+        'Access-Control-Allow-Headers': 'Authorization, Origin, Content-Type, X-CSRF-Token',
+        'x-key': "esoPs03943"
+      }
+    };
+
+    let formData = new FormData();
+    formData.append('userId', userId);
+    formData.append('petId', petId);
+
+    return this.http.post(
+      `${this.url}/requestAdoption`,
+      formData,
+      httpOptions
+    );
+  }
+
+  acceptAdoption(userId, petId) {
+
+    let httpOptions = {
+      headers: {
+        'enctype': 'multipart/form-data;',
+        'Accept': 'plain/text',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT',
+        'Access-Control-Allow-Headers': 'Authorization, Origin, Content-Type, X-CSRF-Token',
+        'x-key': "esoPs03943"
+      }
+    };
+
+    let formData = new FormData();
+    formData.append('userId', userId);
+    formData.append('petId', petId);
+
+    return this.http.post(
+      `${this.url}/acceptAdoption`,
+      formData,
+      httpOptions
+    );
+  }
+
+  cancelAdoption(userId, petId) {
+
+    let httpOptions = {
+      headers: {
+        'enctype': 'multipart/form-data;',
+        'Accept': 'plain/text',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT',
+        'Access-Control-Allow-Headers': 'Authorization, Origin, Content-Type, X-CSRF-Token',
+        'x-key': "esoPs03943"
+      }
+    };
+
+    let formData = new FormData();
+    formData.append('userId', userId);
+    formData.append('petId', petId);
+
+    return this.http.post(
+      `${this.url}/cancelAdoption`,
+      formData,
+      httpOptions
+    );
+  }
 }

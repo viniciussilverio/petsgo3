@@ -1,25 +1,35 @@
 <ion-header class="ion-toolbar-custom" style="z-index:200;">
   <ion-toolbar>
-    <ion-title *ngIf="!chat"> Chat </ion-title>
-    <ion-title *ngIf="detalhes"> Detalhes </ion-title>
-    <ion-title *ngIf="chat && !detalhes"> {{chat.cuidador.nome === firebase.auth().currentUser.uid ? chat.adotante.nome : chat.cuidador.nome }} </ion-title>
+      <ion-title *ngIf="!chat && !perfil"> Chat </ion-title>
+      <ion-title *ngIf="perfil"> Perfil do Usuário </ion-title>
+    <ion-title *ngIf="detalhes && !perfil"> Detalhes </ion-title>
+    <ion-title *ngIf="chat && !detalhes && !perfil"> {{chat.cuidador.nome === firebase.auth().currentUser.uid ? chat.adotante.nome : chat.cuidador.nome }} </ion-title>
 
-    <ion-buttons left *ngIf="selected && !detalhes">
+    <ion-buttons left *ngIf="selected && !detalhes && !perfil">
       <button ion-button icon-only (click)="clearSelected()" class="my-style-for-modal">
         <ion-icon name="arrow-back" class="arrow_color"></ion-icon>
       </button>
-      <button *ngIf="chat" ion-button icon-only>
+      <button *ngIf="chat" ion-button icon-only (click)="openPerfil(chat.cuidador.nome === firebase.auth().currentUser.uid ? chat.adotante : chat.cuidador)">
         <img [src]="chat.cuidador.nome === firebase.auth().currentUser.uid ? chat.adotante.foto : chat.cuidador.foto" class="profile_badge">
       </button>
     </ion-buttons>
 
-    <ion-buttons left *ngIf="chat && detalhes">
+    <ion-buttons left *ngIf="chat && detalhes && !perfil">
       <button ion-button icon-only (click)="closeDetalhes()" class="my-style-for-modal">
         <ion-icon name="arrow-back" class="arrow_color"></ion-icon>
       </button>
     </ion-buttons>
 
-    <ion-buttons right *ngIf="selected && !detalhes">
+    <ion-buttons left *ngIf="perfil">
+      <button ion-button icon-only (click)="closePerfil()" class="my-style-for-modal">
+        <ion-icon name="arrow-back" class="arrow_color"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-buttons right *ngIf="selected && !detalhes && !perfil">
+      <button ion-button icon-only (click)="adoption()" class="my-style-for-modal" *ngIf="chat && chat.pet.adotado !== 2 && !(this.chat.pet.cuidador === firebase.auth().currentUser.uid && !chat.pet.adotado)">
+        <ion-icon name="md-heart" class="arrow_color"></ion-icon>
+      </button>
       <button ion-button icon-only (click)="openDetalhes()" class="my-style-for-modal">
         <ion-icon name="paw" class="arrow_color"></ion-icon>
       </button>
@@ -141,6 +151,26 @@
             <ion-icon name="contact" class="my_icon"></ion-icon>
           </td>
           <td><strong> Cuidador: </strong> {{ detalhes.nomeCuidador }} </td>
+        </tr>
+      </table>
+    </div>
+  </ion-list>
+</ion-content>
+
+
+<ion-content style="z-index:100; background-color: #F6F6F6;" [ngClass]="{'hideThing' : !perfil}" >
+  <ion-list *ngIf="perfil">
+      <div class="item_list_pet box-shadow-blur img_pet" [style.background-image]="'url(' + perfil.foto + ')'" style="width: unset;">
+      </div>
+
+    <div class="align_dados_gerais">
+      <strong> DADOS GERAIS </strong>
+    </div>
+
+    <div class="descricao_frame items_details box-bordered-shadow-blur">
+      <table class="tabela_detalhes">
+        <tr>
+          <td><strong> Nome: </strong> {{ perfil.nome }} </td>
         </tr>
       </table>
     </div>

@@ -81,7 +81,7 @@ page-tab1 {
   }
 
   .ion-buttons button[icon-only].my-style-for-modal {
-    color: white;
+    color: white !important;
     margin: 0 6px;
     min-width: 36px;
   }
@@ -242,5 +242,13 @@ page-tab1 {
     line-height: 3rem;
     color: #488aff;
     background-color: transparent;
+  }
+
+  .star {
+    font-size: 30px;
+  }
+
+  .bold_icon {
+    font-weight: 900;
   }
 }
