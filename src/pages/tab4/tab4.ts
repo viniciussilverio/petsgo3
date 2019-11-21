@@ -39,18 +39,25 @@ export class Tab4Page {
       let location = `${res.coords.latitude},${res.coords.longitude}`;
       this.local = location;
     }).catch((error) => {
-      console.log('Error getting location', error);
+      console.log('Erro ao adquirir localização', error);
     });;
   }
 
   ionViewWillEnter() {
     this.getChatsList();
-    this.updateChatsList();
   }
 
   ngOnInit() {
     this.events.subscribe('openChat', (chat) => {
       this.selectChat(chat);
+    });
+    this.events.subscribe('startChat', (state) => {
+      if (state) this.updateChatsList();
+      else {
+        clearInterval(this.chatTimer);
+        this.chatTimer = null;
+        clearInterval(this.chatTimer);
+      }
     });
   }
 
