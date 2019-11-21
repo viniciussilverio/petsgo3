@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events, AlertController } from 'ionic-angular';
 import { PetsgoBackendProvider } from '../../providers/petsgo-backend/petsgo-backend';
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -31,9 +31,10 @@ export class Tab4Page {
   timeTorun: any;
   mensagem: string;
   detalhes: any;
+  perfil: any;
   local: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private PetsgoBackendProvider: PetsgoBackendProvider, public events: Events, private Geolocation: Geolocation) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private PetsgoBackendProvider: PetsgoBackendProvider, public events: Events, private Geolocation: Geolocation, private alertCtrl: AlertController) {
     this.Geolocation.getCurrentPosition().then((res) => {
       let location = `${res.coords.latitude},${res.coords.longitude}`;
       this.local = location;
@@ -51,6 +52,87 @@ export class Tab4Page {
     this.events.subscribe('openChat', (chat) => {
       this.selectChat(chat);
     });
+  }
+
+  adoption() {
+    let alert = null;
+    if (!this.chat.pet.adotado && this.chat.pet.cuidador !== firebase.auth().currentUser.uid) {
+      alert = this.alertCtrl.create({
+        title: 'Requisitar Adoção',
+        message: 'Gostaria de requisitar a adoção do Pet?',
+        buttons: [
+          {
+            text: 'Sair',
+            role: 'cancel'
+          },
+          {
+            text: 'Requisitar',
+            handler: () => {
+              this.PetsgoBackendProvider.requestAdoption(firebase.auth().currentUser.uid, this.chat.pet._id).subscribe(data => {
+                this.chat = data;
+                this.scrollToBottom();
+              });
+            }
+          }
+        ]
+      });
+    } else if (this.chat.pet.adotado === 1 && this.chat.pet.cuidador !== firebase.auth().currentUser.uid && this.chat.pet.requisitante === firebase.auth().currentUser.uid) {
+      alert = this.alertCtrl.create({
+        title: 'Cancelar Adoção',
+        message: 'Gostaria de cancelar a requisição de adoção do Pet?',
+        buttons: [
+          {
+            text: 'Sair',
+            role: 'cancel',
+          },
+          {
+            text: 'Cancelar',
+            handler: () => {
+              this.PetsgoBackendProvider.cancelAdoption(firebase.auth().currentUser.uid, this.chat.pet._id).subscribe(data => {
+                this.chat = data;
+                this.scrollToBottom();
+              });
+            }
+          }
+        ]
+      });
+    } else if (this.chat.pet.adotado === 1 && this.chat.pet.cuidador === firebase.auth().currentUser.uid) {
+      alert = this.alertCtrl.create({
+        title: 'Aceitar Adoção',
+        message: 'Gostaria de aceitar a adoção do Pet por este usuário?',
+        buttons: [
+          {
+            text: 'Sair',
+            role: 'cancel'
+          },
+          {
+            text: 'Não',
+            handler: () => {
+              this.PetsgoBackendProvider.cancelAdoption(firebase.auth().currentUser.uid, this.chat.pet._id).subscribe(data => {
+                this.chat = data;
+                this.scrollToBottom();
+              });
+            }
+          },
+          {
+            text: 'Sim',
+            handler: () => {
+              this.PetsgoBackendProvider.acceptAdoption(firebase.auth().currentUser.uid, this.chat.pet._id).subscribe(data => {
+                this.chat = data;
+                this.scrollToBottom();
+              });
+            }
+          }
+        ]
+      });
+    } else {
+      alert = this.alertCtrl.create({
+        title: 'Erro',
+        subTitle: 'Estranho!',
+        buttons: ['Sair']
+      });
+    }
+    alert.present();
   }
 
   getChatsList() {
@@ -198,5 +280,13 @@ export class Tab4Page {
 
   closeDetalhes() {
     this.detalhes = null;
+  }
+
+  openPerfil(user) {
+    this.perfil = user;
+  }
+
+  closePerfil() {
+    this.perfil = null;
   }
 }

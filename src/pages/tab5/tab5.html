@@ -1,29 +1,36 @@
 <ion-header class="ion-toolbar-custom" style="z-index:300;">
   <ion-toolbar>
-    <ion-title *ngIf="!meusPets"> Perfil </ion-title>
-    <ion-title *ngIf="meusPets && !selected"> Meus Pets </ion-title>
-    <ion-title *ngIf="meusPets && selected && !alterar"> Detalhes </ion-title>
-    <ion-title *ngIf="meusPets && selected && alterar"> Editar Pet </ion-title>
+    <ion-title *ngIf="!meusPets && !mapa"> Perfil </ion-title>
+    <ion-title *ngIf="meusPets && !selected && !mapa"> Meus Pets </ion-title>
+    <ion-title *ngIf="meusPets && selected && !alterar && !mapa"> Detalhes </ion-title>
+    <ion-title *ngIf="meusPets && selected && alterar && !mapa"> Editar Pet </ion-title>
+    <ion-title *ngIf="mapa"> Mapa do Abandono </ion-title>
 
-    <ion-buttons left *ngIf="meusPets && selected && !alterar">
+    <ion-buttons left *ngIf="meusPets && selected && !alterar && !mapa">
       <button ion-button icon-only (click)="cleanPet()" class="my-style-for-modal">
         <ion-icon name="arrow-back" class="arrow_color"></ion-icon>
       </button>
     </ion-buttons>
 
-    <ion-buttons left *ngIf="meusPets && selected && alterar">
+    <ion-buttons left *ngIf="meusPets && selected && alterar && !mapa">
       <button ion-button icon-only (click)="cleanAlterar()" class="my-style-for-modal">
         <ion-icon name="arrow-back" class="arrow_color"></ion-icon>
       </button>
     </ion-buttons>
 
-    <ion-buttons left *ngIf="meusPets && !selected">
+    <ion-buttons left *ngIf="meusPets && !selected && !mapa">
       <button ion-button icon-only (click)="cleanPerfil()" class="my-style-for-modal">
         <ion-icon name="arrow-back" class="arrow_color"></ion-icon>
       </button>
     </ion-buttons>
 
-    <ion-buttons most right *ngIf="meusPets && selected">
+    <ion-buttons left *ngIf="mapa">
+      <button ion-button icon-only (click)="cleanMapa()" class="my-style-for-modal">
+        <ion-icon name="arrow-back" class="arrow_color"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-buttons most right *ngIf="meusPets && selected && !mapa">
       <button ion-button icon-only (click)="cleanPet()" class="my-style-for-modal">
         <ion-icon name="share" class="arrow_color"></ion-icon>
       </button>
@@ -31,203 +38,213 @@
   </ion-toolbar>
 </ion-header>
 
+
+<ion-content style="z-index:201; position: absolute; background-color: #fff;"
+[ngClass]="{'hideThing' :  !mapa}">
+  <iframe width="100%" height="100%" src="assets/mapa.html"></iframe>
+</ion-content>
+
 <ion-content style="z-index:201; position: absolute; background-color: #fff;"
   [ngClass]="{'hideThing' :  !(meusPets && selected && alterar)}">
   <ion-slides #mySlider pager="true">
-      <ion-slide class="step-one">
-        <div>
-          <div class="linha">
-            <h1>Qual a espécie?</h1>
-            <table class="center">
-              <tr>
-                <td>
-                  <div class="imgframe_new dog" (click)="dog()" [ngClass]="{'img_activated' : animal === 0}">
-                  </div>
-                </td>
-                <td>
-                  <div class="imgframe_new cat" (click)="cat()" [ngClass]="{'img_activated' : animal === 1}">
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td (click)="dog()" [ngClass]="{'td_activated' : animal === 0}">Cachorro</td>
-                <td (click)="cat()" [ngClass]="{'td_activated' : animal === 1}">Gato</td>
-              </tr>
-            </table>
-            <button ion-button (click)="next()" class="u-button-color">Continuar</button>
-          </div>
+    <ion-slide class="step-one">
+      <div>
+        <div class="linha">
+          <h1>Qual a espécie?</h1>
+          <table class="center">
+            <tr>
+              <td>
+                <div class="imgframe_new dog" (click)="dog()" [ngClass]="{'img_activated' : animal === 0}">
+                </div>
+              </td>
+              <td>
+                <div class="imgframe_new cat" (click)="cat()" [ngClass]="{'img_activated' : animal === 1}">
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td (click)="dog()" [ngClass]="{'td_activated' : animal === 0}">Cachorro</td>
+              <td (click)="cat()" [ngClass]="{'td_activated' : animal === 1}">Gato</td>
+            </tr>
+          </table>
+          <button ion-button (click)="next()" class="u-button-color">Continuar</button>
         </div>
-      </ion-slide>
-  
-      <ion-slide class="step-two">
-        <div>
-          <div class="linha">
-            <h1>É menino ou menina?</h1>
-            <table class="center">
-              <tr>
-                <td>
-                  <div class="imgframe_new macho" (click)="menino()" [ngClass]="{'img_activated' : sexo === 0}">
-                  </div>
-                </td>
-                <td>
-                  <div class="imgframe_new femea" (click)="menina()" [ngClass]="{'img_activated' : sexo === 1}">
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td (click)="menino()" [ngClass]="{'td_activated' : sexo === 0}">Menino</td>
-                <td (click)="menina()" [ngClass]="{'td_activated' : sexo === 1}">Menina</td>
-              </tr>
-            </table>
-            <button ion-button (click)="next()" class="u-button-color">Continuar</button>
-          </div>
+      </div>
+    </ion-slide>
+
+    <ion-slide class="step-two">
+      <div>
+        <div class="linha">
+          <h1>É menino ou menina?</h1>
+          <table class="center">
+            <tr>
+              <td>
+                <div class="imgframe_new macho" (click)="menino()" [ngClass]="{'img_activated' : sexo === 0}">
+                </div>
+              </td>
+              <td>
+                <div class="imgframe_new femea" (click)="menina()" [ngClass]="{'img_activated' : sexo === 1}">
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td (click)="menino()" [ngClass]="{'td_activated' : sexo === 0}">Menino</td>
+              <td (click)="menina()" [ngClass]="{'td_activated' : sexo === 1}">Menina</td>
+            </tr>
+          </table>
+          <button ion-button (click)="next()" class="u-button-color">Continuar</button>
         </div>
-      </ion-slide>
-  
-      <ion-slide class="step-three">
-        <div>
-          <div class="linha">
-            <h1>Dados do Pet:</h1>
-            <div class="item_list box-shadow-blur center_text">
-              <div class="descricao_frame_new">
-                <table class="detalhes_table_new">
-                  <tr>
-                    <td>
-                      <ion-icon name="md-book"></ion-icon>
-                    </td>
-                    <td>
-                      <p class="text_title_add"><strong>Descreva como encontrou o Pet:</strong></p>
-                      <ion-item>
-                        <ion-input placeholder="Descrição" [(ngModel)]="descricao"></ion-input>
-                      </ion-item>
-                      <h6 *ngIf="descricaoError" class="error"> {{descricaoErrorMessage}}</h6>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <ion-icon name="md-paw"></ion-icon>
-                    </td>
-                    <td>
-                      <p class="text_title_add"><strong>Qual o nome do Pet:</strong></p>
-                      <ion-item>
-                        <ion-input placeholder="Pode inventar" [(ngModel)]="nome"></ion-input>
-                      </ion-item>
-                      <h6 *ngIf="nomeError" class="error"> {{nomeErrorMessage}}</h6>
-                    </td>
-                  </tr>
-                </table>
-              </div>
+      </div>
+    </ion-slide>
+
+    <ion-slide class="step-three">
+      <div>
+        <div class="linha">
+          <h1>Dados do Pet:</h1>
+          <div class="item_list box-shadow-blur center_text">
+            <div class="descricao_frame_new">
+              <table class="detalhes_table_new">
+                <tr>
+                  <td>
+                    <ion-icon name="md-book"></ion-icon>
+                  </td>
+                  <td>
+                    <p class="text_title_add"><strong>Descreva como encontrou o Pet:</strong></p>
+                    <ion-item>
+                      <ion-input placeholder="Descrição" [(ngModel)]="descricao"></ion-input>
+                    </ion-item>
+                    <h6 *ngIf="descricaoError" class="error"> {{descricaoErrorMessage}}</h6>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <ion-icon name="md-paw"></ion-icon>
+                  </td>
+                  <td>
+                    <p class="text_title_add"><strong>Qual o nome do Pet:</strong></p>
+                    <ion-item>
+                      <ion-input placeholder="Pode inventar" [(ngModel)]="nome"></ion-input>
+                    </ion-item>
+                    <h6 *ngIf="nomeError" class="error"> {{nomeErrorMessage}}</h6>
+                  </td>
+                </tr>
+              </table>
             </div>
-            <button ion-button (click)="validatePetData()" class="u-button-color">Continuar</button>
           </div>
+          <button ion-button (click)="validatePetData()" class="u-button-color">Continuar</button>
         </div>
-      </ion-slide>
-  
-      <ion-slide class="step-four">
-        <div>
-          <div class="linha">
-            <h1>Qual o porte?</h1>
-            <ion-list radio-group [(ngModel)]="porte">
-              <ion-item>
-                <ion-label>Pequeno</ion-label>
-                <ion-radio slot="end" value="0" checked></ion-radio>
-              </ion-item>
-  
-              <ion-item>
-                <ion-label>Médio</ion-label>
-                <ion-radio slot="end" value="1"></ion-radio>
-              </ion-item>
-  
-              <ion-item>
-                <ion-label>Grande</ion-label>
-                <ion-radio slot="end" value="2"></ion-radio>
-              </ion-item>
-            </ion-list>
-            <button ion-button (click)="next()" class="u-button-color">Continuar</button>
-          </div>
+      </div>
+    </ion-slide>
+
+    <ion-slide class="step-four">
+      <div>
+        <div class="linha">
+          <h1>Qual o porte?</h1>
+          <ion-list radio-group [(ngModel)]="porte">
+            <ion-item>
+              <ion-label>Pequeno</ion-label>
+              <ion-radio slot="end" value="0" checked></ion-radio>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>Médio</ion-label>
+              <ion-radio slot="end" value="1"></ion-radio>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>Grande</ion-label>
+              <ion-radio slot="end" value="2"></ion-radio>
+            </ion-item>
+          </ion-list>
+          <button ion-button (click)="next()" class="u-button-color">Continuar</button>
         </div>
-      </ion-slide>
-  
-      <ion-slide class="step-five">
-        <div>
-          <div class="linha">
-            <h1>Qual a idade aproximada?</h1>
-            <ion-list radio-group [(ngModel)]="idade">
-              <ion-item>
-                <ion-label>Filhote</ion-label>
-                <ion-radio slot="end" value="0" checked></ion-radio>
-              </ion-item>
-  
-              <ion-item>
-                <ion-label>Adulto</ion-label>
-                <ion-radio slot="end" value="1"></ion-radio>
-              </ion-item>
-  
-              <ion-item>
-                <ion-label>Idoso</ion-label>
-                <ion-radio slot="end" value="2"></ion-radio>
-              </ion-item>
-            </ion-list>
-            <button ion-button (click)="next()" class="u-button-color">Continuar</button>
-          </div>
+      </div>
+    </ion-slide>
+
+    <ion-slide class="step-five">
+      <div>
+        <div class="linha">
+          <h1>Qual a idade aproximada?</h1>
+          <ion-list radio-group [(ngModel)]="idade">
+            <ion-item>
+              <ion-label>Filhote</ion-label>
+              <ion-radio slot="end" value="0" checked></ion-radio>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>Adulto</ion-label>
+              <ion-radio slot="end" value="1"></ion-radio>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>Idoso</ion-label>
+              <ion-radio slot="end" value="2"></ion-radio>
+            </ion-item>
+          </ion-list>
+          <button ion-button (click)="next()" class="u-button-color">Continuar</button>
         </div>
-      </ion-slide>
-  
-      <ion-slide class="step-six">
-        <div>
-          <div class="linha">
-            <h1>Adicione fotos dele</h1>
-            <table class="center">
-              <tr>
-                <td>
-                  <input type="file" #fileupload0 id="fileupload0" value="" (change)="fileChange($event,0)"
-                    accept="image/*" capture="camera" style="display:none">
-                  <div class="image_frame_add" (click)="!img0 ? ((this.platform.is('core') || this.platform.is('mobileweb')) ? fileupload0.click() : takePicture(0)) : cleanIMG(0)">
-                    <ion-icon *ngIf="!img0" name="md-add"></ion-icon><img class="img_inside" *ngIf="img0" [src]="img0" />
-                  </div>
-                </td>
-  
-                <td>
-                  <input type="file" #fileupload1 id="fileupload1" value="" (change)="fileChange($event,1)"
-                    accept="image/*" capture="camera" style="display:none">
-                  <div class="image_frame_add" (click)="!img1 ? ((this.platform.is('core') || this.platform.is('mobileweb')) ? fileupload1.click() : takePicture(1)) : cleanIMG(1)">
-                    <ion-icon *ngIf="!img1" name="md-add"></ion-icon><img class="img_inside" *ngIf="img1" [src]="img1" />
-                  </div>
-                </td>
-              </tr>
-  
-              <tr>
-                <td>
-                  <input type="file" #fileupload2 id="fileupload2" value="" (change)="fileChange($event,2)"
-                    accept="image/*" capture="camera" style="display:none">
-                  <div class="image_frame_add" (click)="!img2 ? ((this.platform.is('core') || this.platform.is('mobileweb')) ? fileupload2.click() : takePicture(2)) : cleanIMG(2)">
-                    <ion-icon *ngIf="!img2" name="md-add"></ion-icon><img class="img_inside" *ngIf="img2" [src]="img2" />
-                  </div>
-                </td>
-  
-                <td>
-                  <input type="file" #fileupload3 id="fileupload3" value="" (change)="fileChange($event,3)"
-                    accept="image/*" capture="camera" style="display:none">
-                  <div class="image_frame_add" (click)="!img3 ? ((this.platform.is('core') || this.platform.is('mobileweb')) ? fileupload3.click() : takePicture(3)) : cleanIMG(3)">
-                    <ion-icon *ngIf="!img3" name="md-add"></ion-icon><img class="img_inside" *ngIf="img3" [src]="img3" />
-                  </div>
-                </td>
-              </tr>
-            </table>
-            <h6 *ngIf="photoError" class="error"> {{photoErrorMessage}}</h6>
-            <button ion-button (click)="validatePetPhotos()" class="u-button-color">Continuar</button>
-          </div>
+      </div>
+    </ion-slide>
+
+    <ion-slide class="step-six">
+      <div>
+        <div class="linha">
+          <h1>Adicione fotos dele</h1>
+          <table class="center">
+            <tr>
+              <td>
+                <input type="file" #fileupload0 id="fileupload0" value="" (change)="fileChange($event,0)"
+                  accept="image/*" capture="camera" style="display:none">
+                <div class="image_frame_add"
+                  (click)="!img0 ? ((this.platform.is('core') || this.platform.is('mobileweb')) ? fileupload0.click() : takePicture(0)) : cleanIMG(0)">
+                  <ion-icon *ngIf="!img0" name="md-add"></ion-icon><img class="img_inside" *ngIf="img0" [src]="img0" />
+                </div>
+              </td>
+
+              <td>
+                <input type="file" #fileupload1 id="fileupload1" value="" (change)="fileChange($event,1)"
+                  accept="image/*" capture="camera" style="display:none">
+                <div class="image_frame_add"
+                  (click)="!img1 ? ((this.platform.is('core') || this.platform.is('mobileweb')) ? fileupload1.click() : takePicture(1)) : cleanIMG(1)">
+                  <ion-icon *ngIf="!img1" name="md-add"></ion-icon><img class="img_inside" *ngIf="img1" [src]="img1" />
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <input type="file" #fileupload2 id="fileupload2" value="" (change)="fileChange($event,2)"
+                  accept="image/*" capture="camera" style="display:none">
+                <div class="image_frame_add"
+                  (click)="!img2 ? ((this.platform.is('core') || this.platform.is('mobileweb')) ? fileupload2.click() : takePicture(2)) : cleanIMG(2)">
+                  <ion-icon *ngIf="!img2" name="md-add"></ion-icon><img class="img_inside" *ngIf="img2" [src]="img2" />
+                </div>
+              </td>
+
+              <td>
+                <input type="file" #fileupload3 id="fileupload3" value="" (change)="fileChange($event,3)"
+                  accept="image/*" capture="camera" style="display:none">
+                <div class="image_frame_add"
+                  (click)="!img3 ? ((this.platform.is('core') || this.platform.is('mobileweb')) ? fileupload3.click() : takePicture(3)) : cleanIMG(3)">
+                  <ion-icon *ngIf="!img3" name="md-add"></ion-icon><img class="img_inside" *ngIf="img3" [src]="img3" />
+                </div>
+              </td>
+            </tr>
+          </table>
+          <h6 *ngIf="photoError" class="error"> {{photoErrorMessage}}</h6>
+          <button ion-button (click)="validatePetPhotos()" class="u-button-color">Continuar</button>
         </div>
-      </ion-slide>
-  
-      <ion-slide class="step-seven">
-        <div class="full_width">
-          <div class="linha">
-            <h1>Só mais algumas coisinhas:</h1>
-            <div class="item_list box-shadow-blur center_text">
-              <div class="descricao_frame_new">
-                <table class="detalhes_table_new">
-                  <!-- <tr>
+      </div>
+    </ion-slide>
+
+    <ion-slide class="step-seven">
+      <div class="full_width">
+        <div class="linha">
+          <h1>Só mais algumas coisinhas:</h1>
+          <div class="item_list box-shadow-blur center_text">
+            <div class="descricao_frame_new">
+              <table class="detalhes_table_new">
+                <!-- <tr>
                     <td>
                       <ion-icon name="md-pin"></ion-icon>
                     </td>
@@ -238,47 +255,47 @@
                       <h6 *ngIf="localError" class="error"> {{localErrorMessage}}</h6>
                     </td>
                   </tr> -->
-  
-                  <tr>
-                    <td>
-                      <ion-icon name="md-information-circle"></ion-icon>
-                    </td>
-                    <td>
-                      <ion-item>
-                        <ion-label>Situação:</ion-label>
-                        <ion-select placeholder="Selecione" [(ngModel)]="situacao">
-                          <ion-option value="0">Adoção</ion-option>
-                          <ion-option value="1">Perdido</ion-option>
-                        </ion-select>
-                      </ion-item>
-                      <h6 *ngIf="situacaoError" class="error"> {{situacaoErrorMessage}}</h6>
-                    </td>
-                  </tr>
-  
-                  <tr>
-                    <td>
-                      <ion-icon name="md-heart"></ion-icon>
-                    </td>
-                    <td>
-                      <ion-item>
-                        <ion-label>O Pet já foi:</ion-label>
-                        <ion-select placeholder="Selecione" multiple class="multiple-size" [(ngModel)]="foi">
-                          <ion-option value="0">Castrado</ion-option>
-                          <ion-option value="1">Vacinado</ion-option>
-                          <ion-option value="2">Vermifugado</ion-option>
-                        </ion-select>
-                      </ion-item>
-                    </td>
-                  </tr>
-  
-                </table>
-              </div>
+
+                <tr>
+                  <td>
+                    <ion-icon name="md-information-circle"></ion-icon>
+                  </td>
+                  <td>
+                    <ion-item>
+                      <ion-label>Situação:</ion-label>
+                      <ion-select placeholder="Selecione" [(ngModel)]="situacao">
+                        <ion-option value="0">Adoção</ion-option>
+                        <ion-option value="1">Perdido</ion-option>
+                      </ion-select>
+                    </ion-item>
+                    <h6 *ngIf="situacaoError" class="error"> {{situacaoErrorMessage}}</h6>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <ion-icon name="md-star"></ion-icon>
+                  </td>
+                  <td>
+                    <ion-item>
+                      <ion-label>O Pet já foi:</ion-label>
+                      <ion-select placeholder="Selecione" multiple class="multiple-size" [(ngModel)]="foi">
+                        <ion-option value="0">Castrado</ion-option>
+                        <ion-option value="1">Vacinado</ion-option>
+                        <ion-option value="2">Vermifugado</ion-option>
+                      </ion-select>
+                    </ion-item>
+                  </td>
+                </tr>
+
+              </table>
             </div>
-            <button ion-button (click)="validateGeneralInformationData()" class="u-button-color">Atualizar dados</button>
           </div>
+          <button ion-button (click)="validateGeneralInformationData()" class="u-button-color">Atualizar dados</button>
         </div>
-      </ion-slide>
-    </ion-slides>
+      </div>
+    </ion-slide>
+  </ion-slides>
 </ion-content>
 
 <ion-content style="z-index:200; position: fixed; background-color: #F6F6F6; height: 100%; width: 100%;"
@@ -534,6 +551,21 @@
           </td>
           <td>
             <strong>Meus Pets</strong>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="item_list_pet box-shadow-blur" (click)="verMapa()">
+    <div>
+      <table class="detalhes_table">
+        <tr>
+          <td class="icon_size_td">
+            <ion-icon name="ios-map" class="my_icon"></ion-icon>
+          </td>
+          <td>
+            <strong>Mapa do Abandono</strong>
           </td>
         </tr>
       </table>

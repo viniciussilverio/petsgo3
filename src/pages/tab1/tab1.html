@@ -23,7 +23,9 @@
     </ion-buttons>
 
     <ion-buttons right margin-right="5" *ngIf="selected">
-      <button ion-button icon-only (click)="setFavorite(selected._id)" class="imgframe unfavorited"></button>
+      <button ion-button icon-only (click)="setFavorite(selected._id)" class="my-style-for-modal">
+        <ion-icon class="arrow_color bold_icon" name="ios-star-outline"></ion-icon>
+      </button>
     </ion-buttons>
 
     <ion-buttons most right *ngIf="selected">
@@ -171,7 +173,7 @@
             <strong> Espécie: </strong>
           </td>
           <td style="width: 30px;" (click)="limparFiltro('especie')">
-              <strong> Limpar </strong>
+            <strong> Limpar </strong>
           </td>
         </tr>
       </table>
@@ -194,7 +196,7 @@
             <strong> Gênero: </strong>
           </td>
           <td style="width: 30px;" (click)="limparFiltro('genero')">
-              <strong> Limpar </strong>
+            <strong> Limpar </strong>
           </td>
         </tr>
       </table>
@@ -217,7 +219,7 @@
             <strong> Situação: </strong>
           </td>
           <td style="width: 30px;" (click)="limparFiltro('situacao')">
-              <strong> Limpar </strong>
+            <strong> Limpar </strong>
           </td>
         </tr>
       </table>
@@ -240,7 +242,7 @@
             <strong> Porte: </strong>
           </td>
           <td style="width: 30px;" (click)="limparFiltro('porte')">
-              <strong> Limpar </strong>
+            <strong> Limpar </strong>
           </td>
         </tr>
       </table>
@@ -266,7 +268,7 @@
             <strong> Idade: </strong>
           </td>
           <td style="width: 30px;" (click)="limparFiltro('idade')">
-              <strong> Limpar </strong>
+            <strong> Limpar </strong>
           </td>
         </tr>
       </table>
@@ -292,7 +294,7 @@
             <strong> Distância: </strong>
           </td>
           <td style="width: 30px;" (click)="limparFiltro('distancia')">
-              <strong> Limpar </strong>
+            <strong> Limpar </strong>
           </td>
         </tr>
       </table>
@@ -300,7 +302,7 @@
     <div class="buttonSegment">
       <ion-item>
         <ion-range min="10" max="99" step="10" snaps="true" color="secondary" [(ngModel)]="filtro.distancia">
-          <ion-icon range-right> {{ filtro.distancia }} </ion-icon>
+          <ion-icon range-right> {{ filtro.distancia + " Km" }} </ion-icon>
         </ion-range>
       </ion-item>
     </div>
@@ -332,7 +334,9 @@
             <tr>
               <td>Gênero: {{ item.genero }}</td>
               <td>Porte: {{ item.porte }}</td>
-              <div class="imgframe unfavorited" (click)="setFavorite(item._id)"> </div>
+              <div class="star" (click)="setFavorite(item._id)">
+                <ion-icon class="star bold_icon" name="ios-star-outline"></ion-icon>
+              </div>
             </tr>
             <tr>
               <td>Idade: {{ item.idade }}</td>

@@ -87,7 +87,7 @@ export class Tab1Page {
   }
 
   selectPet(pet, event) {
-    if (event.target.className != "imgframe unfavorited") {
+    if (event.target.className.indexOf("star")) {
       this.selected = pet;
       this.card = false;
       this.filtrar = false;

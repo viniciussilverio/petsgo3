@@ -60,7 +60,7 @@ export class Tab2Page {
   }
 
   selectPet(pet, event) {
-    if(event.target.className != "imgframe favorited") {
+    if(event.target.className.indexOf("star")) {
       this.selected = pet;
     }
   }
