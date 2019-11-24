@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import { Geolocation } from '@ionic-native/geolocation';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 @Component({
   selector: 'page-tab1',
@@ -38,7 +39,7 @@ export class Tab1Page {
     distancia: 80
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events, private PetsgoBackendProvider: PetsgoBackendProvider, private Geolocation: Geolocation) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events, private PetsgoBackendProvider: PetsgoBackendProvider, private Geolocation: Geolocation, private socialSharing: SocialSharing) {
     this.selected = false;
     this.filtrar = false;
     this.card = true;
@@ -162,6 +163,34 @@ export class Tab1Page {
     } else {
       this.filtro[item] = null;
     }
+  }
+
+  convertToDataURLviaCanvas(url, outputFormat) {
+    return new Promise((resolve, reject) => {
+      let img = new Image();
+      img.crossOrigin = "anonymous";
+      img.onload = () => {
+        let canvas = <HTMLCanvasElement>document.createElement('CANVAS'),
+          ctx = canvas.getContext('2d'),
+          dataURL;
+        canvas.height = img.height;
+        canvas.width = img.width;
+        ctx.drawImage(img, 0, 0);
+        dataURL = canvas.toDataURL(outputFormat);
+        resolve(dataURL);
+        canvas = null;
+      };
+      img.src = url + '?' + Math.random() + "" + Math.random();
+    });
+  }
+
+  async compartilhar() {
+    let foto = await this.convertToDataURLviaCanvas(this.selected.fotos[0], "image/jpeg");
+    this.socialSharing.share(`${this.selected.nome} esta disponível para adoção.\nEncontre este e outros Pets no PetsGo!`, `Ajude a salvar uma vida.`, `${foto}`, 'https://petsgo0.webnode.com/').then(() => {
+      console.log("Done");
+    }).catch(() => {
+      console.log("Erro");
+    });
   }
 
 }
