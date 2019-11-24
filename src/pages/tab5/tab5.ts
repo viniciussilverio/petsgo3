@@ -7,6 +7,7 @@ import { PetsgoBackendProvider } from '../../providers/petsgo-backend/petsgo-bac
 import { Observable } from 'rxjs';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 /**
  * Generated class for the Tab5Page page.
@@ -71,7 +72,8 @@ export class Tab5Page {
     private PetsgoBackendProvider: PetsgoBackendProvider,
     private Geolocation: Geolocation,
     private camera: Camera,
-    private platform: Platform) {
+    private platform: Platform,
+    private socialSharing: SocialSharing) {
     this.selected = "";
     this.meusPets = false;
     this.mapa = false;
@@ -172,7 +174,7 @@ export class Tab5Page {
     if (this.selected.vermifugado === "Sim") arrayTemp.push("2");
     this.foi = arrayTemp.join(",");
     for (let x = 0; x < this.selected.fotos.length; x++) {
-      this.convertToDataURLviaCanvas(this.selected.fotos[x], "image/jpeg").then(foto => this["img"+x] = foto);
+      this.convertToDataURLviaCanvas(this.selected.fotos[x], "image/jpeg").then(foto => this["img" + x] = foto);
     }
   }
 
@@ -343,14 +345,14 @@ export class Tab5Page {
     this.resetData();
     this.resetValidations();
     let self = this;
-    setTimeout(function() {self.getMyPetsList();}, 1000)
+    setTimeout(function () { self.getMyPetsList(); }, 1000)
   }
 
   async deletePet() {
     await this.PetsgoBackendProvider.deletePet(this.selected._id, firebase.auth().currentUser.uid);
     this.selected = false;
     let self = this;
-    setTimeout(function() {self.getMyPetsList();}, 1000)
+    setTimeout(function () { self.getMyPetsList(); }, 1000)
   }
 
   fileChange(event, imgNumber) {
@@ -401,8 +403,16 @@ export class Tab5Page {
         resolve(dataURL);
         canvas = null;
       };
-      img.src = url+'?'+Math.random()+""+Math.random();
+      img.src = url + '?' + Math.random() + "" + Math.random();
     });
   }
 
+  async compartilhar() {
+    let foto = await this.convertToDataURLviaCanvas(this.selected.fotos[0], "image/jpeg");
+    this.socialSharing.share(`${this.selected.nome} esta disponível para adoção.\nEncontre este e outros Pets no PetsGo!`, `Ajude a salvar uma vida.`, `${foto}`, 'https://petsgo0.webnode.com/').then(() => {
+      console.log("Done");
+    }).catch(() => {
+      console.log("Erro");
+    });
+  }
 }
