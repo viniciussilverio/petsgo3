@@ -19,15 +19,29 @@ export class HomePage {
     if (this.platform.is('cordova')) {
       this.platform.ready().then(() => {
         /* admob.banner.show({ id: "test" }); */
-        admob.setDevMode(true);
-        admob.banner.show({
-          id: {
-            android: 'ca-app-pub-9924908105255416/2420774279',
-            ios: 'ca-app-pub-9924908105255416/6795133555',
-          }
-        });
-        setTimeout(function () {
-          admob.banner.hide('ca-app-pub-9924908105255416/2420774279');}, 10000);
+        if (this.platform.is('ios')) {
+          admob.setDevMode(true);
+          admob.interstitial.load({
+            id: {
+              // replace with your ad unit IDs
+              android: 'ca-app-pub-9924908105255416/2420774279',
+              ios: 'ca-app-pub-9924908105255416/6795133555'
+            },
+          }).then(() => admob.interstitial.show())
+        }
+
+        if (this.platform.is('android')) {
+          admob.setDevMode(true);
+          admob.banner.show({
+            id: {
+              android: 'ca-app-pub-9924908105255416/2420774279',
+              ios: 'ca-app-pub-9924908105255416/6795133555'
+            }
+          });
+          setTimeout(function () {
+            admob.banner.hide('ca-app-pub-9924908105255416/2420774279');
+          }, 10000);
+        }
       });
     }
   }
@@ -36,9 +50,9 @@ export class HomePage {
     firebase.auth().signOut();
   }
 
-  enableMessages (value) {
+  enableMessages(value) {
     let self = this;
-    setTimeout(function () {self.events.publish('startChat', value)}, 100);
+    setTimeout(function () { self.events.publish('startChat', value) }, 100);
   }
 
   tab1Root = Tab1Page;
